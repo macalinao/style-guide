@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig.json",
+  "compilerOptions": {
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "target": "ES2023",
+    "lib": ["ES2023"],
+    "outDir": "${configDir}/dist",
+    "rootDir": "${configDir}/src",
+
+    // build
+    "types": [],
+    "esModuleInterop": true,
+    "preserveConstEnums": true,
+    "skipLibCheck": true,
+    "importHelpers": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+
+    // Enable this per-project as it prevents isolatedDeclarations from being used
+    // "allowJs": true,
+    // "checkJs": true,
+
+    // performance in monorepo
+    "incremental": true,
+    "composite": true,
+    "isolatedDeclarations": true,
+
+    // linting
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitOverride": true,
+    "noUncheckedIndexedAccess": true,
+    "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true,
+    // "noErrorTruncation": true,
+
+    // sources
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
+    "inlineSources": true
+  },
+  "include": ["${configDir}/src/**/*"]
+}

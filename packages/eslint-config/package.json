@@ -1,0 +1,59 @@
+{
+  "name": "@macalinao/eslint-config",
+  "description": "Common ESLint configuration.",
+  "license": "Apache-2.0",
+  "version": "0.1.0",
+  "sideEffects": false,
+  "dependencies": {
+    "@eslint/js": "^9.16.0",
+    "@tanstack/eslint-plugin-query": "^5.62.1",
+    "@tanstack/eslint-plugin-router": "^1.85.3",
+    "@typescript-eslint/eslint-plugin": "^8.17.0",
+    "@typescript-eslint/parser": "^8.17.0",
+    "@typescript-eslint/utils": "^8.17.0",
+    "eslint": "^9.16.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-config-turbo": "^2.3.3",
+    "eslint-import-resolver-typescript": "^3.7.0",
+    "eslint-plugin-import-x": "^4.5.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-prettier": "^5.2.1",
+    "eslint-plugin-react": "^7.37.2",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
+    "eslint-plugin-turbo": "^2.3.3",
+    "eslint-plugin-unused-imports": "^4.1.4",
+    "globals": "^15.13.0",
+    "prettier": "^3.4.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tslib": "^2.8.1",
+    "typescript-eslint": "^8.17.0"
+  },
+  "files": [
+    "src/**/*",
+    "dist/**/*",
+    "README.md"
+  ],
+  "devDependencies": {
+    "@macalinao/tsconfig": "workspace:^",
+    "@types/eslint-plugin-jsx-a11y": "^6.10.0",
+    "@types/eslint__js": "^8.42.3",
+    "@types/node": "^22.10.1",
+    "typescript": "^5.7.2"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "clean": "tsc -b --clean && rm -rf dist",
+    "lint": "eslint ."
+  },
+  "type": "module",
+  "types": "dist/index.d.ts"
+}

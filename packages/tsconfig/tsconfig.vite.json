@@ -1,0 +1,18 @@
+{
+  "extends": ["./tsconfig.base.json"],
+  "compilerOptions": {
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "rootDir": "${configDir}",
+    "baseUrl": "${configDir}",
+    "paths": {
+      "~/*": ["${configDir}/src/*"]
+    },
+    "isolatedDeclarations": false,
+    "allowImportingTsExtensions": true
+  },
+  "include": ["${configDir}/*.ts", "${configDir}/src/"]
+}
