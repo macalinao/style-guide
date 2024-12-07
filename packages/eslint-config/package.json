@@ -2,7 +2,7 @@
   "name": "@macalinao/eslint-config",
   "description": "Common ESLint configuration.",
   "license": "Apache-2.0",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "type": "module",
   "sideEffects": false,
   "dependencies": {
