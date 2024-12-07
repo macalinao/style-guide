@@ -1,5 +1,7 @@
 # @macalinao/tsconfig
 
+<a href="https://www.npmjs.com/package/@macalinao/tsconfig"><img alt="NPM version" src="https://img.shields.io/npm/v/@macalinao/tsconfig.svg?style=for-the-badge&labelColor=000000"></a>
+
 Common TypeScript configuration.
 
 Configs included:
