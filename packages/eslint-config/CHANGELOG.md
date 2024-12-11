@@ -1,5 +1,11 @@
 # @macalinao/eslint-config
 
+## 1.0.1
+
+### Patch Changes
+
+- 478a0cc: Upgrade dependencies
+
 ## 1.0.0
 
 ### Major Changes
