@@ -1,5 +1,11 @@
 # @macalinao/tsconfig
 
+## 3.0.0
+
+### Major Changes
+
+- 44acb25: Force republish again, major
+
 ## 2.0.0
 
 ### Major Changes

@@ -1,5 +1,16 @@
 # @macalinao/eslint-config-react
 
+## 3.0.0
+
+### Major Changes
+
+- 44acb25: Force republish again, major
+
+### Patch Changes
+
+- Updated dependencies [44acb25]
+  - @macalinao/eslint-config@4.0.0
+
 ## 2.0.0
 
 ### Major Changes

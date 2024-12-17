@@ -1,5 +1,11 @@
 # @macalinao/eslint-config
 
+## 4.0.0
+
+### Major Changes
+
+- 44acb25: Force republish again, major
+
 ## 3.0.0
 
 ### Major Changes
