@@ -1,5 +1,11 @@
 # @macalinao/eslint-config
 
+## 1.0.2
+
+### Patch Changes
+
+- c8b22b8: Add lint-staged, bump dependencies
+
 ## 1.0.1
 
 ### Patch Changes
