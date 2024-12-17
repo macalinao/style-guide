@@ -1,5 +1,11 @@
 # @macalinao/eslint-config
 
+## 2.0.0
+
+### Major Changes
+
+- ce37992: Split out React ESLint config into a separate package for quicker installs
+
 ## 1.0.2
 
 ### Patch Changes

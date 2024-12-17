@@ -2,7 +2,7 @@
   "name": "@macalinao/eslint-config-react",
   "description": "ESLint configuration to use for React projects",
   "license": "Apache-2.0",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "type": "module",
   "sideEffects": false,
   "repository": "github:macalinao/style-guide",
@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@eslint/js": "^9.17.0",
-    "@macalinao/eslint-config": "^1.0.2",
+    "@macalinao/eslint-config": "^2.0.0",
     "@tanstack/eslint-plugin-query": "^5.62.1",
     "@tanstack/eslint-plugin-router": "^1.87.6",
     "@typescript-eslint/eslint-plugin": "^8.18.1",
