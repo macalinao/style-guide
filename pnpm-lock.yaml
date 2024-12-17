@@ -71,12 +71,6 @@ importers:
       prettier:
         specifier: ^3.4.2
         version: 3.4.2
-      react:
-        specifier: ^19.0.0
-        version: 19.0.0
-      react-dom:
-        specifier: ^19.0.0
-        version: 19.0.0(react@19.0.0)
       tslib:
         specifier: ^2.8.1
         version: 2.8.1
