@@ -81,9 +81,6 @@ importers:
       '@macalinao/tsconfig':
         specifier: workspace:^
         version: link:../tsconfig
-      '@types/eslint-plugin-jsx-a11y':
-        specifier: ^6.10.0
-        version: 6.10.0
       '@types/eslint__js':
         specifier: ^8.42.3
         version: 8.42.3
