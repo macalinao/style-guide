@@ -8,5 +8,9 @@
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
     "access": "public"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,cjs,mjs,cts,mts}": "eslint --fix --cache",
+    "*.{md,json,yml,yaml,html}": "prettier --write"
   }
 }
