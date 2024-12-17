@@ -20,17 +20,13 @@
       in
       {
         formatter = pkgs.nixfmt-rfc-style;
-        devShells = {
-          default = pkgs.mkShell {
-            name = "devshell";
-
-            buildInputs = with pkgs; [
-              git
-              nixfmt-rfc-style
-              nodejs
-              (nodePackages.pnpm.override { inherit nodejs; })
-            ];
-          };
+        devShell = pkgs.mkShell {
+          buildInputs = with pkgs; [
+            git
+            nixfmt-rfc-style
+            nodejs
+            (nodePackages.pnpm.override { inherit nodejs; })
+          ];
         };
       }
     );
