@@ -1,5 +1,11 @@
 # @macalinao/tsconfig
 
+## 2.0.0
+
+### Major Changes
+
+- 9c3b3a8: Republish due to broken build script
+
 ## 1.0.3
 
 ### Patch Changes

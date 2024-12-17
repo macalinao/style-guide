@@ -1,5 +1,11 @@
 # @macalinao/eslint-config
 
+## 3.0.0
+
+### Major Changes
+
+- 9c3b3a8: Republish due to broken build script
+
 ## 2.0.0
 
 ### Major Changes
