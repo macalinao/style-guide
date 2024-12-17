@@ -5,6 +5,11 @@
   "version": "1.0.1",
   "type": "module",
   "sideEffects": false,
+  "repository": "github:macalinao/style-guide",
+  "homepage": "https://github.com/macalinao/style-guide",
+  "bugs": {
+    "url": "https://github.com/macalinao/style-guide/issues"
+  },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
     "access": "public"
