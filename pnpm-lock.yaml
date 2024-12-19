@@ -49,10 +49,10 @@ importers:
         version: 2.3.3(eslint@9.17.0)
       eslint-import-resolver-typescript:
         specifier: ^3.7.0
-        version: 3.7.0(eslint-plugin-import-x@4.5.0(eslint@9.17.0)(typescript@5.7.2))(eslint@9.17.0)
+        version: 3.7.0(eslint-plugin-import-x@4.6.1(eslint@9.17.0)(typescript@5.7.2))(eslint@9.17.0)
       eslint-plugin-import-x:
-        specifier: ^4.5.0
-        version: 4.5.0(eslint@9.17.0)(typescript@5.7.2)
+        specifier: ^4.6.1
+        version: 4.6.1(eslint@9.17.0)(typescript@5.7.2)
       eslint-plugin-prettier:
         specifier: ^5.2.1
         version: 5.2.1(@types/eslint@9.6.1)(eslint-config-prettier@9.1.0(eslint@9.17.0))(eslint@9.17.0)(prettier@3.4.2)
@@ -121,8 +121,8 @@ importers:
         specifier: ^2.3.3
         version: 2.3.3(eslint@9.17.0)
       eslint-plugin-import-x:
-        specifier: ^4.5.0
-        version: 4.5.0(eslint@9.17.0)(typescript@5.7.2)
+        specifier: ^4.6.1
+        version: 4.6.1(eslint@9.17.0)(typescript@5.7.2)
       eslint-plugin-jsx-a11y:
         specifier: ^6.10.2
         version: 6.10.2(eslint@9.17.0)
@@ -322,6 +322,9 @@ packages:
     resolution: {integrity: sha512-HoJYMI8Jcsdk4Q357bSFykDIpmU+PCAhm9IQpbcPF+wuRITHBBivLy6poaM9X184ng6FDHUOTbt6L8ZF6dYfVw==}
     peerDependencies:
       eslint: ^8.57.0 || ^9.0.0
+
+  '@types/doctrine@0.0.9':
+    resolution: {integrity: sha512-eOIHzCUSH7SMfonMG1LsC2f8vxBFtho6NGBznK41R84YzPuvSBzrhEps33IsQiOW9+VL6NQ9DbjQJznk/S4uRA==}
 
   '@types/eslint-plugin-jsx-a11y@6.10.0':
     resolution: {integrity: sha512-TGKmk2gO6DrvTVADNOGQMqn3SzqcFcJILFnXNllQA34us9uClS3/AsL/cERPz6jS9ePI3bx+1q8/d2GZsxPVYw==}
@@ -709,8 +712,8 @@ packages:
       eslint-plugin-import-x:
         optional: true
 
-  eslint-plugin-import-x@4.5.0:
-    resolution: {integrity: sha512-l0OTfnPF8RwmSXfjT75N8d6ZYLVrVYWpaGlgvVkVqFERCI5SyBfDP7QEMr3kt0zWi2sOa9EQ47clbdFsHkF83Q==}
+  eslint-plugin-import-x@4.6.1:
+    resolution: {integrity: sha512-wluSUifMIb7UfwWXqx7Yx0lE/SGCcGXECLx/9bCmbY2nneLwvAZ4vkd1IXDjPKFvdcdUgr1BaRnaRpx3k2+Pfw==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     peerDependencies:
       eslint: ^8.57.0 || ^9.0.0
@@ -1999,6 +2002,8 @@ snapshots:
       - supports-color
       - typescript
 
+  '@types/doctrine@0.0.9': {}
+
   '@types/eslint-plugin-jsx-a11y@6.10.0':
     dependencies:
       '@types/eslint': 9.6.1
@@ -2471,7 +2476,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-import-resolver-typescript@3.7.0(eslint-plugin-import-x@4.5.0(eslint@9.17.0)(typescript@5.7.2))(eslint@9.17.0):
+  eslint-import-resolver-typescript@3.7.0(eslint-plugin-import-x@4.6.1(eslint@9.17.0)(typescript@5.7.2))(eslint@9.17.0):
     dependencies:
       '@nolyfill/is-core-module': 1.0.39
       debug: 4.4.0
@@ -2483,16 +2488,18 @@ snapshots:
       is-glob: 4.0.3
       stable-hash: 0.0.4
     optionalDependencies:
-      eslint-plugin-import-x: 4.5.0(eslint@9.17.0)(typescript@5.7.2)
+      eslint-plugin-import-x: 4.6.1(eslint@9.17.0)(typescript@5.7.2)
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-import-x@4.5.0(eslint@9.17.0)(typescript@5.7.2):
+  eslint-plugin-import-x@4.6.1(eslint@9.17.0)(typescript@5.7.2):
     dependencies:
+      '@types/doctrine': 0.0.9
       '@typescript-eslint/scope-manager': 8.18.1
       '@typescript-eslint/utils': 8.18.1(eslint@9.17.0)(typescript@5.7.2)
       debug: 4.4.0
       doctrine: 3.0.0
+      enhanced-resolve: 5.17.1
       eslint: 9.17.0
       eslint-import-resolver-node: 0.3.9
       get-tsconfig: 4.8.1
