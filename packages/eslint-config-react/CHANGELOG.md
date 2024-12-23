@@ -1,5 +1,13 @@
 # @macalinao/eslint-config-react
 
+## 3.0.1
+
+### Patch Changes
+
+- 0adca40: Bump dependencies
+- Updated dependencies [0adca40]
+  - @macalinao/eslint-config@4.0.1
+
 ## 3.0.0
 
 ### Major Changes
