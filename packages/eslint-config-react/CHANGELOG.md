@@ -1,5 +1,15 @@
 # @macalinao/eslint-config-react
 
+## 3.0.1
+
+### Patch Changes
+
+- 0adca40: Bump dependencies
+- cdb5ccb: Bump dependency versions
+- Updated dependencies [0adca40]
+- Updated dependencies [cdb5ccb]
+  - @macalinao/eslint-config@4.0.1
+
 ## 3.0.0
 
 ### Major Changes
