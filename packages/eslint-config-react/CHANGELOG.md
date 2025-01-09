@@ -1,5 +1,13 @@
 # @macalinao/eslint-config-react
 
+## 3.0.2
+
+### Patch Changes
+
+- e328ae9: Bump TypeScript to 5.7.3
+- Updated dependencies [e328ae9]
+  - @macalinao/eslint-config@4.0.2
+
 ## 3.0.1
 
 ### Patch Changes

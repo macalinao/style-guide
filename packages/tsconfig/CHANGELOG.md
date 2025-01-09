@@ -1,5 +1,11 @@
 # @macalinao/tsconfig
 
+## 3.0.1
+
+### Patch Changes
+
+- e328ae9: Bump TypeScript to 5.7.3
+
 ## 3.0.0
 
 ### Major Changes
