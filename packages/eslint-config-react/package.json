@@ -41,7 +41,7 @@
     "@macalinao/tsconfig": "workspace:^",
     "@types/eslint-plugin-jsx-a11y": "^6.10.0",
     "@types/eslint__js": "^8.42.3",
-    "@types/node": "^22.10.5",
+    "@types/node": "^22.10.6",
     "typescript": "^5.7.3"
   },
   "exports": {
