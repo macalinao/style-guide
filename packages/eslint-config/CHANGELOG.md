@@ -1,5 +1,11 @@
 # @macalinao/eslint-config
 
+## 4.1.0
+
+### Minor Changes
+
+- 71508b9: Default to ES2024
+
 ## 4.0.3
 
 ### Patch Changes
