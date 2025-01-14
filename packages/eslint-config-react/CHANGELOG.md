@@ -1,5 +1,15 @@
 # @macalinao/eslint-config-react
 
+## 3.0.3
+
+### Patch Changes
+
+- ef45b97: Update dependencies
+- 1ec0625: Bump ESLint
+- Updated dependencies [ef45b97]
+- Updated dependencies [1ec0625]
+  - @macalinao/eslint-config@4.0.3
+
 ## 3.0.2
 
 ### Patch Changes

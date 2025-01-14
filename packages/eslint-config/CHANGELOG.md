@@ -1,5 +1,12 @@
 # @macalinao/eslint-config
 
+## 4.0.3
+
+### Patch Changes
+
+- ef45b97: Update dependencies
+- 1ec0625: Bump ESLint
+
 ## 4.0.2
 
 ### Patch Changes
