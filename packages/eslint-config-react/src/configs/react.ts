@@ -30,9 +30,9 @@ const react: TSESLint.FlatConfig.ConfigArray = tseslint.config(
   ...tanstackQueryPlugin.configs["flat/recommended"],
   ...tanstackRouterPlugin.configs["flat/recommended"],
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  reactPlugin.configs.flat!.recommended! as TSESLint.FlatConfig.Config,
+  reactPlugin.configs.flat.recommended! as TSESLint.FlatConfig.Config,
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  reactPlugin.configs.flat!["jsx-runtime"]! as TSESLint.FlatConfig.Config,
+  reactPlugin.configs.flat["jsx-runtime"]! as TSESLint.FlatConfig.Config,
   a11yPlugin.flatConfigs.strict,
   {
     files: ["**/*.ts", "**/*.tsx"],
