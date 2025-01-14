@@ -41,12 +41,8 @@ const react: TSESLint.FlatConfig.ConfigArray = tseslint.config(
     },
     rules: {
       ...hooksPlugin.configs.recommended.rules,
-
       // don't think this is necessary
       "react/react-in-jsx-scope": "off",
-
-      // TypeError: context.getAncestors is not a function
-      // "@tanstack/query/exhaustive-deps": "off",
       // should validate props with TypeScript
       "react/prop-types": "off",
       // twin.macro stuff
