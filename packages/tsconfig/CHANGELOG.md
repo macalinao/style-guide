@@ -1,5 +1,15 @@
 # @macalinao/tsconfig
 
+## 3.1.0
+
+### Minor Changes
+
+- 71508b9: Default to ES2024
+
+### Patch Changes
+
+- d288d46: Add React and DOM TSConfigs
+
 ## 3.0.2
 
 ### Patch Changes
