@@ -1,5 +1,11 @@
 # @macalinao/tsconfig
 
+## 3.0.2
+
+### Patch Changes
+
+- 0885256: Remove redundant lib in tsconfig.cf.json
+
 ## 3.0.1
 
 ### Patch Changes
