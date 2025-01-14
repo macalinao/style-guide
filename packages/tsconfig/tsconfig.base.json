@@ -3,8 +3,8 @@
   "compilerOptions": {
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
-    "target": "ES2023",
-    "lib": ["ES2023"],
+    "target": "ES2024",
+    "lib": ["ES2024"],
     "outDir": "${configDir}/dist",
     "rootDir": "${configDir}/src",
 

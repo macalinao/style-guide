@@ -63,7 +63,7 @@ const base: TSESLint.FlatConfig.ConfigArray = tseslint.config(
       globals: {
         ...globals.browser,
         ...globals.commonjs,
-        ...globals.es2023,
+        ...globals.es2024,
         ...globals.worker,
       },
     },
