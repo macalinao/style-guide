@@ -57,7 +57,7 @@ const base: TSESLint.FlatConfig.ConfigArray = tseslint.config(
     languageOptions: {
       parserOptions: {
         projectService: {
-          allowDefaultProject: ["eslint.config.*"],
+          allowDefaultProject: ["eslint.config.*", "tailwind.config.*"],
         },
       },
       globals: {
