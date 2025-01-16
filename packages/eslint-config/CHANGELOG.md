@@ -1,5 +1,11 @@
 # @macalinao/eslint-config
 
+## 4.1.1
+
+### Patch Changes
+
+- 6245c53: Bump deps
+
 ## 4.1.0
 
 ### Minor Changes
