@@ -1,5 +1,13 @@
 # @macalinao/eslint-config-react
 
+## 3.0.6
+
+### Patch Changes
+
+- 8923f8a: Bump deps
+- Updated dependencies [8923f8a]
+  - @macalinao/eslint-config@4.1.2
+
 ## 3.0.5
 
 ### Patch Changes
