@@ -48,8 +48,8 @@ importers:
         specifier: ^10.0.1
         version: 10.0.1(eslint@9.18.0)
       eslint-config-turbo:
-        specifier: ^2.3.3
-        version: 2.3.3(eslint@9.18.0)
+        specifier: ^2.3.4
+        version: 2.3.4(eslint@9.18.0)(turbo@2.3.3)
       eslint-import-resolver-typescript:
         specifier: ^3.7.0
         version: 3.7.0(eslint-plugin-import-x@4.6.1(eslint@9.18.0)(typescript@5.7.3))(eslint@9.18.0)
@@ -121,8 +121,8 @@ importers:
         specifier: ^9.18.0
         version: 9.18.0
       eslint-config-turbo:
-        specifier: ^2.3.3
-        version: 2.3.3(eslint@9.18.0)
+        specifier: ^2.3.4
+        version: 2.3.4(eslint@9.18.0)(turbo@2.3.3)
       eslint-plugin-import-x:
         specifier: ^4.6.1
         version: 4.6.1(eslint@9.18.0)(typescript@5.7.3)
@@ -730,10 +730,11 @@ packages:
     peerDependencies:
       eslint: '>=7.0.0'
 
-  eslint-config-turbo@2.3.3:
-    resolution: {integrity: sha512-cM9wSBYowQIrjx2MPCzFE6jTnG4vpTPJKZ/O+Ps3CqrmGK/wtNOsY6WHGMwLtKY/nNbgRahAJH6jGVF6k2coOg==}
+  eslint-config-turbo@2.3.4:
+    resolution: {integrity: sha512-MxPl+IKkR7mRGcHoiZAMHYl+RZnjqBsxTLf+IGnx8BrJQe9/CoLT7oBlUxXGvh9bsd5MTaqCxly5h8BE1v/7AA==}
     peerDependencies:
       eslint: '>6.6.0'
+      turbo: '>2.0.0'
 
   eslint-import-resolver-node@0.3.9:
     resolution: {integrity: sha512-WFj2isz22JahUv+B788TlO3N6zL3nNJGU8CcZbPZvVEkBPaJdCV4vy5wyghty5ROFbCRnm132v8BScu5/1BQ8g==}
@@ -798,6 +799,12 @@ packages:
     resolution: {integrity: sha512-j8UEA0Z+NNCsjZep9G5u5soDQHcXq/x4amrwulk6eHF1U91H2qAjp5I4jQcvJewmccCJbVp734PkHHTRnosjpg==}
     peerDependencies:
       eslint: '>6.6.0'
+
+  eslint-plugin-turbo@2.3.4:
+    resolution: {integrity: sha512-9ncoUJkQGkC28NmlQiS17oB9mrE8XaSulRZiB5pv9vmRbYjOfUwyGhY3EIcoBRdww81igxOzXmAmvNNd6GFBPg==}
+    peerDependencies:
+      eslint: '>6.6.0'
+      turbo: '>2.0.0'
 
   eslint-plugin-unused-imports@4.1.4:
     resolution: {integrity: sha512-YptD6IzQjDardkl0POxnnRBhU1OEePMV0nd6siHaRBbd+lyh6NAhFEobiznKU7kTsSsDeSD62Pe7kAM1b7dAZQ==}
@@ -2680,10 +2687,11 @@ snapshots:
     dependencies:
       eslint: 9.18.0
 
-  eslint-config-turbo@2.3.3(eslint@9.18.0):
+  eslint-config-turbo@2.3.4(eslint@9.18.0)(turbo@2.3.3):
     dependencies:
       eslint: 9.18.0
-      eslint-plugin-turbo: 2.3.3(eslint@9.18.0)
+      eslint-plugin-turbo: 2.3.4(eslint@9.18.0)(turbo@2.3.3)
+      turbo: 2.3.3
 
   eslint-import-resolver-node@0.3.9:
     dependencies:
@@ -2792,6 +2800,12 @@ snapshots:
     dependencies:
       dotenv: 16.0.3
       eslint: 9.18.0
+
+  eslint-plugin-turbo@2.3.4(eslint@9.18.0)(turbo@2.3.3):
+    dependencies:
+      dotenv: 16.0.3
+      eslint: 9.18.0
+      turbo: 2.3.3
 
   eslint-plugin-unused-imports@4.1.4(@typescript-eslint/eslint-plugin@8.21.0(@typescript-eslint/parser@8.21.0(eslint@9.18.0)(typescript@5.7.3))(eslint@9.18.0)(typescript@5.7.3))(eslint@9.18.0):
     dependencies:
