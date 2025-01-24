@@ -20,7 +20,7 @@
       in
       {
         formatter = pkgs.nixfmt-rfc-style;
-        devShell = pkgs.mkShell {
+        devShells.default = pkgs.mkShell {
           buildInputs = with pkgs; [
             git
             nixfmt-rfc-style
