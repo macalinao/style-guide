@@ -25,7 +25,7 @@
             git
             nixfmt-rfc-style
             nodejs
-            (nodePackages.pnpm.override { inherit nodejs; })
+            (pnpm.override { inherit nodejs; })
           ];
         };
       }
