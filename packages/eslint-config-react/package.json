@@ -18,7 +18,7 @@
     "@typescript-eslint/eslint-plugin": "^8.21.0",
     "@typescript-eslint/parser": "^8.21.0",
     "@typescript-eslint/utils": "^8.21.0",
-    "eslint": "^9.18.0",
+    "eslint": "^9.19.0",
     "eslint-config-turbo": "^2.3.4",
     "eslint-plugin-import-x": "^4.6.1",
     "eslint-plugin-jsx-a11y": "^6.10.2",
