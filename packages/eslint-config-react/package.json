@@ -11,14 +11,14 @@
     "url": "https://github.com/macalinao/style-guide/issues"
   },
   "dependencies": {
-    "@eslint/js": "^9.18.0",
+    "@eslint/js": "^9.19.0",
     "@macalinao/eslint-config": "workspace:^",
     "@tanstack/eslint-plugin-query": "^5.64.2",
-    "@tanstack/eslint-plugin-router": "^1.97.8",
+    "@tanstack/eslint-plugin-router": "^1.97.19",
     "@typescript-eslint/eslint-plugin": "^8.21.0",
     "@typescript-eslint/parser": "^8.21.0",
     "@typescript-eslint/utils": "^8.21.0",
-    "eslint": "^9.18.0",
+    "eslint": "^9.19.0",
     "eslint-config-turbo": "^2.3.4",
     "eslint-plugin-import-x": "^4.6.1",
     "eslint-plugin-jsx-a11y": "^6.10.2",
