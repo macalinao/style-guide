@@ -13,11 +13,11 @@
   "dependencies": {
     "@eslint/js": "^9.19.0",
     "@macalinao/eslint-config": "workspace:^",
-    "@tanstack/eslint-plugin-query": "^5.64.2",
+    "@tanstack/eslint-plugin-query": "^5.65.0",
     "@tanstack/eslint-plugin-router": "^1.97.19",
-    "@typescript-eslint/eslint-plugin": "^8.21.0",
-    "@typescript-eslint/parser": "^8.21.0",
-    "@typescript-eslint/utils": "^8.21.0",
+    "@typescript-eslint/eslint-plugin": "^8.22.0",
+    "@typescript-eslint/parser": "^8.22.0",
+    "@typescript-eslint/utils": "^8.22.0",
     "eslint": "^9.19.0",
     "eslint-config-turbo": "^2.3.4",
     "eslint-plugin-import-x": "^4.6.1",
@@ -30,7 +30,7 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "tslib": "^2.8.1",
-    "typescript-eslint": "^8.21.0"
+    "typescript-eslint": "^8.22.0"
   },
   "files": [
     "src/**/*",
@@ -41,7 +41,7 @@
     "@macalinao/tsconfig": "workspace:^",
     "@types/eslint-plugin-jsx-a11y": "^6.10.0",
     "@types/eslint__js": "^8.42.3",
-    "@types/node": "^22.10.10",
+    "@types/node": "^22.12.0",
     "typescript": "^5.7.3"
   },
   "exports": {
