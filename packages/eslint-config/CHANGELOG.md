@@ -1,5 +1,11 @@
 # @macalinao/eslint-config
 
+## 4.1.4
+
+### Patch Changes
+
+- 5247fea: Bump packages
+
 ## 4.1.3
 
 ### Patch Changes
