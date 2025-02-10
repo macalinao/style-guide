@@ -15,7 +15,7 @@
     "@macalinao/eslint-config": "workspace:^",
     "@tanstack/eslint-plugin-query": "^5.66.0",
     "@tanstack/eslint-plugin-router": "^1.99.3",
-    "@typescript-eslint/eslint-plugin": "^8.23.0",
+    "@typescript-eslint/eslint-plugin": "^8.24.0",
     "@typescript-eslint/parser": "^8.23.0",
     "@typescript-eslint/utils": "^8.23.0",
     "eslint": "^9.20.0",
