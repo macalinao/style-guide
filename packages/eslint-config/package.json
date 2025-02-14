@@ -12,22 +12,22 @@
   },
   "dependencies": {
     "@eslint/js": "^9.20.0",
-    "@typescript-eslint/eslint-plugin": "^8.23.0",
-    "@typescript-eslint/parser": "^8.23.0",
-    "@typescript-eslint/utils": "^8.23.0",
-    "eslint": "^9.20.0",
+    "@typescript-eslint/eslint-plugin": "^8.24.0",
+    "@typescript-eslint/parser": "^8.24.0",
+    "@typescript-eslint/utils": "^8.24.0",
+    "eslint": "^9.20.1",
     "eslint-config-prettier": "^10.0.1",
-    "eslint-config-turbo": "^2.4.0",
-    "eslint-import-resolver-typescript": "^3.7.0",
+    "eslint-config-turbo": "^2.4.2",
+    "eslint-import-resolver-typescript": "^3.8.0",
     "eslint-plugin-import-x": "^4.6.1",
     "eslint-plugin-prettier": "^5.2.3",
     "eslint-plugin-simple-import-sort": "^12.1.1",
-    "eslint-plugin-turbo": "^2.4.0",
+    "eslint-plugin-turbo": "^2.4.2",
     "eslint-plugin-unused-imports": "^4.1.4",
-    "globals": "^15.14.0",
-    "prettier": "^3.4.2",
+    "globals": "^15.15.0",
+    "prettier": "^3.5.1",
     "tslib": "^2.8.1",
-    "typescript-eslint": "^8.23.0"
+    "typescript-eslint": "^8.24.0"
   },
   "files": [
     "src/**/*",
@@ -37,7 +37,7 @@
   "devDependencies": {
     "@macalinao/tsconfig": "workspace:^",
     "@types/eslint__js": "^8.42.3",
-    "@types/node": "^22.13.1",
+    "@types/node": "^22.13.4",
     "typescript": "^5.7.3"
   },
   "exports": {
