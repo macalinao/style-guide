@@ -1,5 +1,11 @@
 # @macalinao/eslint-config
 
+## 4.1.8
+
+### Patch Changes
+
+- cb04b7c: Update dependencies
+
 ## 4.1.7
 
 ### Patch Changes
