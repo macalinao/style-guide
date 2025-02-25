@@ -2,7 +2,7 @@
   "name": "@macalinao/eslint-config-react",
   "description": "ESLint configuration to use for React projects",
   "license": "Apache-2.0",
-  "version": "3.0.10",
+  "version": "3.0.11",
   "type": "module",
   "sideEffects": false,
   "repository": "github:macalinao/style-guide",
