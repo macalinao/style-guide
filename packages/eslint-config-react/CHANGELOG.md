@@ -1,5 +1,13 @@
 # @macalinao/eslint-config-react
 
+## 3.0.13
+
+### Patch Changes
+
+- 60e5a51: Update dependencies
+- Updated dependencies [60e5a51]
+  - @macalinao/eslint-config@4.1.9
+
 ## 3.0.12
 
 ### Patch Changes
