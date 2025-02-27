@@ -1,5 +1,11 @@
 # @macalinao/eslint-config
 
+## 4.1.9
+
+### Patch Changes
+
+- 60e5a51: Update dependencies
+
 ## 4.1.8
 
 ### Patch Changes
