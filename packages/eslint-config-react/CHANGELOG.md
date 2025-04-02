@@ -1,5 +1,13 @@
 # @macalinao/eslint-config-react
 
+## 3.0.14
+
+### Patch Changes
+
+- ed84de0: Bump dependencies
+- Updated dependencies [ed84de0]
+  - @macalinao/eslint-config@4.1.10
+
 ## 3.0.13
 
 ### Patch Changes

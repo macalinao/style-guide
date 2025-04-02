@@ -1,5 +1,11 @@
 # @macalinao/eslint-config
 
+## 4.1.10
+
+### Patch Changes
+
+- ed84de0: Bump dependencies
+
 ## 4.1.9
 
 ### Patch Changes
