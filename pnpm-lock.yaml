@@ -100,8 +100,8 @@ importers:
         specifier: workspace:^
         version: link:../eslint-config
       '@tanstack/eslint-plugin-query':
-        specifier: ^5.68.0
-        version: 5.68.0(eslint@9.23.0)(typescript@5.8.2)
+        specifier: ^5.72.1
+        version: 5.72.1(eslint@9.23.0)(typescript@5.8.2)
       '@tanstack/eslint-plugin-router':
         specifier: ^1.114.29
         version: 1.114.29(eslint@9.23.0)(typescript@5.8.2)
@@ -322,8 +322,8 @@ packages:
     resolution: {integrity: sha512-vsJDAkYR6qCPu+ioGScGiMYR7LvZYIXh/dlQeviqoTWNCVfKTLYD/LkNWH4Mxsv2a5vpIRc77FN5DnmK1eBggQ==}
     engines: {node: ^12.20.0 || ^14.18.0 || >=16.0.0}
 
-  '@tanstack/eslint-plugin-query@5.68.0':
-    resolution: {integrity: sha512-w/+y5LILV1GTWBB2R/lKfUzgocKXU1B7O6jipLUJhmxCKPmJFy5zpfR1Vx7c6yCEsQoKcTbhuR/tIy+1sIGaiA==}
+  '@tanstack/eslint-plugin-query@5.72.1':
+    resolution: {integrity: sha512-nAh9KKZ2UT50FTY7ha3NU+IBzC6XzXLtPlKFwfORM4+Tt/6eMOHgzE8oxYaRCr4uSNxCao0AK2WzLGHZo8ViSA==}
     peerDependencies:
       eslint: ^8.57.0 || ^9.0.0
 
@@ -2212,7 +2212,7 @@ snapshots:
 
   '@pkgr/core@0.2.0': {}
 
-  '@tanstack/eslint-plugin-query@5.68.0(eslint@9.23.0)(typescript@5.8.2)':
+  '@tanstack/eslint-plugin-query@5.72.1(eslint@9.23.0)(typescript@5.8.2)':
     dependencies:
       '@typescript-eslint/utils': 8.29.0(eslint@9.23.0)(typescript@5.8.2)
       eslint: 9.23.0
