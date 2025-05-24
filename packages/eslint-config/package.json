@@ -29,11 +29,7 @@
     "tslib": "^2.8.1",
     "typescript-eslint": "^8.32.1"
   },
-  "files": [
-    "src/**/*",
-    "dist/**/*",
-    "README.md"
-  ],
+  "files": ["src/**/*", "dist/**/*", "README.md"],
   "devDependencies": {
     "@macalinao/tsconfig": "workspace:^",
     "@types/node": "^22.15.21",
@@ -57,7 +53,11 @@
     "access": "public"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx,cjs,mjs,cts,mts}": "eslint --fix --cache",
-    "*.{md,json,yml,yaml,html}": "prettier --write"
+    "*.{js,jsx,ts,tsx,cjs,mjs,cts,mts}": [
+      "biome check --apply",
+      "eslint --fix --cache"
+    ],
+    "*.{md,yml,yaml}": "prettier --write",
+    "*.{json,jsonc,html}": "biome format --write"
   }
 }
