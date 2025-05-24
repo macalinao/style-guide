@@ -1,5 +1,11 @@
 # @macalinao/tsconfig
 
+## 3.1.1
+
+### Patch Changes
+
+- f13ac22: Update dependencies
+
 ## 3.1.0
 
 ### Minor Changes
