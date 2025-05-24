@@ -4,13 +4,12 @@
   "private": true,
   "version": "0.1.0",
   "main": "index.js",
-  "workspaces": [
-    "packages/*"
-  ],
   "scripts": {
     "build": "turbo run build",
     "clean": "turbo run clean",
     "lint": "turbo run lint",
+    "format": "biome format --write",
+    "format:check": "biome check --write",
     "ci:version": "changeset version",
     "ci:publish": "pnpm publish -r",
     "prepare": "husky"
@@ -19,12 +18,13 @@
   "author": "Ian Macalinao <me@ianm.com>",
   "license": "Apache-2.0",
   "devDependencies": {
-    "@changesets/cli": "^2.28.1",
+    "@biomejs/biome": "1.9.4",
+    "@changesets/cli": "^2.29.4",
     "husky": "^9.1.7",
-    "lint-staged": "^15.5.0",
+    "lint-staged": "^16.0.0",
     "prettier": "^3.5.3",
-    "turbo": "^2.4.4",
-    "typescript": "^5.8.2"
+    "turbo": "^2.5.3",
+    "typescript": "^5.8.3"
   },
   "packageManager": "pnpm@10.11.0",
   "engines": {
@@ -32,7 +32,11 @@
     "pnpm": ">=9"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx,cjs,mjs,cts,mts}": "eslint --fix --cache",
-    "*.{md,json,yml,yaml,html}": "prettier --write"
+    "*.{js,jsx,ts,tsx,cjs,mjs,cts,mts}": [
+      "biome check --apply",
+      "eslint --fix --cache"
+    ],
+    "*.{md,yml,yaml}": "prettier --write",
+    "*.{json,jsonc,html}": "biome format --write"
   }
 }
