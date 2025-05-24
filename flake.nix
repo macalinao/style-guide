@@ -26,6 +26,7 @@
             nixfmt-rfc-style
             nodejs
             (pnpm.override { inherit nodejs; })
+            biome
           ];
         };
       }
