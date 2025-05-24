@@ -1,5 +1,11 @@
 # @macalinao/eslint-config
 
+## 4.1.11
+
+### Patch Changes
+
+- f13ac22: Update dependencies
+
 ## 4.1.10
 
 ### Patch Changes
