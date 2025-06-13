@@ -1,5 +1,11 @@
 # @macalinao/tsconfig
 
+## 3.2.0
+
+### Minor Changes
+
+- 8e6c887: Add fast ESLint config, encourage use of Biome
+
 ## 3.1.1
 
 ### Patch Changes

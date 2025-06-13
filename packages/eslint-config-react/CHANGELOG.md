@@ -1,5 +1,16 @@
 # @macalinao/eslint-config-react
 
+## 3.1.0
+
+### Minor Changes
+
+- 8e6c887: Add fast ESLint config, encourage use of Biome
+
+### Patch Changes
+
+- Updated dependencies [8e6c887]
+  - @macalinao/eslint-config@4.2.0
+
 ## 3.0.15
 
 ### Patch Changes
