@@ -7,11 +7,12 @@
   "scripts": {
     "build": "turbo run build",
     "clean": "turbo run clean",
-    "lint": "turbo run lint",
+    "lint": "biome check && turbo run lint",
+    "lint:fix": "biome check --write --unsafe && turbo run lint -- --fix",
     "format": "biome format --write",
     "format:check": "biome check --write",
     "ci:version": "changeset version",
-    "ci:publish": "bun publish --all",
+    "ci:publish": "for dir in packages/*; do (cd \"$dir\" && bun publish); done",
     "prepare": "husky"
   },
   "keywords": [],
@@ -38,5 +39,6 @@
     ],
     "*.{md,yml,yaml}": "prettier --write",
     "*.{json,jsonc,html}": "biome format --write"
-  }
+  },
+  "packageManager": "bun@1.2.2"
 }
