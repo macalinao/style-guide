@@ -4,10 +4,7 @@ import type { TSESLint } from "@typescript-eslint/utils";
 import * as tsResolver from "eslint-import-resolver-typescript";
 // https://github.com/import-js/eslint-plugin-import/issues/2948
 import * as importPlugin from "eslint-plugin-import-x";
-import prettierConfig from "eslint-plugin-prettier/recommended";
-import simpleImportSortPlugin from "eslint-plugin-simple-import-sort";
 import * as turboPlugin from "eslint-plugin-turbo";
-import unusedImportsPlugin from "eslint-plugin-unused-imports";
 import globals from "globals";
 import tseslint from "typescript-eslint";
 
@@ -19,9 +16,6 @@ const base: TSESLint.FlatConfig.ConfigArray = tseslint.config(
 
   // ESLint defaults
   eslint.configs.recommended,
-
-  // Prettier. This is slow; candidate for removal.
-  prettierConfig,
 
   // ESLint import plugin defaults
   importPlugin.flatConfigs.recommended,
@@ -73,15 +67,12 @@ const base: TSESLint.FlatConfig.ConfigArray = tseslint.config(
     },
 
     plugins: {
-      "simple-import-sort": simpleImportSortPlugin,
-      "unused-imports": unusedImportsPlugin,
       turbo: turboPlugin,
     },
 
     rules: {
       ...turboPlugin.configs.recommended.rules,
 
-      eqeqeq: "error",
       "@typescript-eslint/explicit-member-accessibility": [
         "error",
         { accessibility: "no-public" },
@@ -96,37 +87,17 @@ const base: TSESLint.FlatConfig.ConfigArray = tseslint.config(
       "import-x/no-unresolved": "off",
       "import-x/extensions": "off",
 
-      // import stuff
-      "simple-import-sort/imports": "error",
-      "simple-import-sort/exports": "error",
-      "import-x/first": "warn",
-      "import-x/newline-after-import": "warn",
+      // Import rules - keeping only those not handled by Biome
       "import-x/no-duplicates": "warn",
       "import-x/no-extraneous-dependencies": "error",
-      // Should not allow mixed import styles
       "import-x/consistent-type-specifier-style": "error",
 
-      "unused-imports/no-unused-imports": "error",
-      "unused-imports/no-unused-vars": [
-        "warn",
-        {
-          vars: "all",
-          varsIgnorePattern: "^_",
-          args: "after-used",
-          argsIgnorePattern: "^_",
-        },
-      ],
+      // Removed - handled by Biome:
+      // - eqeqeq -> Biome's noDoubleEquals
+      // - @typescript-eslint/consistent-type-imports -> Biome's useImportType
+      // - @typescript-eslint/no-unused-vars -> Biome's noUnusedVariables
+      // - import-x/first and import-x/newline-after-import -> Biome's organizeImports
 
-      "@typescript-eslint/consistent-type-imports": "error",
-      "@typescript-eslint/no-unused-vars": [
-        "warn",
-        {
-          vars: "all",
-          varsIgnorePattern: "^_",
-          args: "after-used",
-          argsIgnorePattern: "^_",
-        },
-      ],
       // Enforce that private members are prefixed with an underscore
       "@typescript-eslint/naming-convention": [
         "error",

@@ -41,3 +41,5 @@ node_modules/
 .direnv/
 dist/
 .npmrc
+
+.claude/settings.local.json

@@ -1,7 +1,7 @@
 import { configs } from "@macalinao/eslint-config";
 
 export default [
-  ...configs.base,
+  ...configs.fast,
   {
     languageOptions: {
       parserOptions: {

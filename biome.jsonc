@@ -13,19 +13,30 @@
     "ignore": [
       // other ignores
       "packages/tsconfig/tsconfig.base.json",
-      "**/pnpm-lock.yaml"
+      "**/bun.lockb"
     ]
   },
   "organizeImports": { "enabled": true },
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true
+      "recommended": true,
+      "suspicious": {
+        "noDoubleEquals": "error"
+      },
+      "style": {
+        "useImportType": "error",
+        "noNonNullAssertion": "off"
+      },
+      "correctness": {
+        "noUnusedVariables": "warn",
+        "noUnusedImports": "error"
+      }
     },
     "ignore": [
       // other ignores
       "packages/tsconfig/tsconfig.base.json",
-      "**/pnpm-lock.yaml"
+      "**/bun.lockb"
     ]
   },
   "javascript": {

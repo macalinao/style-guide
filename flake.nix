@@ -25,7 +25,7 @@
             git
             nixfmt-rfc-style
             nodejs
-            (pnpm.override { inherit nodejs; })
+            bun
             biome
           ];
         };
