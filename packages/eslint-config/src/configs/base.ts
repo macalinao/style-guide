@@ -45,7 +45,7 @@ const base: TSESLint.FlatConfig.ConfigArray = tseslint.config(
     rules: {
       "no-unused-vars": "off",
       "import-x/no-dynamic-require": "warn",
-      "import-x/no-nodejs-modules": "warn",
+      "import-x/no-nodejs-modules": "off",
     },
   },
 
