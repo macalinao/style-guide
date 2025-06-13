@@ -11,7 +11,7 @@
     "format": "biome format --write",
     "format:check": "biome check --write",
     "ci:version": "changeset version",
-    "ci:publish": "pnpm publish -r",
+    "ci:publish": "bun publish --all",
     "prepare": "husky"
   },
   "keywords": [],
@@ -26,10 +26,10 @@
     "turbo": "^2.5.4",
     "typescript": "^5.8.3"
   },
-  "packageManager": "pnpm@10.11.0",
+  "workspaces": ["packages/*"],
   "engines": {
     "node": ">=22",
-    "pnpm": ">=9"
+    "bun": ">=1.0.0"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,cjs,mjs,cts,mts}": [

@@ -4,8 +4,8 @@ This monorepo contains ESLint and TypeScript configurations used across my proje
 
 Notes:
 
-- I use default Prettier settings.
-- I only use ES Modules. Dual CommonJS/ESM is a minefield I don't want to step into.
+- ~~I use default Prettier settings.~~ I use Biome formatting and linting. Prettier has performance issues with large codebases.
+- I only use ES Modules. Dual CommonJS/ESM is a minefield that isn't worth the hassle.
 
 ## Packages
 

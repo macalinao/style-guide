@@ -6,19 +6,19 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ### Build Commands
 
-- `pnpm build` - Build all packages in the monorepo using Turbo
-- `pnpm clean` - Clean all build artifacts across packages
+- `bun run build` - Build all packages in the monorepo using Turbo
+- `bun run clean` - Clean all build artifacts across packages
 
 ### Code Quality
 
-- `pnpm lint` - Run ESLint across all packages
-- `pnpm format` - Format code using Biome
-- `pnpm format:check` - Check and fix code using Biome
+- `bun run lint` - Run ESLint across all packages
+- `bun run format` - Format code using Biome
+- `bun run format:check` - Check and fix code using Biome
 
 ### Publishing
 
-- `pnpm ci:version` - Update package versions using Changesets
-- `pnpm ci:publish` - Publish packages to npm
+- `bun run ci:version` - Update package versions using Changesets
+- `bun run ci:publish` - Publish packages to npm
 
 ## Architecture Overview
 
@@ -44,6 +44,7 @@ This is a monorepo containing Ian Macalinao's standardized TypeScript and ESLint
 - **ES Modules Only** - No CommonJS support, uses `"type": "module"`
 - **TypeScript Strict Mode** - All configurations enable strict type checking with additional constraints
 - **Tool Chain**:
+  - Bun for package management and script running
   - Turbo for monorepo task orchestration with caching
   - Biome for fast formatting (JSON, JSONC, HTML)
   - ESLint with TypeScript for linting
