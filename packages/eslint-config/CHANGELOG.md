@@ -1,5 +1,11 @@
 # @macalinao/eslint-config
 
+## 4.2.0
+
+### Minor Changes
+
+- 8e6c887: Add fast ESLint config, encourage use of Biome
+
 ## 4.1.11
 
 ### Patch Changes
