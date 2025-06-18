@@ -1,5 +1,13 @@
 # @macalinao/eslint-config-react
 
+## 3.1.1
+
+### Patch Changes
+
+- de4b3d5: Fix publish command
+- Updated dependencies [de4b3d5]
+  - @macalinao/eslint-config@4.2.1
+
 ## 3.1.0
 
 ### Minor Changes

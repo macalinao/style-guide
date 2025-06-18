@@ -1,5 +1,11 @@
 # @macalinao/tsconfig
 
+## 3.2.1
+
+### Patch Changes
+
+- de4b3d5: Fix publish command
+
 ## 3.2.0
 
 ### Minor Changes

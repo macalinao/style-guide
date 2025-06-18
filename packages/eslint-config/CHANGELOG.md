@@ -1,5 +1,11 @@
 # @macalinao/eslint-config
 
+## 4.2.1
+
+### Patch Changes
+
+- de4b3d5: Fix publish command
+
 ## 4.2.0
 
 ### Minor Changes
