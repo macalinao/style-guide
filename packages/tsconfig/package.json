@@ -16,10 +16,10 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,cjs,mjs,cts,mts}": [
-      "biome check --apply",
+      "biome check --write --no-errors-on-unmatched",
       "eslint --fix --cache"
     ],
     "*.{md,yml,yaml}": "prettier --write",
-    "*.{json,jsonc,html}": "biome format --write"
+    "*.{json,jsonc,html}": "biome format --write --no-errors-on-unmatched"
   }
 }

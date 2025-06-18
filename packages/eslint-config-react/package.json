@@ -11,18 +11,18 @@
     "url": "https://github.com/macalinao/style-guide/issues"
   },
   "dependencies": {
-    "@eslint/js": "^9.28.0",
+    "@eslint/js": "^9.29.0",
     "@macalinao/eslint-config": "workspace:^",
     "@tanstack/eslint-plugin-query": "^5.78.0",
-    "@tanstack/eslint-plugin-router": "^1.120.17",
-    "@typescript-eslint/eslint-plugin": "^8.34.0",
-    "@typescript-eslint/parser": "^8.34.0",
-    "@typescript-eslint/utils": "^8.34.0",
-    "eslint": "^9.28.0",
+    "@tanstack/eslint-plugin-router": "^1.121.21",
+    "@typescript-eslint/eslint-plugin": "^8.34.1",
+    "@typescript-eslint/parser": "^8.34.1",
+    "@typescript-eslint/utils": "^8.34.1",
+    "eslint": "^9.29.0",
     "eslint-config-turbo": "^2.5.4",
     "eslint-plugin-import-x": "^4.15.2",
     "eslint-plugin-jsx-a11y": "^6.10.2",
-    "eslint-plugin-prettier": "^5.4.1",
+    "eslint-plugin-prettier": "^5.5.0",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-turbo": "^2.5.4",
@@ -30,13 +30,17 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "tslib": "^2.8.1",
-    "typescript-eslint": "^8.34.0"
+    "typescript-eslint": "^8.34.1"
   },
-  "files": ["src/**/*", "dist/**/*", "README.md"],
+  "files": [
+    "src/**/*",
+    "dist/**/*",
+    "README.md"
+  ],
   "devDependencies": {
     "@macalinao/tsconfig": "workspace:^",
     "@types/eslint-plugin-jsx-a11y": "^6.10.0",
-    "@types/node": "^24.0.1",
+    "@types/node": "^24.0.3",
     "typescript": "^5.8.3"
   },
   "exports": {
@@ -58,10 +62,10 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,cjs,mjs,cts,mts}": [
-      "biome check --apply",
+      "biome check --write --no-errors-on-unmatched",
       "eslint --fix --cache"
     ],
     "*.{md,yml,yaml}": "prettier --write",
-    "*.{json,jsonc,html}": "biome format --write"
+    "*.{json,jsonc,html}": "biome format --write --no-errors-on-unmatched"
   }
 }
