@@ -22,7 +22,7 @@
     "@biomejs/biome": "^2.0.0",
     "@changesets/cli": "^2.29.4",
     "husky": "^9.1.7",
-    "lint-staged": "^16.1.0",
+    "lint-staged": "^16.1.2",
     "prettier": "^3.5.3",
     "turbo": "^2.5.4",
     "typescript": "^5.8.3"
@@ -42,5 +42,5 @@
     "*.{md,yml,yaml}": "prettier --write",
     "*.{json,jsonc,html}": "biome format --write --no-errors-on-unmatched"
   },
-  "packageManager": "bun@1.2.2"
+  "packageManager": "bun@1.2.16"
 }
