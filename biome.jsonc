@@ -24,15 +24,13 @@
     },
     "rules": {
       "recommended": true,
-      "suspicious": {
-        "noDoubleEquals": "error"
-      },
       "nursery": {
-        "noFloatingPromises": "error",
-        "noTsIgnore": "error"
+        "noFloatingPromises": "error"
+      },
+      "complexity": {
+        "useSimplifiedLogicExpression": "error"
       },
       "style": {
-        "useImportType": "error",
         "noParameterAssign": "error",
         "useAsConstAssertion": "error",
         "useDefaultParameterLast": "error",
@@ -42,11 +40,19 @@
         "noUnusedTemplateLiteral": "error",
         "useNumberNamespace": "error",
         "noInferrableTypes": "error",
-        "noUselessElse": "error"
+        "noUselessElse": "error",
+        "useBlockStatements": "error",
+        "useCollapsedElseIf": "error",
+        "useConsistentArrayType": {
+          "level": "error",
+          "options": {
+            "syntax": "shorthand"
+          }
+        },
+        "useShorthandAssign": "error"
       },
       "correctness": {
-        "noUnusedVariables": "warn",
-        "noUnusedImports": "error"
+        "noUnusedVariables": "warn"
       }
     },
     "includes": [
