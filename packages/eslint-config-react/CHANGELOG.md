@@ -1,5 +1,13 @@
 # @macalinao/eslint-config-react
 
+## 3.1.2
+
+### Patch Changes
+
+- 31d53b3: Dependency bumps
+- Updated dependencies [31d53b3]
+  - @macalinao/eslint-config@4.2.2
+
 ## 3.1.1
 
 ### Patch Changes
