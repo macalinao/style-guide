@@ -1,5 +1,11 @@
 # @macalinao/eslint-config
 
+## 4.2.2
+
+### Patch Changes
+
+- 31d53b3: Dependency bumps
+
 ## 4.2.1
 
 ### Patch Changes

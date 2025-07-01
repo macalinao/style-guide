@@ -1,5 +1,11 @@
 # @macalinao/tsconfig
 
+## 3.2.2
+
+### Patch Changes
+
+- 31d53b3: Dependency bumps
+
 ## 3.2.1
 
 ### Patch Changes
