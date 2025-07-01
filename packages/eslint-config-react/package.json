@@ -16,7 +16,7 @@
     "@tanstack/eslint-plugin-query": "^5.78.0",
     "@tanstack/eslint-plugin-router": "^1.121.21",
     "@typescript-eslint/eslint-plugin": "^8.34.1",
-    "@typescript-eslint/parser": "^8.34.1",
+    "@typescript-eslint/parser": "^8.35.1",
     "@typescript-eslint/utils": "^8.34.1",
     "eslint": "^9.29.0",
     "eslint-config-turbo": "^2.5.4",
