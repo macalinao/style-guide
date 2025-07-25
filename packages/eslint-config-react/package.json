@@ -11,7 +11,7 @@
     "url": "https://github.com/macalinao/style-guide/issues"
   },
   "dependencies": {
-    "@eslint/js": "^9.30.0",
+    "@eslint/js": "^9.32.0",
     "@macalinao/eslint-config": "workspace:^",
     "@tanstack/eslint-plugin-query": "^5.81.2",
     "@tanstack/eslint-plugin-router": "^1.121.21",
