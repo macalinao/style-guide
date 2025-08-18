@@ -3,7 +3,6 @@
   "description": "Monorepo containing ESLint and TypeScript configurations.",
   "private": true,
   "version": "0.1.0",
-  "main": "index.js",
   "scripts": {
     "build": "turbo run build",
     "clean": "turbo run clean",

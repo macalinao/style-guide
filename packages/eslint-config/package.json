@@ -12,12 +12,8 @@
   },
   "dependencies": {
     "@eslint/js": "catalog:",
-    "@typescript-eslint/eslint-plugin": "catalog:",
     "@typescript-eslint/parser": "catalog:",
     "@typescript-eslint/utils": "catalog:",
-    "eslint": "catalog:",
-    "eslint-config-prettier": "catalog:",
-    "eslint-config-turbo": "catalog:",
     "eslint-import-resolver-typescript": "catalog:",
     "eslint-plugin-import-x": "catalog:",
     "eslint-plugin-prettier": "catalog:",
@@ -25,8 +21,6 @@
     "eslint-plugin-turbo": "catalog:",
     "eslint-plugin-unused-imports": "catalog:",
     "globals": "catalog:",
-    "prettier": "catalog:",
-    "tslib": "catalog:",
     "typescript-eslint": "catalog:"
   },
   "files": [
