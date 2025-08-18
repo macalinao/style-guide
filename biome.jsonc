@@ -58,7 +58,7 @@
     "includes": [
       "**",
       "!**/packages/tsconfig/tsconfig.base.json",
-      "!**/bun.lockb"
+      "!**/bun.lock"
     ]
   },
   "javascript": {
