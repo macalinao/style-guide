@@ -1,10 +1,10 @@
 import eslint from "@eslint/js";
 import * as tsParser from "@typescript-eslint/parser";
 import type { TSESLint } from "@typescript-eslint/utils";
+import { globalIgnores } from "eslint/config";
+import eslintConfigPrettier from "eslint-config-prettier/flat";
 import * as tsResolver from "eslint-import-resolver-typescript";
-// https://github.com/import-js/eslint-plugin-import/issues/2948
 import * as importPlugin from "eslint-plugin-import-x";
-import prettierConfig from "eslint-plugin-prettier/recommended";
 import simpleImportSortPlugin from "eslint-plugin-simple-import-sort";
 import * as turboPlugin from "eslint-plugin-turbo";
 import unusedImportsPlugin from "eslint-plugin-unused-imports";
@@ -13,48 +13,32 @@ import tseslint from "typescript-eslint";
 
 const base: TSESLint.FlatConfig.ConfigArray = tseslint.config(
   // Files we never want to lint
-  {
-    ignores: ["**/.wrangler/**", "dist/**/*", "vite.config.ts.timestamp-*.mjs"],
-  },
-
-  // ESLint defaults
-  eslint.configs.recommended,
-
-  // Prettier. This is slow; candidate for removal.
-  prettierConfig,
-
-  // ESLint import plugin defaults
-  importPlugin.flatConfigs.recommended,
-  importPlugin.flatConfigs.typescript,
+  globalIgnores([
+    "**/.wrangler/**",
+    "dist/**/*",
+    "vite.config.ts.timestamp-*.mjs",
+  ]),
   {
     files: ["**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}"],
+    extends: [
+      // ESLint defaults
+      eslint.configs.recommended,
+
+      // Prettier. This is slow; candidate for removal.
+      eslintConfigPrettier,
+
+      // ESLint import plugin defaults
+      importPlugin.flatConfigs.recommended,
+      importPlugin.flatConfigs.typescript,
+
+      // TypeScript stuff
+      tseslint.configs.strictTypeChecked,
+      tseslint.configs.stylisticTypeChecked,
+    ],
     languageOptions: {
       parser: tsParser,
       ecmaVersion: "latest",
       sourceType: "module",
-    },
-    settings: {
-      "import-x/resolver": {
-        name: "tsResolver",
-        resolver: tsResolver,
-        options: {
-          alwaysTryTypes: true,
-        },
-      },
-    },
-    rules: {
-      "no-unused-vars": "off",
-      "import-x/no-dynamic-require": "warn",
-      "import-x/no-nodejs-modules": "off",
-    },
-  },
-
-  // TypeScript linting
-  ...tseslint.configs.strictTypeChecked,
-  ...tseslint.configs.stylisticTypeChecked,
-
-  {
-    languageOptions: {
       parserOptions: {
         projectService: {
           allowDefaultProject: ["eslint.config.*", "tailwind.config.*"],
@@ -67,18 +51,26 @@ const base: TSESLint.FlatConfig.ConfigArray = tseslint.config(
         ...globals.worker,
       },
     },
-
-    settings: {
-      ...turboPlugin.configs.recommended.settings,
-    },
-
     plugins: {
       "simple-import-sort": simpleImportSortPlugin,
       "unused-imports": unusedImportsPlugin,
       turbo: turboPlugin,
     },
-
+    settings: {
+      ...turboPlugin.configs.recommended.settings,
+      "import-x/resolver": {
+        name: "tsResolver",
+        resolver: tsResolver,
+        options: {
+          alwaysTryTypes: true,
+        },
+      },
+    },
     rules: {
+      "no-unused-vars": "off",
+      "import-x/no-dynamic-require": "warn",
+      "import-x/no-nodejs-modules": "off",
+
       ...turboPlugin.configs.recommended.rules,
 
       eqeqeq: "error",

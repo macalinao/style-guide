@@ -1,8 +1,8 @@
 import eslint from "@eslint/js";
 import * as tsParser from "@typescript-eslint/parser";
 import type { TSESLint } from "@typescript-eslint/utils";
+import { globalIgnores } from "eslint/config";
 import * as tsResolver from "eslint-import-resolver-typescript";
-// https://github.com/import-js/eslint-plugin-import/issues/2948
 import * as importPlugin from "eslint-plugin-import-x";
 import * as turboPlugin from "eslint-plugin-turbo";
 import globals from "globals";
@@ -10,9 +10,11 @@ import tseslint from "typescript-eslint";
 
 const base: TSESLint.FlatConfig.ConfigArray = tseslint.config(
   // Files we never want to lint
-  {
-    ignores: ["**/.wrangler/**", "dist/**/*", "vite.config.ts.timestamp-*.mjs"],
-  },
+  globalIgnores([
+    "**/.wrangler/**",
+    "dist/**/*",
+    "vite.config.ts.timestamp-*.mjs",
+  ]),
 
   // ESLint defaults
   eslint.configs.recommended,
