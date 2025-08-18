@@ -3,6 +3,7 @@ import * as tsParser from "@typescript-eslint/parser";
 import type { TSESLint } from "@typescript-eslint/utils";
 import { globalIgnores } from "eslint/config";
 import eslintConfigPrettier from "eslint-config-prettier/flat";
+import turboConfig from "eslint-config-turbo/flat";
 import * as tsResolver from "eslint-import-resolver-typescript";
 import * as importPlugin from "eslint-plugin-import-x";
 import simpleImportSortPlugin from "eslint-plugin-simple-import-sort";
@@ -34,6 +35,9 @@ const base: TSESLint.FlatConfig.ConfigArray = tseslint.config(
       // TypeScript stuff
       tseslint.configs.strictTypeChecked,
       tseslint.configs.stylisticTypeChecked,
+
+      // Turborepo
+      turboConfig,
     ],
     languageOptions: {
       parser: tsParser,
