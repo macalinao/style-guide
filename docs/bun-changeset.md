@@ -58,9 +58,9 @@ I do this because:
 
 This approach prevents partial-publish disasters where some packages would fail and leave my monorepo in an inconsistent state.
 
-## Setting up the GitHub Actions release workflow
+## GitHub Actions Setup
 
-The GitHub action is largely the same as the official documentation, utilizing the [changesets/action](https://github.com/changesets/action) GitHub action. Here's my workflow from the [release.yml](https://github.com/macalinao/style-guide/blob/master/.github/workflows/release.yml):
+The GitHub action is largely the same as the official documentation, utilizing the [changesets/action](https://github.com/changesets/action) GitHub action. Here's my workflow from [release.yml](https://github.com/macalinao/style-guide/blob/master/.github/workflows/release.yml):
 
 ```yaml
 name: Release
@@ -145,10 +145,10 @@ Here's how I release packages now:
 
 The beauty is that what I test locally with `workspace:*` references is exactly what gets published to npm, just with resolved version numbers.
 
-## Looking Forward
+## Conclusion
 
-This workaround has been working reliably for my monorepo, but I'm looking forward to first-class support. The Bun team is aware of the issue ([#16074](https://github.com/oven-sh/bun/issues/16074)), and hopefully we'll see native Changesets support soon.
+This workaround has been working reliably for my monorepo. While I'm looking forward to first-class support ([tracked here](https://github.com/oven-sh/bun/issues/16074)), this solution gets the job done today.
 
-Until then, the combination of `bun update` after versioning and publishing all packages together has proven to be a robust solution. If you're struggling with the same issue, feel free to check out my [style-guide repo](https://github.com/macalinao/style-guide) for a working example.
+The key takeaway: **always run `bun update` after `changeset version`** to fix the lockfile, and **use `bun publish` directly** for each package. This combination ensures workspace references are properly resolved during publishing.
 
-The key takeaway: always run `bun update` after `changeset version` to resolve workspace references, and use `bun publish` directly when publishing. This approach has eliminated all the workspace reference issues I was experiencing.
+If you're struggling with the same issue, check out my [style-guide repo](https://github.com/macalinao/style-guide) for a working example. The approach has eliminated all the workspace reference issues I was experiencing, and my packages now publish reliably with properly resolved dependencies.
