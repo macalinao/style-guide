@@ -10,6 +10,13 @@
   "bugs": {
     "url": "https://github.com/macalinao/style-guide/issues"
   },
+  "keywords": [
+    "typescript",
+    "tsconfig",
+    "configuration",
+    "config",
+    "ian-macalinao"
+  ],
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
     "access": "public"

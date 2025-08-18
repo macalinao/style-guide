@@ -10,6 +10,15 @@
   "bugs": {
     "url": "https://github.com/macalinao/style-guide/issues"
   },
+  "keywords": [
+    "eslint",
+    "eslintconfig",
+    "react",
+    "typescript",
+    "linting",
+    "code-style",
+    "ian-macalinao"
+  ],
   "dependencies": {
     "@macalinao/eslint-config": "workspace:^",
     "@tanstack/eslint-plugin-query": "^5.83.1",
