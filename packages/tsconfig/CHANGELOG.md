@@ -1,5 +1,11 @@
 # @macalinao/tsconfig
 
+## 3.2.3
+
+### Patch Changes
+
+- 2884f5f: keywords in package.json
+
 ## 3.2.2
 
 ### Patch Changes
