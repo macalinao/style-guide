@@ -13,6 +13,29 @@ This package provides two configurations:
 - **base** - Full configuration with all rules including Prettier integration, import sorting, and unused imports detection
 - **fast** - Performance-optimized configuration that removes slower rules in favor of Biome
 
+### Recommended Starter Configuration
+
+For most TypeScript projects, use the fast configuration with TypeScript project settings:
+
+```js
+// eslint.config.js
+import { configs } from "@macalinao/eslint-config";
+
+export default [
+  // For full configuration with Prettier and all plugins
+  // ...configs.base,
+  // For fast configuration optimized for Biome (recommended)
+  ...configs.fast,
+  {
+    languageOptions: {
+      parserOptions: {
+        tsconfigRootDir: import.meta.dirname,
+      },
+    },
+  },
+];
+```
+
 ## Biome Integration
 
 The `fast` configuration removes the following from the `base` configuration for better performance:
