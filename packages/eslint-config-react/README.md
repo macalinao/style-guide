@@ -13,17 +13,27 @@ This package provides two configurations:
 - **reactFull** - Full configuration extending `@macalinao/eslint-config` base with React rules
 - **reactFast** - Performance-optimized configuration extending `@macalinao/eslint-config` fast with React rules
 
-## Usage
+### Recommended Starter Configuration
+
+For most React projects, use the fast configuration with TypeScript project settings:
 
 ```js
 // eslint.config.js
 import { configs } from "@macalinao/eslint-config-react";
 
-// For full configuration with Prettier and all plugins
-export default configs.reactFull;
-
-// For fast configuration optimized for Biome
-export default configs.reactFast;
+export default [
+  // For full configuration with Prettier and all plugins
+  // ...configs.reactFull,
+  // For fast configuration optimized for Biome (recommended)
+  ...configs.reactFast,
+  {
+    languageOptions: {
+      parserOptions: {
+        tsconfigRootDir: import.meta.dirname,
+      },
+    },
+  },
+];
 ```
 
 ## Biome Integration

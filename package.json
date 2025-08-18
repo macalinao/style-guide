@@ -3,7 +3,6 @@
   "description": "Monorepo containing ESLint and TypeScript configurations.",
   "private": true,
   "version": "0.1.0",
-  "main": "index.js",
   "scripts": {
     "build": "turbo run build",
     "clean": "turbo run clean",
@@ -15,21 +14,30 @@
     "ci:publish": "for dir in packages/*; do (cd \"$dir\" && bun publish || true); done && changeset tag",
     "prepare": "husky"
   },
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ],
+    "catalog": {
+      "@typescript-eslint/utils": "^8.39.1",
+      "eslint": "^9.33.0",
+      "eslint-plugin-import-x": "^4.16.1",
+      "typescript": "^5.9.2",
+      "typescript-eslint": "^8.39.1"
+    }
+  },
   "keywords": [],
   "author": "Ian Macalinao <me@ianm.com>",
   "license": "Apache-2.0",
   "devDependencies": {
-    "@biomejs/biome": "^2.0.6",
-    "@changesets/cli": "^2.29.5",
+    "@biomejs/biome": "^2.2.0",
+    "@changesets/cli": "^2.29.6",
     "husky": "^9.1.7",
-    "lint-staged": "^16.1.2",
+    "lint-staged": "^16.1.5",
     "prettier": "^3.6.2",
-    "turbo": "^2.5.4",
-    "typescript": "^5.8.3"
+    "turbo": "^2.5.6",
+    "typescript": "^5.9.2"
   },
-  "workspaces": [
-    "packages/*"
-  ],
   "engines": {
     "node": ">=22",
     "bun": ">=1.0.0"
@@ -42,5 +50,5 @@
     "*.{md,yml,yaml}": "prettier --write",
     "*.{json,jsonc,html}": "biome format --write --no-errors-on-unmatched"
   },
-  "packageManager": "bun@1.2.17"
+  "packageManager": "bun@1.2.20"
 }

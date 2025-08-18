@@ -26,17 +26,17 @@ const react: TSESLint.FlatConfig.ConfigArray = tseslint.config(
       },
     },
   },
-  importPlugin.flatConfigs.react,
-  ...tanstackQueryPlugin.configs["flat/recommended"],
-  ...tanstackRouterPlugin.configs["flat/recommended"],
-  reactPlugin.configs.flat.recommended as TSESLint.FlatConfig.Config,
-  reactPlugin.configs.flat["jsx-runtime"] as TSESLint.FlatConfig.Config,
-  a11yPlugin.flatConfigs.strict,
   {
     files: ["**/*.ts", "**/*.tsx"],
-    plugins: {
-      "react-hooks": hooksPlugin,
-    },
+    extends: [
+      hooksPlugin.configs["recommended-latest"],
+      importPlugin.flatConfigs.react,
+      tanstackQueryPlugin.configs["flat/recommended"],
+      tanstackRouterPlugin.configs["flat/recommended"],
+      reactPlugin.configs.flat.recommended as TSESLint.FlatConfig.Config,
+      reactPlugin.configs.flat["jsx-runtime"] as TSESLint.FlatConfig.Config,
+      a11yPlugin.flatConfigs.strict,
+    ],
     rules: {
       ...hooksPlugin.configs.recommended.rules,
       // don't think this is necessary

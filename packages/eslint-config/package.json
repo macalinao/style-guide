@@ -11,23 +11,21 @@
     "url": "https://github.com/macalinao/style-guide/issues"
   },
   "dependencies": {
-    "@eslint/js": "^9.30.0",
-    "@typescript-eslint/eslint-plugin": "^8.35.1",
-    "@typescript-eslint/parser": "^8.35.1",
-    "@typescript-eslint/utils": "^8.35.1",
-    "eslint": "^9.30.0",
-    "eslint-config-prettier": "^10.1.5",
-    "eslint-config-turbo": "^2.5.4",
+    "@eslint/js": "^9.33.0",
+    "@typescript-eslint/parser": "^8.39.1",
+    "@typescript-eslint/utils": "catalog:",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-config-turbo": "^2.5.6",
     "eslint-import-resolver-typescript": "^4.4.4",
-    "eslint-plugin-import-x": "^4.16.1",
-    "eslint-plugin-prettier": "^5.5.1",
+    "eslint-plugin-import-x": "catalog:",
+    "eslint-plugin-prettier": "^5.5.4",
     "eslint-plugin-simple-import-sort": "^12.1.1",
-    "eslint-plugin-turbo": "^2.5.4",
     "eslint-plugin-unused-imports": "^4.1.4",
-    "globals": "^16.2.0",
-    "prettier": "^3.6.2",
-    "tslib": "^2.8.1",
-    "typescript-eslint": "^8.35.1"
+    "globals": "^16.3.0",
+    "typescript-eslint": "catalog:"
+  },
+  "peerDependencies": {
+    "eslint": "catalog:"
   },
   "files": [
     "src/**/*",
@@ -36,8 +34,8 @@
   ],
   "devDependencies": {
     "@macalinao/tsconfig": "workspace:^",
-    "@types/node": "^24.0.8",
-    "typescript": "^5.8.3"
+    "eslint": "catalog:",
+    "typescript": "catalog:"
   },
   "exports": {
     ".": {
