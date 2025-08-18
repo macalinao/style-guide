@@ -54,10 +54,12 @@ export function buildConfig(fast = false): TSESLint.FlatConfig.ConfigArray {
           ...globals.worker,
         },
       },
-      plugins: {
-        "simple-import-sort": simpleImportSortPlugin,
-        "unused-imports": unusedImportsPlugin,
-      },
+      plugins: fast
+        ? {}
+        : {
+            "simple-import-sort": simpleImportSortPlugin,
+            "unused-imports": unusedImportsPlugin,
+          },
       settings: {
         "import-x/resolver": {
           name: "tsResolver",
@@ -71,8 +73,6 @@ export function buildConfig(fast = false): TSESLint.FlatConfig.ConfigArray {
         "no-unused-vars": "off",
         "import-x/no-dynamic-require": "warn",
         "import-x/no-nodejs-modules": "off",
-
-        eqeqeq: "error",
 
         "@typescript-eslint/explicit-member-accessibility": [
           "error",
@@ -107,6 +107,7 @@ export function buildConfig(fast = false): TSESLint.FlatConfig.ConfigArray {
         ...(fast
           ? {}
           : {
+              eqeqeq: "error",
               // Import sorting
               "simple-import-sort/imports": "error",
               "simple-import-sort/exports": "error",
