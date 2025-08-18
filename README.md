@@ -13,6 +13,16 @@ Notes:
 - [@macalinao/eslint-config](./packages/eslint-config/)
 - [@macalinao/eslint-config-react](./packages/eslint-config-react/)
 
+## Contributing
+
+To create a changeset for your changes, run:
+
+```bash
+bun changeset
+```
+
+This will prompt you to select the packages affected and describe your changes.
+
 ## License
 
 [Apache-2.0](LICENSE.txt)
