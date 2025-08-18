@@ -1,5 +1,16 @@
 # @macalinao/eslint-config
 
+## 5.0.0
+
+### Major Changes
+
+- 68b632d: Refactor config to share fast/base configs and use new TSESLint builder
+
+### Patch Changes
+
+- 53d67c8: Catalog
+- 529af01: Update dependencies
+
 ## 4.2.2
 
 ### Patch Changes

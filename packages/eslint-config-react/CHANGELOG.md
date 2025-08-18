@@ -1,5 +1,20 @@
 # @macalinao/eslint-config-react
 
+## 4.0.0
+
+### Major Changes
+
+- 68b632d: Refactor config to share fast/base configs and use new TSESLint builder
+
+### Patch Changes
+
+- 53d67c8: Catalog
+- 529af01: Update dependencies
+- Updated dependencies [53d67c8]
+- Updated dependencies [68b632d]
+- Updated dependencies [529af01]
+  - @macalinao/eslint-config@5.0.0
+
 ## 3.1.2
 
 ### Patch Changes
