@@ -1,8 +1,8 @@
 {
-  "name": "@macalinao/eslint-config-react",
-  "description": "ESLint configuration to use for React projects",
+  "name": "@macalinao/eslint-config-vite",
+  "description": "ESLint configuration for Vite projects with React Refresh support",
   "license": "Apache-2.0",
-  "version": "4.0.0",
+  "version": "0.1.0",
   "type": "module",
   "sideEffects": false,
   "repository": "github:macalinao/style-guide",
@@ -13,20 +13,18 @@
   "keywords": [
     "eslint",
     "eslintconfig",
-    "react",
+    "vite",
+    "react-refresh",
     "typescript",
     "linting",
     "code-style",
     "ian-macalinao"
   ],
   "dependencies": {
-    "@macalinao/eslint-config": "workspace:^",
-    "@tanstack/eslint-plugin-query": "^5.83.1",
+    "@macalinao/eslint-config-react": "workspace:^",
+    "@tanstack/eslint-plugin-router": "^1.131.2",
     "@typescript-eslint/utils": "catalog:",
-    "eslint-plugin-import-x": "catalog:",
-    "eslint-plugin-jsx-a11y": "^6.10.2",
-    "eslint-plugin-react": "^7.37.5",
-    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.16",
     "typescript-eslint": "catalog:"
   },
   "peerDependencies": {
@@ -38,8 +36,8 @@
     "README.md"
   ],
   "devDependencies": {
+    "@macalinao/eslint-config": "workspace:^",
     "@macalinao/tsconfig": "workspace:^",
-    "@types/eslint-plugin-jsx-a11y": "^6.10.0",
     "eslint": "catalog:",
     "typescript": "catalog:"
   },

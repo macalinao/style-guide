@@ -57,7 +57,6 @@ All React-specific rules remain the same since Biome doesn't have React equivale
 - React Hooks rules
 - JSX accessibility (strict mode)
 - TanStack Query linting
-- TanStack Router linting
 - React import validation
 
 See [@macalinao/eslint-config README](https://github.com/macalinao/style-guide/tree/main/packages/eslint-config#biome-integration) for the full list of rules handled by Biome.
