@@ -2,7 +2,7 @@
   "name": "@macalinao/eslint-config",
   "description": "Common ESLint configuration.",
   "license": "Apache-2.0",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "type": "module",
   "sideEffects": false,
   "repository": "github:macalinao/style-guide",

@@ -1,5 +1,14 @@
 # @macalinao/eslint-config-react
 
+## 4.0.1
+
+### Patch Changes
+
+- 38f6fd3: Switch to named exports
+- 9994b07: Adds a Vite config
+- Updated dependencies [38f6fd3]
+  - @macalinao/eslint-config@5.0.1
+
 ## 4.0.0
 
 ### Major Changes

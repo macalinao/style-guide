@@ -1,5 +1,11 @@
 # @macalinao/eslint-config
 
+## 5.0.1
+
+### Patch Changes
+
+- 38f6fd3: Switch to named exports
+
 ## 5.0.0
 
 ### Major Changes
