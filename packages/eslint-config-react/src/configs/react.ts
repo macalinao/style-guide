@@ -6,7 +6,7 @@ import reactPlugin from "eslint-plugin-react";
 import hooksPlugin from "eslint-plugin-react-hooks";
 import tseslint from "typescript-eslint";
 
-const react: TSESLint.FlatConfig.ConfigArray = tseslint.config(
+export const react: TSESLint.FlatConfig.ConfigArray = tseslint.config(
   {
     settings: {
       react: {
@@ -49,5 +49,3 @@ const react: TSESLint.FlatConfig.ConfigArray = tseslint.config(
     },
   },
 );
-
-export default react;
