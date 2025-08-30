@@ -1,5 +1,16 @@
 # @macalinao/eslint-config-vite
 
+## 1.0.0
+
+### Major Changes
+
+- 07aaebc: Switch more rules to using Biome rules for the fast version
+
+### Patch Changes
+
+- Updated dependencies [07aaebc]
+  - @macalinao/eslint-config-react@5.0.0
+
 ## 0.1.1
 
 ### Patch Changes
