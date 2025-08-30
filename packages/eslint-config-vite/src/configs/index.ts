@@ -1,6 +1,5 @@
-import { configs } from "@macalinao/eslint-config-react";
 import type { TSESLint } from "@typescript-eslint/utils";
-
+import { configs } from "@macalinao/eslint-config-react";
 import { vite } from "./vite.js";
 
 export { vite } from "./vite.js";

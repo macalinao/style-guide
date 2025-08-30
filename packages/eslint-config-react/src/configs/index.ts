@@ -1,6 +1,5 @@
-import { configs } from "@macalinao/eslint-config";
 import type { TSESLint } from "@typescript-eslint/utils";
-
+import { configs } from "@macalinao/eslint-config";
 import { react } from "./react.js";
 
 export { react } from "./react.js";
