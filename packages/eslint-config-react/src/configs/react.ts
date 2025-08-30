@@ -1,5 +1,5 @@
-import tanstackQueryPlugin from "@tanstack/eslint-plugin-query";
 import type { TSESLint } from "@typescript-eslint/utils";
+import tanstackQueryPlugin from "@tanstack/eslint-plugin-query";
 import * as importPlugin from "eslint-plugin-import-x";
 import a11yPlugin from "eslint-plugin-jsx-a11y";
 import reactPlugin from "eslint-plugin-react";

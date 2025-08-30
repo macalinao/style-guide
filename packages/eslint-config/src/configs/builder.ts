@@ -1,6 +1,6 @@
+import type { TSESLint } from "@typescript-eslint/utils";
 import eslint from "@eslint/js";
 import * as tsParser from "@typescript-eslint/parser";
-import type { TSESLint } from "@typescript-eslint/utils";
 import { globalIgnores } from "eslint/config";
 import eslintConfigPrettier from "eslint-config-prettier/flat";
 import turboConfig from "eslint-config-turbo/flat";
@@ -25,12 +25,15 @@ export function buildConfig(fast = false): TSESLint.FlatConfig.ConfigArray {
         // ESLint defaults
         eslint.configs.recommended,
 
-        // Prettier config only for base (not fast)
-        ...(fast ? [] : [eslintConfigPrettier]),
-
         // ESLint import plugin defaults
-        importPlugin.flatConfigs.recommended,
-        importPlugin.flatConfigs.typescript,
+        // Prettier config only for base (not fast)
+        ...(fast
+          ? []
+          : [
+              importPlugin.flatConfigs.recommended,
+              importPlugin.flatConfigs.typescript,
+              eslintConfigPrettier,
+            ]),
 
         // TypeScript stuff
         tseslint.configs.strictTypeChecked,
@@ -60,37 +63,24 @@ export function buildConfig(fast = false): TSESLint.FlatConfig.ConfigArray {
             "simple-import-sort": simpleImportSortPlugin,
             "unused-imports": unusedImportsPlugin,
           },
-      settings: {
-        "import-x/resolver": {
-          name: "tsResolver",
-          resolver: tsResolver,
-          options: {
-            alwaysTryTypes: true,
+      settings: fast
+        ? {}
+        : {
+            "import-x/resolver": {
+              name: "tsResolver",
+              resolver: tsResolver,
+              options: {
+                alwaysTryTypes: true,
+              },
+            },
           },
-        },
-      },
       rules: {
         "no-unused-vars": "off",
-        "import-x/no-dynamic-require": "warn",
-        "import-x/no-nodejs-modules": "off",
 
         "@typescript-eslint/explicit-member-accessibility": [
           "error",
           { accessibility: "no-public" },
         ],
-
-        // Performance for typed linting
-        "import-x/named": "off",
-        "import-x/namespace": "off",
-        "import-x/default": "off",
-        "import-x/no-named-as-default-member": "off",
-        "import-x/no-unresolved": "off",
-        "import-x/extensions": "off",
-
-        // Common import rules
-        "import-x/no-duplicates": "warn",
-        "import-x/no-extraneous-dependencies": "error",
-        "import-x/consistent-type-specifier-style": "error",
 
         // Enforce that private members are prefixed with an underscore
         "@typescript-eslint/naming-convention": [
@@ -108,6 +98,23 @@ export function buildConfig(fast = false): TSESLint.FlatConfig.ConfigArray {
           ? {}
           : {
               eqeqeq: "error",
+
+              "import-x/no-dynamic-require": "warn",
+              "import-x/no-nodejs-modules": "off",
+
+              // Performance for typed linting
+              "import-x/named": "off",
+              "import-x/namespace": "off",
+              "import-x/default": "off",
+              "import-x/no-named-as-default-member": "off",
+              "import-x/no-unresolved": "off",
+              "import-x/extensions": "off",
+
+              // Common import rules
+              "import-x/no-duplicates": "warn",
+              "import-x/no-extraneous-dependencies": "error",
+              "import-x/consistent-type-specifier-style": "error",
+
               // Import sorting
               "simple-import-sort/imports": "error",
               "simple-import-sort/exports": "error",
