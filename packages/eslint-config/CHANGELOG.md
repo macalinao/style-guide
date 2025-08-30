@@ -1,5 +1,11 @@
 # @macalinao/eslint-config
 
+## 6.0.0
+
+### Major Changes
+
+- 07aaebc: Switch more rules to using Biome rules for the fast version
+
 ## 5.0.1
 
 ### Patch Changes
