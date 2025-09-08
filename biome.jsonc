@@ -19,11 +19,7 @@
     "lineWidth": 80,
     "attributePosition": "auto",
     "bracketSpacing": true,
-    "includes": [
-      "**",
-      "!**/packages/tsconfig/tsconfig.base.json",
-      "!**/bun.lock"
-    ]
+    "includes": ["**", "!**/bun.lock"]
   },
   "assist": {
     "actions": {
