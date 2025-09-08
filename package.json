@@ -20,7 +20,7 @@
     ],
     "catalog": {
       "@typescript-eslint/utils": "^8.39.1",
-      "eslint": "^9.33.0",
+      "eslint": "^9.35.0",
       "eslint-plugin-import-x": "^4.16.1",
       "typescript": "^5.9.2",
       "typescript-eslint": "^8.39.1"
@@ -30,10 +30,10 @@
   "author": "Ian Macalinao <me@ianm.com>",
   "license": "Apache-2.0",
   "devDependencies": {
-    "@biomejs/biome": "^2.2.2",
+    "@biomejs/biome": "^2.2.3",
     "@changesets/cli": "^2.29.6",
     "husky": "^9.1.7",
-    "lint-staged": "^16.1.5",
+    "lint-staged": "^16.1.6",
     "prettier": "^3.6.2",
     "turbo": "^2.5.6",
     "typescript": "^5.9.2"
