@@ -19,17 +19,15 @@
     "ian-macalinao"
   ],
   "dependencies": {
-    "@eslint/js": "^9.34.0",
-    "@typescript-eslint/parser": "^8.41.0",
-    "@typescript-eslint/utils": "catalog:",
-    "eslint-config-prettier": "^10.1.8",
+    "@eslint/js": "^9.36.0",
+    "@typescript-eslint/parser": "^8.44.0",
     "eslint-config-turbo": "^2.5.6",
     "eslint-import-resolver-typescript": "^4.4.4",
-    "eslint-plugin-import-x": "catalog:",
+    "eslint-plugin-import-x": "^4.16.1",
     "eslint-plugin-prettier": "^5.5.4",
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "eslint-plugin-unused-imports": "^4.2.0",
-    "globals": "^16.3.0",
+    "globals": "^16.4.0",
     "typescript-eslint": "catalog:"
   },
   "peerDependencies": {

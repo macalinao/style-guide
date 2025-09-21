@@ -1,18 +1,18 @@
-import type { TSESLint } from "@typescript-eslint/utils";
+import type { Linter } from "eslint";
 import eslint from "@eslint/js";
 import * as tsParser from "@typescript-eslint/parser";
-import { globalIgnores } from "eslint/config";
-import eslintConfigPrettier from "eslint-config-prettier/flat";
+import { defineConfig, globalIgnores } from "eslint/config";
 import turboConfig from "eslint-config-turbo/flat";
 import * as tsResolver from "eslint-import-resolver-typescript";
-import * as importPlugin from "eslint-plugin-import-x";
+import { importX } from "eslint-plugin-import-x";
+import eslintPluginPrettier from "eslint-plugin-prettier/recommended";
 import simpleImportSortPlugin from "eslint-plugin-simple-import-sort";
 import unusedImportsPlugin from "eslint-plugin-unused-imports";
 import globals from "globals";
 import tseslint from "typescript-eslint";
 
-export function buildConfig(fast = false): TSESLint.FlatConfig.ConfigArray {
-  return tseslint.config(
+export function buildConfig(fast = false): Linter.Config[] {
+  return defineConfig(
     // Files we never want to lint
     globalIgnores([
       "**/.wrangler/**",
@@ -30,14 +30,15 @@ export function buildConfig(fast = false): TSESLint.FlatConfig.ConfigArray {
         ...(fast
           ? []
           : [
-              importPlugin.flatConfigs.recommended,
-              importPlugin.flatConfigs.typescript,
-              eslintConfigPrettier,
+              importX.flatConfigs.recommended as Linter.Config,
+              importX.flatConfigs.typescript as Linter.Config,
+              eslintPluginPrettier,
             ]),
 
-        // TypeScript stuff
         tseslint.configs.strictTypeChecked,
         tseslint.configs.stylisticTypeChecked,
+
+        // TypeScript stuff
 
         // Turborepo
         turboConfig,

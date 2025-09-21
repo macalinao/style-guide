@@ -1,12 +1,12 @@
-import type { TSESLint } from "@typescript-eslint/utils";
+import type { Linter } from "eslint";
 import tanstackQueryPlugin from "@tanstack/eslint-plugin-query";
+import { defineConfig } from "eslint/config";
 import * as importPlugin from "eslint-plugin-import-x";
 import a11yPlugin from "eslint-plugin-jsx-a11y";
 import reactPlugin from "eslint-plugin-react";
 import hooksPlugin from "eslint-plugin-react-hooks";
-import tseslint from "typescript-eslint";
 
-export const react: TSESLint.FlatConfig.ConfigArray = tseslint.config(
+export const react: Linter.Config[] = defineConfig(
   {
     settings: {
       react: {
@@ -29,10 +29,10 @@ export const react: TSESLint.FlatConfig.ConfigArray = tseslint.config(
     files: ["**/*.ts", "**/*.tsx"],
     extends: [
       hooksPlugin.configs["recommended-latest"],
-      importPlugin.flatConfigs.react,
+      importPlugin.flatConfigs.react as Linter.Config,
       tanstackQueryPlugin.configs["flat/recommended"],
-      reactPlugin.configs.flat.recommended as TSESLint.FlatConfig.Config,
-      reactPlugin.configs.flat["jsx-runtime"] as TSESLint.FlatConfig.Config,
+      reactPlugin.configs.flat.recommended as Linter.Config,
+      reactPlugin.configs.flat["jsx-runtime"] as Linter.Config,
       hooksPlugin.configs["recommended-latest"],
       a11yPlugin.flatConfigs.strict,
     ],

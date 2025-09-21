@@ -1,9 +1,9 @@
-import type { TSESLint } from "@typescript-eslint/utils";
+import type { Linter } from "eslint";
 import tanstackRouterPlugin from "@tanstack/eslint-plugin-router";
+import { defineConfig } from "eslint/config";
 import reactRefresh from "eslint-plugin-react-refresh";
-import tseslint from "typescript-eslint";
 
-export const vite: TSESLint.FlatConfig.ConfigArray = tseslint.config([
+export const vite: Linter.Config[] = defineConfig([
   {
     files: ["**/*.{ts,tsx}"],
     extends: [
