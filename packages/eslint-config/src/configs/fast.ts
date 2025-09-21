@@ -1,4 +1,4 @@
-import type { TSESLint } from "@typescript-eslint/utils";
+import type { Linter } from "eslint";
 import { buildConfig } from "./builder.js";
 
-export const fast: TSESLint.FlatConfig.ConfigArray = buildConfig(true);
+export const fast: Linter.Config[] = buildConfig(true);
