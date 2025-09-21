@@ -43,7 +43,6 @@
       "dependencies": {
         "@macalinao/eslint-config": "workspace:^",
         "@tanstack/eslint-plugin-query": "^5.83.1",
-        "@typescript-eslint/utils": "catalog:",
         "eslint-plugin-import-x": "catalog:",
         "eslint-plugin-jsx-a11y": "^6.10.2",
         "eslint-plugin-react": "^7.37.5",
@@ -66,7 +65,6 @@
       "dependencies": {
         "@macalinao/eslint-config-react": "workspace:^",
         "@tanstack/eslint-plugin-router": "^1.131.2",
-        "@typescript-eslint/utils": "catalog:",
         "eslint-plugin-react-refresh": "^0.4.20",
         "typescript-eslint": "catalog:",
       },
@@ -86,7 +84,6 @@
     },
   },
   "catalog": {
-    "@typescript-eslint/utils": "^8.39.1",
     "eslint": "^9.33.0",
     "eslint-plugin-import-x": "^4.16.1",
     "typescript": "^5.9.2",
