@@ -29,10 +29,10 @@
   "author": "Ian Macalinao <me@ianm.com>",
   "license": "Apache-2.0",
   "devDependencies": {
-    "@biomejs/biome": "^2.2.2",
-    "@changesets/cli": "^2.29.6",
+    "@biomejs/biome": "^2.2.4",
+    "@changesets/cli": "^2.29.7",
     "husky": "^9.1.7",
-    "lint-staged": "^16.1.5",
+    "lint-staged": "^16.1.6",
     "prettier": "^3.6.2",
     "turbo": "^2.5.6",
     "typescript": "^5.9.2"
@@ -49,5 +49,5 @@
     "*.{md,yml,yaml}": "prettier --write",
     "*.{json,jsonc,html}": "biome format --write --no-errors-on-unmatched"
   },
-  "packageManager": "bun@1.2.21"
+  "packageManager": "bun@1.2.22"
 }
