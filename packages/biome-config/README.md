@@ -12,11 +12,12 @@ bun add -D @macalinao/biome-config @biomejs/biome
 
 ## Usage
 
-Create a `biome.json` file in your project root:
+Create a `biome.jsonc` file in your project root:
 
 ```json
 {
-  "extends": "@macalinao/biome-config/base"
+  "$schema": "https://biomejs.dev/schemas/2.2.4/schema.json",
+  "extends": ["@macalinao/biome-config/base"]
 }
 ```
 
