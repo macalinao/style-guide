@@ -1,5 +1,13 @@
 # @macalinao/eslint-config-vite
 
+## 1.0.1
+
+### Patch Changes
+
+- 582fb6f: Update to latest ESLint configs
+- Updated dependencies [582fb6f]
+  - @macalinao/eslint-config-react@5.0.1
+
 ## 1.0.0
 
 ### Major Changes

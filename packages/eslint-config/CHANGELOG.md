@@ -1,5 +1,11 @@
 # @macalinao/eslint-config
 
+## 6.0.1
+
+### Patch Changes
+
+- 582fb6f: Update to latest ESLint configs
+
 ## 6.0.0
 
 ### Major Changes
