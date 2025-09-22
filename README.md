@@ -9,9 +9,19 @@ Notes:
 
 ## Packages
 
-- [@macalinao/tsconfig](./packages/tsconfig/)
-- [@macalinao/eslint-config](./packages/eslint-config/)
-- [@macalinao/eslint-config-react](./packages/eslint-config-react/)
+### TypeScript Configuration
+
+- [@macalinao/tsconfig](./packages/tsconfig/) - TypeScript configurations for different environments (Node.js, DOM, React, Vite, Cloudflare Workers)
+
+### Biome Configuration
+
+- [@macalinao/biome-config](./packages/biome-config/) - Fast, opinionated Biome configuration for formatting and linting
+
+### ESLint Configurations
+
+- [@macalinao/eslint-config](./packages/eslint-config/) - Base ESLint configuration with TypeScript support
+- [@macalinao/eslint-config-react](./packages/eslint-config-react/) - ESLint configuration for React projects with TanStack Query
+- [@macalinao/eslint-config-vite](./packages/eslint-config-vite/) - ESLint configuration for Vite projects with React Refresh and TanStack Router
 
 ## Contributing
 

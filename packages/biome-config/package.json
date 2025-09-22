@@ -1,0 +1,34 @@
+{
+  "name": "@macalinao/biome-config",
+  "description": "Opinionated Biome configuration for modern TypeScript projects.",
+  "license": "Apache-2.0",
+  "version": "0.1.0",
+  "type": "module",
+  "sideEffects": false,
+  "repository": "github:macalinao/style-guide",
+  "homepage": "https://github.com/macalinao/style-guide",
+  "bugs": {
+    "url": "https://github.com/macalinao/style-guide/issues"
+  },
+  "keywords": [
+    "biome",
+    "configuration",
+    "config",
+    "ian-macalinao"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,cjs,mjs,cts,mts}": [
+      "biome check --write --no-errors-on-unmatched",
+      "eslint --fix --cache"
+    ],
+    "*.{md,yml,yaml}": "prettier --write",
+    "*.{json,jsonc,html}": "biome format --write --no-errors-on-unmatched"
+  },
+  "exports": {
+    "./base": "./base.jsonc"
+  }
+}

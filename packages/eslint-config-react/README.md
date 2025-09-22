@@ -38,7 +38,19 @@ export default [
 
 ## Biome Integration
 
-When using `reactFast`, you get the same React-specific rules but with the performance benefits from the base fast configuration:
+When using `reactFast`, you get the same React-specific rules but with the performance benefits from the base fast configuration. **For optimal performance, use [`@macalinao/biome-config`](https://www.npmjs.com/package/@macalinao/biome-config)** alongside the fast configuration:
+
+```bash
+bun add -D @macalinao/biome-config @biomejs/biome
+```
+
+```jsonc
+// biome.jsonc
+{
+  "$schema": "https://biomejs.dev/schemas/2.2.4/schema.json",
+  "extends": ["@macalinao/biome-config/base"],
+}
+```
 
 ### What's Different in Fast Mode
 
