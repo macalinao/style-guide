@@ -1,6 +1,6 @@
 {
   "name": "@macalinao/biome-config",
-  "description": "Biome configuration.",
+  "description": "Opinionated Biome configuration for modern TypeScript projects.",
   "license": "Apache-2.0",
   "version": "0.1.0",
   "type": "module",
