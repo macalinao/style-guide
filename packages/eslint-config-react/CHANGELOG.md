@@ -1,5 +1,13 @@
 # @macalinao/eslint-config-react
 
+## 5.0.2
+
+### Patch Changes
+
+- baa8bdf: README updates for reference to fast biome config
+- Updated dependencies [baa8bdf]
+  - @macalinao/eslint-config@6.0.2
+
 ## 5.0.1
 
 ### Patch Changes
