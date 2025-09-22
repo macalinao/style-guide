@@ -38,7 +38,19 @@ export default [
 
 ## Biome Integration
 
-The `fast` configuration removes the following from the `base` configuration for better performance:
+The `fast` configuration removes the following from the `base` configuration for better performance. **For optimal performance, use [`@macalinao/biome-config`](https://www.npmjs.com/package/@macalinao/biome-config)** which provides all the rules below pre-configured:
+
+```bash
+bun add -D @macalinao/biome-config @biomejs/biome
+```
+
+```jsonc
+// biome.jsonc
+{
+  "$schema": "https://biomejs.dev/schemas/2.2.4/schema.json",
+  "extends": ["@macalinao/biome-config/base"],
+}
+```
 
 ### Removed Plugins
 
@@ -55,28 +67,6 @@ The `fast` configuration removes the following from the `base` configuration for
 | `@typescript-eslint/no-unused-vars`                                                                                 | `noUnusedVariables` | `correctness`    |
 | `unused-imports/no-unused-imports`                                                                                  | `noUnusedImports`   | `correctness`    |
 | `simple-import-sort/imports`<br>`simple-import-sort/exports`<br>`import-x/first`<br>`import-x/newline-after-import` | `organizeImports`   | Built-in feature |
-
-To use these Biome rules, ensure your `biome.jsonc` includes:
-
-```jsonc
-{
-  "organizeImports": { "enabled": true },
-  "linter": {
-    "rules": {
-      "suspicious": {
-        "noDoubleEquals": "error",
-      },
-      "style": {
-        "useImportType": "error",
-      },
-      "correctness": {
-        "noUnusedVariables": "warn",
-        "noUnusedImports": "error",
-      },
-    },
-  },
-}
-```
 
 ## License
 
