@@ -6,12 +6,17 @@
       "devDependencies": {
         "@biomejs/biome": "^2.2.4",
         "@changesets/cli": "^2.29.7",
+        "@macalinao/biome-config": "workspace:^",
         "husky": "^9.1.7",
         "lint-staged": "^16.1.6",
         "prettier": "^3.6.2",
         "turbo": "^2.5.6",
         "typescript": "^5.9.2",
       },
+    },
+    "packages/biome-config": {
+      "name": "@macalinao/biome-config",
+      "version": "0.1.0",
     },
     "packages/eslint-config": {
       "name": "@macalinao/eslint-config",
@@ -181,6 +186,8 @@
     "@isaacs/balanced-match": ["@isaacs/balanced-match@4.0.1", "", {}, "sha512-yzMTt9lEb8Gv7zRioUilSglI0c0smZ9k5D65677DLWLtWJaXIS3CqcGyUFByYKlnUj6TkjLVs54fBl6+TiGQDQ=="],
 
     "@isaacs/brace-expansion": ["@isaacs/brace-expansion@5.0.0", "", { "dependencies": { "@isaacs/balanced-match": "^4.0.1" } }, "sha512-ZT55BDLV0yv0RBm2czMiZ+SqCGO7AvmOM3G/w2xhVPH+te0aKgFjmBvGlL1dH+ql2tgGO3MVrbb3jCKyvpgnxA=="],
+
+    "@macalinao/biome-config": ["@macalinao/biome-config@workspace:packages/biome-config"],
 
     "@macalinao/eslint-config": ["@macalinao/eslint-config@workspace:packages/eslint-config"],
 
