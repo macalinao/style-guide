@@ -27,13 +27,15 @@ export const react: Linter.Config[] = defineConfig(
   },
   {
     files: ["**/*.ts", "**/*.tsx"],
+    plugins: {
+      "react-hooks": hooksPlugin,
+    },
     extends: [
-      hooksPlugin.configs["recommended-latest"],
       importPlugin.flatConfigs.react as Linter.Config,
       tanstackQueryPlugin.configs["flat/recommended"],
       reactPlugin.configs.flat.recommended as Linter.Config,
       reactPlugin.configs.flat["jsx-runtime"] as Linter.Config,
-      hooksPlugin.configs["recommended-latest"],
+      "react-hooks/recommended",
       a11yPlugin.flatConfigs.strict,
     ],
     rules: {
