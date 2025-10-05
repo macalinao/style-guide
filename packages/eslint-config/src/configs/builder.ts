@@ -96,7 +96,9 @@ export function buildConfig(fast = false): Linter.Config[] {
 
         // Additional rules only for base config
         ...(fast
-          ? {}
+          ? {
+              "@typescript-eslint/no-non-null-assertion": "off",
+            }
           : {
               eqeqeq: "error",
 
