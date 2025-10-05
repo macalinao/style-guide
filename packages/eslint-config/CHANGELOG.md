@@ -1,5 +1,11 @@
 # @macalinao/eslint-config
 
+## 6.0.3
+
+### Patch Changes
+
+- e85d828: Update dependencies, support HTML formatting in BIome
+
 ## 6.0.2
 
 ### Patch Changes
