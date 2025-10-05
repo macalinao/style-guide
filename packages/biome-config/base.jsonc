@@ -99,5 +99,10 @@
       "bracketSameLine": false,
       "bracketSpacing": true
     }
+  },
+  "html": {
+    "formatter": {
+      "enabled": true
+    }
   }
 }
