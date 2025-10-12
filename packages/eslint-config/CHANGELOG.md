@@ -1,5 +1,15 @@
 # @macalinao/eslint-config
 
+## 7.0.0
+
+### Major Changes
+
+- 4985b49: Breaking change: base is now fast only
+
+### Patch Changes
+
+- b70aadc: Remove slow config, Biome only
+
 ## 6.0.3
 
 ### Patch Changes
