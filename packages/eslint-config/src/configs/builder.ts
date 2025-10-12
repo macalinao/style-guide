@@ -3,11 +3,6 @@ import eslint from "@eslint/js";
 import * as tsParser from "@typescript-eslint/parser";
 import { defineConfig, globalIgnores } from "eslint/config";
 import turboConfig from "eslint-config-turbo/flat";
-import * as tsResolver from "eslint-import-resolver-typescript";
-import { importX } from "eslint-plugin-import-x";
-import eslintPluginPrettier from "eslint-plugin-prettier/recommended";
-import simpleImportSortPlugin from "eslint-plugin-simple-import-sort";
-import unusedImportsPlugin from "eslint-plugin-unused-imports";
 import globals from "globals";
 import tseslint from "typescript-eslint";
 
@@ -24,16 +19,6 @@ export function buildConfig(fast = false): Linter.Config[] {
       extends: [
         // ESLint defaults
         eslint.configs.recommended,
-
-        // ESLint import plugin defaults
-        // Prettier config only for base (not fast)
-        ...(fast
-          ? []
-          : [
-              importX.flatConfigs.recommended as Linter.Config,
-              importX.flatConfigs.typescript as Linter.Config,
-              eslintPluginPrettier,
-            ]),
 
         tseslint.configs.strictTypeChecked,
         tseslint.configs.stylisticTypeChecked,
@@ -58,23 +43,6 @@ export function buildConfig(fast = false): Linter.Config[] {
           ...globals.worker,
         },
       },
-      plugins: fast
-        ? {}
-        : {
-            "simple-import-sort": simpleImportSortPlugin,
-            "unused-imports": unusedImportsPlugin,
-          },
-      settings: fast
-        ? {}
-        : {
-            "import-x/resolver": {
-              name: "tsResolver",
-              resolver: tsResolver,
-              options: {
-                alwaysTryTypes: true,
-              },
-            },
-          },
       rules: {
         "no-unused-vars": "off",
 
