@@ -64,6 +64,7 @@ export function buildConfig(): Linter.Config[] {
 
         // Handles by Biome
         "@typescript-eslint/no-non-null-assertion": "off",
+        "@typescript-eslint/no-unused-vars": "off",
       },
     },
     {
