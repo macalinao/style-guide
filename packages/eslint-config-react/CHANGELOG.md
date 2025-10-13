@@ -1,5 +1,11 @@
 # @macalinao/eslint-config-react
 
+## 6.0.0
+
+### Major Changes
+
+- e6b01ce: Force republish with new major version
+
 ## 5.0.4
 
 ### Patch Changes

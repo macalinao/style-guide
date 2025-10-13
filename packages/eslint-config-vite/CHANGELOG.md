@@ -1,5 +1,16 @@
 # @macalinao/eslint-config-vite
 
+## 2.0.0
+
+### Major Changes
+
+- e6b01ce: Force republish with new major version
+
+### Patch Changes
+
+- Updated dependencies [e6b01ce]
+  - @macalinao/eslint-config-react@6.0.0
+
 ## 1.0.3
 
 ### Patch Changes
