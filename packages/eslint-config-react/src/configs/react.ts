@@ -1,7 +1,6 @@
 import type { Linter } from "eslint";
 import tanstackQueryPlugin from "@tanstack/eslint-plugin-query";
 import { defineConfig } from "eslint/config";
-import * as importPlugin from "eslint-plugin-import-x";
 import a11yPlugin from "eslint-plugin-jsx-a11y";
 import reactPlugin from "eslint-plugin-react";
 import { default as hooksPlugin } from "eslint-plugin-react-hooks";
@@ -28,7 +27,6 @@ export const react: Linter.Config[] = defineConfig(
   {
     files: ["**/*.ts", "**/*.tsx"],
     extends: [
-      importPlugin.flatConfigs.react as Linter.Config,
       tanstackQueryPlugin.configs["flat/recommended"],
       reactPlugin.configs.flat.recommended as Linter.Config,
       reactPlugin.configs.flat["jsx-runtime"] as Linter.Config,
