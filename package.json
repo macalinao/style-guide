@@ -19,17 +19,17 @@
       "packages/*"
     ],
     "catalog": {
-      "eslint": "^9.33.0",
+      "eslint": "^9.37.0",
       "eslint-plugin-import-x": "^4.16.1",
       "typescript": "^5.9.2",
-      "typescript-eslint": "^8.39.1"
+      "typescript-eslint": "^8.46.1"
     }
   },
   "keywords": [],
   "author": "Ian Macalinao <me@ianm.com>",
   "license": "Apache-2.0",
   "devDependencies": {
-    "@biomejs/biome": "^2.2.5",
+    "@biomejs/biome": "^2.2.6",
     "@changesets/cli": "^2.29.7",
     "@macalinao/biome-config": "workspace:^",
     "husky": "^9.1.7",
