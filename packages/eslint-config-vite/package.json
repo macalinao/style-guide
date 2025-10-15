@@ -22,7 +22,7 @@
   ],
   "dependencies": {
     "@macalinao/eslint-config-react": "workspace:^",
-    "@tanstack/eslint-plugin-router": "^1.132.31",
+    "@tanstack/eslint-plugin-router": "^1.133.3",
     "eslint-plugin-react-refresh": "^0.4.23",
     "typescript-eslint": "catalog:"
   },
