@@ -16,11 +16,11 @@
     },
     "packages/biome-config": {
       "name": "@macalinao/biome-config",
-      "version": "0.1.2",
+      "version": "0.1.3",
     },
     "packages/eslint-config": {
       "name": "@macalinao/eslint-config",
-      "version": "7.0.0",
+      "version": "7.0.1",
       "dependencies": {
         "@eslint/js": "^9.37.0",
         "@typescript-eslint/parser": "^8.46.1",
@@ -39,7 +39,7 @@
     },
     "packages/eslint-config-react": {
       "name": "@macalinao/eslint-config-react",
-      "version": "6.0.0",
+      "version": "6.0.1",
       "dependencies": {
         "@macalinao/eslint-config": "workspace:^",
         "@tanstack/eslint-plugin-query": "^5.91.0",
