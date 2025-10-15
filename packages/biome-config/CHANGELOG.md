@@ -1,5 +1,11 @@
 # @macalinao/biome-config
 
+## 0.1.3
+
+### Patch Changes
+
+- 57edbe2: USe Biome 2.2.6
+
 ## 0.1.2
 
 ### Patch Changes
