@@ -1,10 +1,9 @@
 import type { Linter } from "eslint";
 import tanstackQueryPlugin from "@tanstack/eslint-plugin-query";
 import { defineConfig } from "eslint/config";
-import * as importPlugin from "eslint-plugin-import-x";
 import a11yPlugin from "eslint-plugin-jsx-a11y";
 import reactPlugin from "eslint-plugin-react";
-import hooksPlugin from "eslint-plugin-react-hooks";
+import { default as hooksPlugin } from "eslint-plugin-react-hooks";
 
 export const react: Linter.Config[] = defineConfig(
   {
@@ -27,15 +26,12 @@ export const react: Linter.Config[] = defineConfig(
   },
   {
     files: ["**/*.ts", "**/*.tsx"],
-    plugins: {
-      "react-hooks": hooksPlugin,
-    },
     extends: [
-      importPlugin.flatConfigs.react as Linter.Config,
       tanstackQueryPlugin.configs["flat/recommended"],
       reactPlugin.configs.flat.recommended as Linter.Config,
       reactPlugin.configs.flat["jsx-runtime"] as Linter.Config,
-      "react-hooks/recommended",
+      // biome-ignore lint/style/noNonNullAssertion: it exists
+      hooksPlugin.default.configs.flat["recommended-latest"]!,
       a11yPlugin.flatConfigs.strict,
     ],
     rules: {
