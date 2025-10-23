@@ -1,5 +1,15 @@
 # @macalinao/eslint-config-react
 
+## 6.0.1
+
+### Patch Changes
+
+- e3f9387: bump dependencies
+- 6d4f88b: Bump dependencies
+- Updated dependencies [e3f9387]
+- Updated dependencies [6d4f88b]
+  - @macalinao/eslint-config@7.0.1
+
 ## 6.0.0
 
 ### Major Changes

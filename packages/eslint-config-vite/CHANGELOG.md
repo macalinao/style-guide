@@ -1,5 +1,14 @@
 # @macalinao/eslint-config-vite
 
+## 2.0.1
+
+### Patch Changes
+
+- e3f9387: bump dependencies
+- Updated dependencies [e3f9387]
+- Updated dependencies [6d4f88b]
+  - @macalinao/eslint-config-react@6.0.1
+
 ## 2.0.0
 
 ### Major Changes
