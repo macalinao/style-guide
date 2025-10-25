@@ -1,5 +1,11 @@
 # @macalinao/tsconfig
 
+## 3.2.4
+
+### Patch Changes
+
+- 72c2add: Adds verbatimModuleSyntax and skipDefaultLibCheck for faster bulids
+
 ## 3.2.3
 
 ### Patch Changes

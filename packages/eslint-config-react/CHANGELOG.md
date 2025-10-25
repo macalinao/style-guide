@@ -1,5 +1,12 @@
 # @macalinao/eslint-config-react
 
+## 6.0.2
+
+### Patch Changes
+
+- baebad4: Update Biome to 2.3.0
+- d29001b: Biome react config
+
 ## 6.0.1
 
 ### Patch Changes

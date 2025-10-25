@@ -1,5 +1,12 @@
 # @macalinao/biome-config
 
+## 0.1.4
+
+### Patch Changes
+
+- baebad4: Update Biome to 2.3.0
+- d29001b: Biome react config
+
 ## 0.1.3
 
 ### Patch Changes
