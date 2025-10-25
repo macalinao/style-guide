@@ -12,6 +12,7 @@
     "types": [],
     "esModuleInterop": true,
     "preserveConstEnums": true,
+    "skipDefaultLibCheck": true,
     "skipLibCheck": true,
     "importHelpers": true,
     "resolveJsonModule": true,
