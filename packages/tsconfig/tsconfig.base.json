@@ -17,6 +17,9 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
 
+    // speeds up compilation, make sure you are linting for type-only imports!
+    "verbatimModuleSyntax": true,
+
     // Enable this per-project as it prevents isolatedDeclarations from being used
     // "allowJs": true,
     // "checkJs": true,
