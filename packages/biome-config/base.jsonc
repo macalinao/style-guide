@@ -20,6 +20,14 @@
     "lineWidth": 80,
     "attributePosition": "auto"
   },
+  "json": {
+    "parser": {
+      "allowTrailingCommas": true
+    },
+    "formatter": {
+      "trailingCommas": "none"
+    }
+  },
   "assist": {
     "actions": {
       "source": {

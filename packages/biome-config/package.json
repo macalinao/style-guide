@@ -29,7 +29,8 @@
     "*.{json,jsonc,html}": "biome format --write --no-errors-on-unmatched"
   },
   "exports": {
-    "./base": "./base.jsonc"
+    "./base": "./base.jsonc",
+    "./react": "./react.jsonc"
   },
   "peerDependencies": {
     "@biomejs/biome": "^2.3.0"
