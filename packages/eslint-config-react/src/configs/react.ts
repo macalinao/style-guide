@@ -30,8 +30,7 @@ export const react: Linter.Config[] = defineConfig(
       tanstackQueryPlugin.configs["flat/recommended"],
       reactPlugin.configs.flat.recommended as Linter.Config,
       reactPlugin.configs.flat["jsx-runtime"] as Linter.Config,
-      // biome-ignore lint/style/noNonNullAssertion: it exists
-      hooksPlugin.default.configs.flat["recommended-latest"]!,
+      hooksPlugin.configs.flat["recommended-latest"],
       a11yPlugin.flatConfigs.strict,
     ],
     rules: {
