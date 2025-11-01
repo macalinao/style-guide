@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.3.0/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.3.2/schema.json",
   "root": false,
   "extends": ["./base.jsonc"],
   "linter": {
@@ -10,7 +10,7 @@
     "rules": {
       "style": {
         // For React Fast Refresh to work
-        "useComponentExportOnlyModules": "error",
+        "useComponentExportOnlyModules": "warn",
         "useReactFunctionComponents": "error"
       }
     }
