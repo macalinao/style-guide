@@ -1,5 +1,11 @@
 # @macalinao/biome-config
 
+## 0.1.5
+
+### Patch Changes
+
+- ff5e970: Update to Biome 2.3.1
+
 ## 0.1.4
 
 ### Patch Changes

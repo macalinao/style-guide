@@ -1,5 +1,11 @@
 # @macalinao/eslint-config
 
+## 7.0.2
+
+### Patch Changes
+
+- 044b1fe: Update dependencies, remove a11y ESLint plugin
+
 ## 7.0.1
 
 ### Patch Changes
