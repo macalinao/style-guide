@@ -19,7 +19,7 @@
     "ian-macalinao"
   ],
   "dependencies": {
-    "@eslint/js": "^9.39.0",
+    "@eslint/js": "^9.39.1",
     "@typescript-eslint/parser": "^8.46.2",
     "eslint-config-turbo": "^2.6.0",
     "globals": "^16.5.0",
