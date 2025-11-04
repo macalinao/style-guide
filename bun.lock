@@ -16,7 +16,7 @@
     },
     "packages/biome-config": {
       "name": "@macalinao/biome-config",
-      "version": "0.1.5",
+      "version": "0.1.6",
       "peerDependencies": {
         "@biomejs/biome": "^2.3.3",
       },
@@ -81,7 +81,7 @@
     },
     "packages/tsconfig": {
       "name": "@macalinao/tsconfig",
-      "version": "3.2.4",
+      "version": "3.2.5",
     },
   },
   "catalog": {
