@@ -7,6 +7,7 @@
     "lib": ["ES2024"],
     "outDir": "${configDir}/dist",
     "rootDir": "${configDir}/src",
+    "tsBuildInfoFile": "${configDir}/dist/.tsbuildinfo",
 
     // build
     "types": [],

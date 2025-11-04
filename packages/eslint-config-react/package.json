@@ -49,9 +49,9 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc --build",
     "clean": "tsc -b --clean && rm -rf dist",
-    "lint": "eslint ."
+    "lint": "eslint . --cache"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
