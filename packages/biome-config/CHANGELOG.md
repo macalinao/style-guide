@@ -1,5 +1,11 @@
 # @macalinao/biome-config
 
+## 0.1.6
+
+### Patch Changes
+
+- de1df4a: Update Biome to 2.3.3
+
 ## 0.1.5
 
 ### Patch Changes

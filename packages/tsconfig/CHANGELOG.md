@@ -1,5 +1,11 @@
 # @macalinao/tsconfig
 
+## 3.2.5
+
+### Patch Changes
+
+- e83b6f2: Put tsbuildinfo file in dist/
+
 ## 3.2.4
 
 ### Patch Changes
