@@ -33,6 +33,6 @@
     "./react": "./react.jsonc"
   },
   "peerDependencies": {
-    "@biomejs/biome": "^2.3.2"
+    "@biomejs/biome": "^2.3.3"
   }
 }
