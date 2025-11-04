@@ -1,5 +1,13 @@
 # @macalinao/eslint-config-react
 
+## 6.0.3
+
+### Patch Changes
+
+- 044b1fe: Update dependencies, remove a11y ESLint plugin
+- Updated dependencies [044b1fe]
+  - @macalinao/eslint-config@7.0.2
+
 ## 6.0.2
 
 ### Patch Changes
