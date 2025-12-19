@@ -22,8 +22,8 @@
   ],
   "dependencies": {
     "@macalinao/eslint-config-react": "workspace:^",
-    "@tanstack/eslint-plugin-router": "^1.133.19",
-    "eslint-plugin-react-refresh": "^0.4.24",
+    "@tanstack/eslint-plugin-router": "^1.141.0",
+    "eslint-plugin-react-refresh": "^0.4.26",
     "typescript-eslint": "catalog:"
   },
   "peerDependencies": {
