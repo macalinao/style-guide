@@ -1,5 +1,11 @@
 # @macalinao/biome-config
 
+## 0.1.7
+
+### Patch Changes
+
+- 2f82a8c: Update all dependencies
+
 ## 0.1.6
 
 ### Patch Changes
