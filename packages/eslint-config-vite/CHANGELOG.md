@@ -1,5 +1,11 @@
 # @macalinao/eslint-config-vite
 
+## 2.0.2
+
+### Patch Changes
+
+- 2f82a8c: Update all dependencies
+
 ## 2.0.1
 
 ### Patch Changes

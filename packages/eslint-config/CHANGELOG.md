@@ -1,5 +1,11 @@
 # @macalinao/eslint-config
 
+## 7.0.3
+
+### Patch Changes
+
+- 2f82a8c: Update all dependencies
+
 ## 7.0.2
 
 ### Patch Changes
