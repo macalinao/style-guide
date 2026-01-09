@@ -74,6 +74,7 @@
         "noUnusedTemplateLiteral": "error",
         "useNumberNamespace": "error",
         "noInferrableTypes": "error",
+        "noNonNullAssertion": "error",
         "noUselessElse": "error",
         "useBlockStatements": "error",
         "useCollapsedElseIf": "error",
