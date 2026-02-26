@@ -49,7 +49,6 @@ This is a monorepo containing Ian Macalinao's standardized TypeScript and ESLint
   - Biome for fast formatting (JSON, JSONC, HTML)
   - ESLint with TypeScript for linting
   - Prettier for Markdown and YAML formatting
-  - Husky + lint-staged for pre-commit hooks
   - Changesets for version management
 
 ### Development Patterns
