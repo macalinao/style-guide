@@ -7,7 +7,6 @@ in
   packages = with pkgs; [
     nixfmt
     git
-    biome
     lintel
   ];
 
@@ -21,7 +20,7 @@ in
     biome = {
       enable = true;
       name = "biome check";
-      entry = "${pkgs.biome}/bin/biome check --write --unsafe";
+      entry = "bunx biome check --write --unsafe";
       files = "\\.(js|jsx|ts|tsx|cjs|mjs|cts|mts|json|jsonc)$";
       language = "system";
     };
