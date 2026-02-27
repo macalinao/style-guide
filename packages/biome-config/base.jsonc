@@ -51,6 +51,7 @@
         "noUnnecessaryConditions": "error",
       },
       "complexity": {
+        "noUselessUndefined": "error",
         "useSimplifiedLogicExpression": "error",
         "noForEach": "error",
         "noExcessiveCognitiveComplexity": {
@@ -61,6 +62,7 @@
         },
       },
       "suspicious": {
+        "noDeprecatedImports": "error",
         "noEmptyBlockStatements": "error",
         "noConsole": "error",
         "noEvolvingTypes": "error",
