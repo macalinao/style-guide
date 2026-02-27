@@ -5,11 +5,11 @@
     "enabled": true,
     "clientKind": "git",
     "useIgnoreFile": true,
-    "defaultBranch": "master"
+    "defaultBranch": "master",
   },
   "files": {
     "ignoreUnknown": false,
-    "includes": ["**", "!**/bun.lock"]
+    "includes": ["**", "!**/bun.lock"],
   },
   "formatter": {
     "enabled": true,
@@ -18,15 +18,15 @@
     "indentWidth": 2,
     "lineEnding": "lf",
     "lineWidth": 80,
-    "attributePosition": "auto"
+    "attributePosition": "auto",
   },
   "json": {
     "parser": {
-      "allowTrailingCommas": true
+      "allowTrailingCommas": true,
     },
     "formatter": {
-      "trailingCommas": "none"
-    }
+      "trailingCommas": "none",
+    },
   },
   "assist": {
     "actions": {
@@ -35,35 +35,48 @@
         "organizeImports": {
           "level": "on",
           "options": {
-            "groups": [{ "type": true }]
-          }
-        }
-      }
-    }
+            "groups": [{ "type": true }],
+          },
+        },
+      },
+    },
   },
   "linter": {
     "enabled": true,
     "domains": {
-      "project": "recommended"
+      "project": "recommended",
     },
     "rules": {
       "recommended": true,
       "nursery": {
         "noFloatingPromises": "error",
-        "noUnnecessaryConditions": "error"
+        "noUnnecessaryConditions": "error",
       },
       "complexity": {
-        "useSimplifiedLogicExpression": "error"
+        "useSimplifiedLogicExpression": "error",
+        "noForEach": "error",
+        "noExcessiveCognitiveComplexity": {
+          "level": "error",
+          "options": {
+            "maxAllowedComplexity": 20,
+          },
+        },
       },
       "suspicious": {
-        "noDoubleEquals": "error"
+        "noEmptyBlockStatements": "error",
+        "noConsole": "error",
+        "noEvolvingTypes": "error",
+        "useNumberToFixedDigitsArgument": "error",
+        "useErrorMessage": "error",
+        "noExplicitAny": "error",
+        "noSkippedTests": "error",
       },
       "style": {
         "useImportType": {
           "level": "error",
           "options": {
-            "style": "separatedType"
-          }
+            "style": "separatedType",
+          },
         },
         "noParameterAssign": "error",
         "useAsConstAssertion": "error",
@@ -81,23 +94,39 @@
         "useConsistentArrayType": {
           "level": "error",
           "options": {
-            "syntax": "shorthand"
-          }
+            "syntax": "shorthand",
+          },
         },
         "useShorthandAssign": "error",
-        "useConsistentTypeDefinitions": "error"
+        "useConsistentTypeDefinitions": "error",
+        "noCommonJs": "error",
+        "noNestedTernary": "error",
+        "useForOf": "error",
+        "noNegationElse": "error",
+        "useThrowOnlyError": "error",
+        "useExplicitLengthCheck": "error",
+        "noDoneCallback": "error",
+      },
+      "performance": {
+        "useTopLevelRegex": "error",
       },
       "correctness": {
-        "noUnusedVariables": "warn",
+        "noUnusedVariables": "error",
         "noUndeclaredDependencies": "error",
+        "noUndeclaredVariables": {
+          "level": "error",
+          "options": {
+            "checkTypes": true,
+          },
+        },
         "useImportExtensions": {
           "level": "error",
           "options": {
-            "forceJsExtensions": true
-          }
-        }
-      }
-    }
+            "forceJsExtensions": true,
+          },
+        },
+      },
+    },
   },
   "javascript": {
     "formatter": {
@@ -107,12 +136,12 @@
       "semicolons": "always",
       "arrowParentheses": "always",
       "bracketSameLine": false,
-      "bracketSpacing": true
-    }
+      "bracketSpacing": true,
+    },
   },
   "html": {
     "formatter": {
-      "enabled": true
-    }
-  }
+      "enabled": true,
+    },
+  },
 }
