@@ -19,9 +19,9 @@
     ],
     "catalog": {
       "@biomejs/biome": "^2.4.4",
-      "eslint": "^9.39.2",
+      "eslint": "^10.0.2",
       "typescript": "^5.9.2",
-      "typescript-eslint": "^8.50.0"
+      "typescript-eslint": "^8.56.1"
     }
   },
   "keywords": [],
