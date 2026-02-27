@@ -24,9 +24,6 @@
     "parser": {
       "allowTrailingCommas": true,
     },
-    "formatter": {
-      "trailingCommas": "none",
-    },
   },
   "assist": {
     "actions": {
@@ -106,6 +103,12 @@
         "useThrowOnlyError": "error",
         "useExplicitLengthCheck": "error",
         "noDoneCallback": "error",
+        "useFilenamingConvention": {
+          "level": "warn",
+          "options": {
+            "filenameCases": ["kebab-case"],
+          },
+        },
       },
       "performance": {
         "useTopLevelRegex": "error",
@@ -144,4 +147,14 @@
       "enabled": true,
     },
   },
+  "overrides": [
+    {
+      "includes": ["**/*.jsonc"],
+      "json": {
+        "formatter": {
+          "trailingCommas": "all",
+        },
+      },
+    },
+  ],
 }
