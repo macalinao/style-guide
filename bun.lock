@@ -1,6 +1,5 @@
 {
   "lockfileVersion": 1,
-  "configVersion": 0,
   "workspaces": {
     "": {
       "name": "@macalinao/style-guide",
@@ -22,7 +21,7 @@
     },
     "packages/eslint-config": {
       "name": "@macalinao/eslint-config",
-      "version": "8.0.0",
+      "version": "8.1.0",
       "dependencies": {
         "@eslint/js": "^10.0.1",
         "@typescript-eslint/parser": "^8.56.1",
@@ -41,7 +40,7 @@
     },
     "packages/eslint-config-react": {
       "name": "@macalinao/eslint-config-react",
-      "version": "6.0.4",
+      "version": "6.1.0",
       "dependencies": {
         "@macalinao/eslint-config": "workspace:^",
         "@tanstack/eslint-plugin-query": "^5.91.4",
@@ -61,7 +60,7 @@
     },
     "packages/eslint-config-vite": {
       "name": "@macalinao/eslint-config-vite",
-      "version": "2.0.2",
+      "version": "2.1.0",
       "dependencies": {
         "@macalinao/eslint-config-react": "workspace:^",
         "@tanstack/eslint-plugin-router": "^1.161.4",
