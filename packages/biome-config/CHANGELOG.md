@@ -1,5 +1,16 @@
 # @macalinao/biome-config
 
+## 0.2.0
+
+### Minor Changes
+
+- 8994a08: Migrate ESLint config to Biome
+- 7c6a021: Much stricter Biome config
+
+### Patch Changes
+
+- 359acf0: Add no non-null assertion error to biome config
+
 ## 0.1.7
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @macalinao/eslint-config
 
+## 8.0.0
+
+### Major Changes
+
+- 8994a08: Migrate ESLint config to Biome
+
 ## 7.0.3
 
 ### Patch Changes

@@ -1,5 +1,12 @@
 # @macalinao/eslint-config-react
 
+## 6.0.4
+
+### Patch Changes
+
+- Updated dependencies [8994a08]
+  - @macalinao/eslint-config@8.0.0
+
 ## 6.0.3
 
 ### Patch Changes
