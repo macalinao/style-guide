@@ -47,8 +47,15 @@
       "recommended": true,
       "nursery": {
         "noFloatingPromises": "error",
+        "noForIn": "error",
+        "noMisusedPromises": "error",
         "noRedundantDefaultExport": "error",
         "noUnnecessaryConditions": "error",
+        "useAwaitThenable": "error",
+        "useConsistentEnumValueType": "error",
+        "useExhaustiveSwitchCases": "error",
+        "useFind": "error",
+        "useRegexpExec": "error",
       },
       "complexity": {
         "noUselessUndefined": "error",
@@ -62,6 +69,7 @@
         },
       },
       "suspicious": {
+        "noConfusingVoidType": "error",
         "noDeprecatedImports": "error",
         "noEmptyBlockStatements": "error",
         "noConsole": "error",
@@ -70,6 +78,7 @@
         "useErrorMessage": "error",
         "noExplicitAny": "error",
         "noSkippedTests": "error",
+        "useAwait": "error",
       },
       "style": {
         "useImportType": {
@@ -106,6 +115,7 @@
         "useForOf": "error",
         "noNegationElse": "error",
         "useThrowOnlyError": "error",
+        "useUnifiedTypeSignatures": "error",
         "useExplicitLengthCheck": "error",
         "noDoneCallback": "error",
         "useFilenamingConvention": {
