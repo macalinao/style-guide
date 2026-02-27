@@ -1,14 +1,15 @@
 {
   "lockfileVersion": 1,
+  "configVersion": 0,
   "workspaces": {
     "": {
       "name": "@macalinao/style-guide",
       "devDependencies": {
-        "@biomejs/biome": "catalog:",
+        "@biomejs/biome": "^2.4.4",
         "@changesets/cli": "^2.29.8",
         "@macalinao/biome-config": "workspace:^",
-        "prettier": "^3.7.4",
-        "turbo": "^2.6.3",
+        "prettier": "^3.8.1",
+        "turbo": "^2.8.11",
         "typescript": "^5.9.3",
       },
     },
