@@ -1,5 +1,16 @@
 # @macalinao/eslint-config-vite
 
+## 2.1.0
+
+### Minor Changes
+
+- fb1aa28: Update to ESLint 10
+
+### Patch Changes
+
+- Updated dependencies [fb1aa28]
+  - @macalinao/eslint-config-react@6.1.0
+
 ## 2.0.2
 
 ### Patch Changes

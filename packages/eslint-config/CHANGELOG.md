@@ -1,5 +1,11 @@
 # @macalinao/eslint-config
 
+## 8.1.0
+
+### Minor Changes
+
+- fb1aa28: Update to ESLint 10
+
 ## 8.0.0
 
 ### Major Changes
