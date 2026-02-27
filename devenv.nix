@@ -24,13 +24,6 @@ in
       files = "\\.(js|jsx|ts|tsx|cjs|mjs|cts|mts|json|jsonc)$";
       language = "system";
     };
-    eslint = {
-      enable = true;
-      name = "eslint";
-      entry = "bun eslint --fix --cache";
-      files = "\\.(js|jsx|ts|tsx|cjs|mjs|cts|mts)$";
-      language = "system";
-    };
     nixfmt = {
       enable = true;
     };

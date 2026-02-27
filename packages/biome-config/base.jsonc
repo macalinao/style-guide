@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.3.13/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.4.4/schema.json",
   "root": false,
   "vcs": {
     "enabled": true,
@@ -47,9 +47,18 @@
       "recommended": true,
       "nursery": {
         "noFloatingPromises": "error",
+        "noForIn": "error",
+        "noMisusedPromises": "error",
+        "noRedundantDefaultExport": "error",
         "noUnnecessaryConditions": "error",
+        "useAwaitThenable": "error",
+        "useConsistentEnumValueType": "error",
+        "useExhaustiveSwitchCases": "error",
+        "useFind": "error",
+        "useRegexpExec": "error",
       },
       "complexity": {
+        "noUselessUndefined": "error",
         "useSimplifiedLogicExpression": "error",
         "noForEach": "error",
         "noExcessiveCognitiveComplexity": {
@@ -60,6 +69,8 @@
         },
       },
       "suspicious": {
+        "noConfusingVoidType": "error",
+        "noDeprecatedImports": "error",
         "noEmptyBlockStatements": "error",
         "noConsole": "error",
         "noEvolvingTypes": "error",
@@ -67,6 +78,7 @@
         "useErrorMessage": "error",
         "noExplicitAny": "error",
         "noSkippedTests": "error",
+        "useAwait": "error",
       },
       "style": {
         "useImportType": {
@@ -94,6 +106,8 @@
             "syntax": "shorthand",
           },
         },
+        "useNumericSeparators": "error",
+        "useObjectSpread": "error",
         "useShorthandAssign": "error",
         "useConsistentTypeDefinitions": "error",
         "noCommonJs": "error",
@@ -101,6 +115,7 @@
         "useForOf": "error",
         "noNegationElse": "error",
         "useThrowOnlyError": "error",
+        "useUnifiedTypeSignatures": "error",
         "useExplicitLengthCheck": "error",
         "noDoneCallback": "error",
         "useFilenamingConvention": {
