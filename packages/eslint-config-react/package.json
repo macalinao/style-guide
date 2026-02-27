@@ -21,7 +21,7 @@
   ],
   "dependencies": {
     "@macalinao/eslint-config": "workspace:^",
-    "@tanstack/eslint-plugin-query": "^5.91.2",
+    "@tanstack/eslint-plugin-query": "^5.91.4",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.0.1",
     "typescript-eslint": "catalog:"
