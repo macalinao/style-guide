@@ -17,5 +17,7 @@ jobs:
           name: devenv
       - name: Install devenv
         run: nix profile install nixpkgs#devenv
+      - name: Install dependencies
+        run: devenv shell -- bun install --frozen-lockfile
       - name: Run devenv test
         run: devenv test
