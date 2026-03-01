@@ -58,9 +58,14 @@
         "useRegexpExec": "error",
       },
       "complexity": {
+        "noUselessCatchBinding": "error",
         "noUselessUndefined": "error",
         "useSimplifiedLogicExpression": "error",
         "noForEach": "error",
+        // Prefer named arguments via objects over many positional parameters.
+        // This improves readability at call sites, makes argument order irrelevant,
+        // and allows adding new parameters without breaking existing callers.
+        "useMaxParams": "warn",
         "noExcessiveCognitiveComplexity": {
           "level": "error",
           "options": {
