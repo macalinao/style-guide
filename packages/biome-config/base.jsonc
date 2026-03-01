@@ -118,6 +118,7 @@
         "useUnifiedTypeSignatures": "error",
         "useExplicitLengthCheck": "error",
         "noDoneCallback": "error",
+        // kebab-case prevents bugs on case-insensitive file systems (macOS, Windows)
         "useFilenamingConvention": {
           "level": "warn",
           "options": {
