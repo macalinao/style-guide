@@ -21,7 +21,7 @@
   "dependencies": {
     "@eslint/js": "^10.0.1",
     "@typescript-eslint/parser": "^8.56.1",
-    "eslint-config-turbo": "^2.8.11",
+    "eslint-config-turbo": "^2.8.13",
     "globals": "^17.3.0",
     "typescript-eslint": "catalog:"
   },
