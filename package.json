@@ -32,7 +32,7 @@
     "@changesets/cli": "^2.29.8",
     "@macalinao/biome-config": "workspace:^",
     "prettier": "^3.8.1",
-    "turbo": "^2.8.11",
+    "turbo": "^2.8.13",
     "typescript": "^5.9.3"
   },
   "engines": {
