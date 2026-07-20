@@ -1,0 +1,1442 @@
+{
+  "$schema": "https://unpkg.com/oxlint@1.74.0/configuration_schema.json",
+  "options": {
+    "typeAware": true,
+  },
+  "plugins": ["typescript", "unicorn", "oxc", "import", "promise", "react"],
+  // Only `correctness` is denied by category. The categories oxlint layers on
+  // top (suspicious/pedantic/style) are far wider than anything this repo has
+  // enforced -- turning any of them on lights up hundreds of pre-existing
+  // violations (strict-boolean-expressions, prefer-readonly-parameter-types,
+  // no-unsafe-type-assertion, ...). Every rule beyond `correctness` is
+  // therefore listed explicitly below instead of pulling in whole categories.
+  "categories": {
+    "correctness": "error",
+  },
+  "ignorePatterns": ["**/dist/**", "**/node_modules/**"],
+  "rules": {
+    // Flags await on a value that is not a Promise or thenable, which does
+    // nothing useful and usually signals a missing await earlier or a
+    // misunderstanding of what a function returns.
+    //
+    // Awaiting a non-thenable is silently a no-op at runtime, so the mistake
+    // hides: you think you paused for an async result but the value was already
+    // synchronous, or you awaited the wrong expression. The rule also catches
+    // for-await-of over a non-async-iterable and await using on a
+    // non-disposable, the same class of typo in newer syntax. Because it is
+    // type-aware it can tell a real Promise from a plain value, so false
+    // positives are rare.
+    "typescript/await-thenable": "error",
+
+    // Bans the delete operator on an array index, which leaves a hole rather
+    // than shrinking the array and desyncs length from the real contents.
+    //
+    // delete arr[2] sets that slot to empty without shifting anything, so
+    // length stays the same and the array becomes sparse. Sparse arrays
+    // deoptimize the engine and break the mental model every reader has of a
+    // contiguous list. If you meant to remove an element, splice does it; if
+    // you meant to clear a value, assign undefined. There is no case where
+    // delete on a numeric index is the right tool.
+    "typescript/no-array-delete": "error",
+
+    // Catches values that stringify to the useless [object Object] because they
+    // inherit the default Object.prototype.toString instead of defining their
+    // own.
+    //
+    // This fires when a plain object, or a class without a toString, lands in a
+    // template literal, a string concatenation, or an explicit String() call.
+    // The bug is almost always that you meant to serialize the value with
+    // JSON.stringify or pull a specific field out of it, and instead shipped
+    // [object Object] into a log line, a URL, or the UI. Being type-aware, it
+    // clears types that do define a meaningful toString and only complains
+    // about the ones that would produce garbage.
+    "typescript/no-base-to-string": "error",
+
+    // Stops void-typed expressions from being used where a real value is
+    // expected, such as returning the result of a void function or passing it
+    // as an argument.
+    //
+    // return doThing() when doThing returns void reads like it forwards a
+    // value, but it forwards nothing, and the pattern hides the fact that the
+    // function is being used for its side effect only. It also traps a common
+    // async bug: return callback() where callback is inferred void swallows the
+    // case where callback was actually meant to be awaited. Splitting the call
+    // onto its own statement and returning explicitly makes the control flow
+    // honest.
+    "typescript/no-confusing-void-expression": "error",
+
+    // Removes repeated members from a union or intersection, where the
+    // duplicate is dead weight and often a copy-paste symptom.
+    //
+    // string | string is just string, and A & A is just A. A duplicate
+    // constituent never changes the type, so its presence means either a
+    // mistake (you meant a different second type) or leftover churn from a
+    // refactor. Left in, it makes the type read as if it carries more
+    // information than it does. The rule also collapses cases where two aliases
+    // resolve to the same underlying type, which plain reading would miss.
+    "typescript/no-duplicate-type-constituents": "error",
+
+    // Requires that every Promise is awaited, returned, or explicitly handled,
+    // so a rejection can never vanish silently.
+    //
+    // A floating promise is the single most common source of lost errors in
+    // async code: the function kicks off async work, the surrounding code moves
+    // on, and if that work rejects there is no catch in the call stack to see
+    // it, so the failure either crashes the process on an unhandled rejection
+    // or disappears entirely. It also means ordering you assumed was guaranteed
+    // is not, because nothing waited. When you genuinely want fire-and-forget,
+    // void marks it deliberately so the next reader knows it was a choice, not
+    // an oversight.
+    "typescript/no-floating-promises": "error",
+
+    // Bans for-in over an array, which iterates string keys and inherited
+    // enumerable properties rather than the elements you want.
+    //
+    // for (const i in arr) binds i to "0", "1", "2" as strings, not numbers,
+    // and walks any enumerable property added to the array or its prototype, so
+    // the loop body rarely does what it looks like it does. Off-by-one type
+    // bugs and accidental inclusion of non-index properties both come from
+    // here. Use for-of for values, entries() when you also need the index, or a
+    // classic index loop.
+    "typescript/no-for-in-array": "error",
+
+    // Blocks the eval-equivalent code paths: passing a string to setTimeout,
+    // setInterval, setImmediate, or the Function constructor.
+    //
+    // Handing a string to these APIs compiles and runs it exactly like eval,
+    // with all the same injection surface and none of the scoping or tooling
+    // that normal code gets. It defeats minifiers, bundler analysis, and the
+    // type checker, and any interpolated value becomes an execution vector.
+    // Pass an actual function reference instead; there is no legitimate reason
+    // to reach for the string form.
+    "typescript/no-implied-eval": "error",
+
+    // Flags the void operator applied to an expression that is already void or
+    // undefined, where it accomplishes nothing.
+    //
+    // void exists to discard a value, so void someVoidCall() is redundant:
+    // there was nothing to discard. It usually survives from a refactor where
+    // the callee's return type changed, and now it just adds noise that implies
+    // a value is being deliberately dropped when none exists. Removing it says
+    // exactly what happens.
+    "typescript/no-meaningless-void-operator": "error",
+
+    // Catches promises used in positions that ignore or misread them: as an if
+    // condition, in a logical operator, or passed to a callback slot typed to
+    // return void.
+    //
+    // A Promise object is always truthy, so if (asyncCheck()) branches on the
+    // object, not the resolved boolean, and always takes the true path. Passing
+    // an async function where a void-returning callback is expected, such as an
+    // event handler or an array forEach, means the returned promise floats and
+    // its rejection is lost. Both are silent logic errors that type-blind
+    // linting cannot see. It pairs with no-floating-promises to close the
+    // async-error gap from both ends.
+    "typescript/no-misused-promises": "error",
+
+    // Flags spreads that produce something other than what the author intended,
+    // such as spreading a string into an array or spreading a class instance
+    // and losing its prototype.
+    //
+    // Spreading a string yields an array of its characters, which is
+    // occasionally intended and far more often a mistake where an array was
+    // expected. Spreading a Promise, a function, or a class instance into an
+    // object copies only own enumerable properties, dropping methods that live
+    // on the prototype, so the result looks like the original but has quietly
+    // lost its behavior. The rule surfaces these so the copy actually carries
+    // what you think it does.
+    "typescript/no-misused-spread": "error",
+
+    // Requires every member of an enum to be the same kind, either all numeric
+    // or all string, never a mix.
+    //
+    // Mixed enums behave inconsistently: numeric members get a reverse mapping
+    // and participate in arithmetic, string members do not, so the same enum
+    // answers to different rules depending on the member. That inconsistency
+    // leaks into comparisons, serialization, and iteration in ways that
+    // surprise every reader. Keeping an enum homogeneous makes its runtime
+    // shape predictable.
+    "typescript/no-mixed-enums": "error",
+
+    // Removes union and intersection members that are subsumed by another
+    // member, where they contribute nothing to the resulting type.
+    //
+    // any | string collapses to any, unknown | string collapses to unknown, and
+    // never | string collapses to string, because one member already swallows
+    // or is swallowed by the other. Writing the redundant member suggests a
+    // constraint that is not actually there, most dangerously when any silently
+    // erases the rest of a union and turns off checking for the whole thing.
+    // Cutting the dead member makes the type mean what it says.
+    "typescript/no-redundant-type-constituents": "error",
+
+    // Flags comparing a boolean against a boolean literal, such as x === true
+    // or x !== false, which is longer and no clearer than the expression
+    // itself.
+    //
+    // x === true is just x, and x === false is just !x. The comparison adds
+    // ceremony without adding meaning, and === false in particular is easy to
+    // misread. The rule is careful with nullable booleans, where comparing
+    // against a literal actually changes behavior, and only rewrites the cases
+    // where the comparison is genuinely redundant.
+    "typescript/no-unnecessary-boolean-literal-compare": "error",
+
+    // Flags conditions the type system already knows the answer to: an
+    // always-truthy check, an always-falsy check, or optional chaining on a
+    // value that cannot be nullish.
+    //
+    // If the type says a value is never null, then value?.foo and if (value)
+    // are telling the reader something the types contradict, and one of the two
+    // is wrong. Usually it means a type is too narrow or too wide, or a guard
+    // was left behind after the shape changed. This is one of the
+    // highest-signal type-aware rules for finding dead branches and stale null
+    // checks, though it leans on your types being honest, so it works best
+    // alongside the no-unsafe family that keeps any out of the picture.
+    "typescript/no-unnecessary-condition": "error",
+
+    // Flags template literals whose interpolations add nothing, like a single
+    // ${string} that could just be the string, or interpolating a string
+    // literal.
+    //
+    // ${someString} with no surrounding text is just someString, and ${"a"}b is
+    // just "ab". These come from refactors that removed the other parts of the
+    // template or from reflexive wrapping, and they leave a template literal
+    // that does no templating. Collapsing them removes the implication that
+    // runtime assembly is happening when it is not.
+    "typescript/no-unnecessary-template-expression": "error",
+
+    // Flags explicit type arguments that exactly match the default the type
+    // parameter already provides.
+    //
+    // If a generic declares a default and you pass that same type at the call
+    // or reference site, the argument is noise: MyType<DefaultKind> reads
+    // identically to MyType. It also creates a maintenance trap, because if the
+    // default later changes, the explicit copy silently pins the old value.
+    // Dropping the redundant argument lets the default do its job.
+    "typescript/no-unnecessary-type-arguments": "error",
+
+    // Flags an as assertion or non-null assertion that does not change the
+    // type, because the value already has the asserted type.
+    //
+    // A redundant assertion is a lie the reader has to disprove: it signals
+    // that the value might not be what it looks like, when the type checker
+    // already guarantees it is. Worse, assertions suppress future errors, so a
+    // redundant one left in place can hide a real type mismatch introduced
+    // later. Removing it restores the checker's ability to catch that. The rule
+    // is type-aware, so it only flags the assertions that provably do nothing.
+    "typescript/no-unnecessary-type-assertion": "error",
+
+    // Flags no-op conversions, like String() on a value that is already a
+    // string or Number() on a number, including the shorthand forms.
+    //
+    // String(alreadyString), +alreadyNumber, Boolean(alreadyBoolean), and
+    // arr.slice()-style copies where a conversion was meant contribute nothing
+    // but imply a type change that never happens. They usually survive a
+    // refactor after the input's type settled. Removing them makes it clear no
+    // coercion is in play, which matters because coercion is exactly the kind
+    // of thing readers scan for.
+    "typescript/no-unnecessary-type-conversion": "error",
+
+    // Flags a generic type parameter that is used only once, so it functions as
+    // a disguised single-use type rather than relating two positions.
+    //
+    // A type parameter earns its place by connecting things, tying an argument
+    // to a return, or one argument to another. If it appears exactly once, it
+    // relates nothing and could be inlined to its constraint or to unknown, and
+    // the generic signature is more intimidating than the function actually is.
+    // Collapsing it makes the real contract legible and removes a common source
+    // of false confidence about inference.
+    "typescript/no-unnecessary-type-parameters": "error",
+
+    // Flags passing an any-typed value as a function argument, where it
+    // silently defeats the parameter's declared type.
+    //
+    // The moment an any crosses into a typed parameter, the checker stops
+    // verifying that call: wrong shapes, wrong primitives, missing fields all
+    // pass. any propagates outward from untyped JSON, loose third-party types,
+    // and assertions, and this rule is one of the walls that stops it at the
+    // function boundary. Narrow the value with a guard or a schema before
+    // passing it so the parameter's type means something again.
+    "typescript/no-unsafe-argument": "error",
+
+    // Flags assigning an any-typed value to a typed variable or property, which
+    // launders any into a slot the checker then trusts.
+    //
+    // const user: User = someAny compiles, and from that point everything
+    // treats user as a fully checked User while it could be anything at all.
+    // This is the primary way any spreads through a codebase, one assignment at
+    // a time, each disabling checks downstream. The fix is to validate or
+    // narrow at the boundary where untyped data arrives, so the typed side of
+    // the program stays trustworthy.
+    "typescript/no-unsafe-assignment": "error",
+
+    // Flags calling an any-typed or error-typed value, where neither the
+    // arguments nor the return are checked and the call may not even be a
+    // function.
+    //
+    // someAny() type-checks unconditionally, so a value that turns out to be
+    // undefined or a number throws at runtime with nothing having warned you,
+    // and the return type becomes any and spreads further. This catches the
+    // case where a function pulled from loosely typed config or a dynamic
+    // import was never actually confirmed to be callable. Establish the real
+    // type first, then call.
+    "typescript/no-unsafe-call": "error",
+
+    // Flags comparing an enum value against a plain literal of the underlying
+    // type instead of against the enum members.
+    //
+    // status === 2 or color === "red" works today but silently decouples the
+    // code from the enum: renumber or rename a member and the literal
+    // comparison keeps compiling while now meaning the wrong thing, with no
+    // error to catch it. Comparing against Status.Active or Color.Red keeps the
+    // check tied to the source of truth, so refactors that change the enum
+    // force the comparison to move with them.
+    "typescript/no-unsafe-enum-comparison": "error",
+
+    // Flags property access on an any-typed value, where the accessed member is
+    // itself any and the access could throw.
+    //
+    // someAny.foo.bar reads a chain the checker cannot verify, so a missing
+    // intermediate throws at runtime and, worse, foo and bar are now any too,
+    // widening the untyped region with every dot. This is how one untyped input
+    // infects a whole expression tree. Narrow the object to a known shape
+    // before reaching into it so member access is verified again.
+    "typescript/no-unsafe-member-access": "error",
+
+    // Flags returning an any-typed value from a function that declares a more
+    // specific return type, which pushes unchecked data across the function
+    // boundary to every caller.
+    //
+    // A function typed to return User that actually returns an any hands each
+    // caller a value they will trust as a User without any of them having
+    // grounds to. It is the outbound counterpart to no-unsafe-assignment: the
+    // leak happens at return instead of at assignment, and it is arguably worse
+    // because it fans out to all callers at once. Narrow the value to the
+    // declared type before returning it.
+    "typescript/no-unsafe-return": "error",
+
+    // Flags unary minus applied to anything that is not a number or bigint,
+    // where the result is almost always NaN or a type error waiting to happen.
+    //
+    // -value only means negation for numeric operands; applied to a string,
+    // object, or any, it either coerces in surprising ways or yields NaN, and
+    // the surrounding arithmetic then quietly produces garbage. Requiring a
+    // numeric operand keeps negation meaning negation and forces an explicit
+    // conversion when the source really is a string of digits.
+    "typescript/no-unsafe-unary-minus": "error",
+
+    // Requires that thrown values are Error instances rather than strings,
+    // objects, or other primitives.
+    //
+    // throw "something broke" carries no stack trace, so the where and how of
+    // the failure are gone by the time anyone reads the log, and catch blocks
+    // that expect err.message get undefined instead. Standardizing on Error
+    // objects means every failure has a stack, a message, and a consistent
+    // shape that handlers and reporters can rely on. Throwing a bare value is a
+    // debugging tax paid later, at the worst time.
+    "typescript/only-throw-error": "error",
+
+    // Requires that Promise.reject and the reject callback receive an Error,
+    // mirroring only-throw-error for the promise world.
+    //
+    // A rejection is a throw that travels through async boundaries, so
+    // rejecting with a string or a plain object loses the stack trace and hands
+    // catch and .catch a value they cannot introspect the same way. Rejecting
+    // with an Error keeps async failures as debuggable as synchronous ones,
+    // with a stack that points at the origin. It closes the gap that
+    // only-throw-error would otherwise leave open for promises.
+    "typescript/prefer-promise-reject-errors": "error",
+
+    // Flags asserting the accumulator's type on the reduce initial value when
+    // passing it as reduce's generic type argument is cleaner and safer.
+    //
+    // Writing arr.reduce((acc, x) => ..., [] as string[]) uses an assertion,
+    // which suppresses checking, whereas arr.reduce<string[]>((acc, x) => ...,
+    // []) tells reduce the accumulator type directly and lets the checker
+    // verify the initial value against it. The generic form conveys the same
+    // intent without the escape hatch, so a genuinely wrong initial value is
+    // caught instead of asserted away.
+    "typescript/prefer-reduce-type-parameter": "error",
+
+    // Flags builder-style methods typed to return the concrete class when they
+    // return this, so subclasses lose the fluent chain.
+    //
+    // If setName returns Builder explicitly but its body returns this, then
+    // calling it on a SubBuilder narrows the chain back down to Builder and the
+    // subclass's own methods drop off the end of the fluent call. Typing the
+    // return as this keeps the real receiver type flowing through the chain,
+    // which is the whole point of a fluent API and the thing that makes it work
+    // under inheritance.
+    "typescript/prefer-return-this-type": "error",
+
+    // Requires that a getter and its matching setter for the same property
+    // agree on type, so the value you read back matches the contract you wrote.
+    //
+    // When get x returns string but set x accepts string | undefined, the
+    // property lies to one side: readers are promised a string that assignment
+    // says might be missing, and the mismatch invites bugs that only show up on
+    // the read-after-write path. Keeping the pair in sync means the property
+    // has one honest type. A deliberate asymmetry is almost always a design
+    // smell pointing at two different concepts wearing one name.
+    "typescript/related-getter-setter-pairs": "error",
+
+    // Flags async functions that contain no await, where the async keyword adds
+    // a promise wrapper and an extra microtask for nothing.
+    //
+    // async with no await means the function returns a resolved promise it
+    // never needed to, which both misleads the reader into thinking real
+    // asynchronous work happens here and adds a microtask hop that can matter
+    // in tight or timing-sensitive code. Usually it is a leftover from removing
+    // the last await, or a signature written async out of habit. Drop the
+    // keyword, or add the await that was meant to be there. Note the
+    // deliberately-off promise-function-async elsewhere in this config is the
+    // inverse concern, kept off where the extra tick would hurt.
+    "typescript/require-await": "error",
+
+    // Requires both operands of + to be the same primitive type, blocking the
+    // coercion surprises that come from mixing numbers, strings, and other
+    // types.
+    //
+    // The + operator means addition for numbers and concatenation for strings,
+    // and JavaScript picks based on runtime types with a coercion table almost
+    // nobody has memorized, so 1 + "2" is "12" and [] + {} is a punchline.
+    // Requiring matching operand types forces an explicit String() or Number()
+    // at the point where a conversion is actually intended, which turns a
+    // silent coercion into a visible decision. For building strings, a template
+    // literal is clearer than + anyway.
+    "typescript/restrict-plus-operands": "error",
+
+    // Restricts what can be interpolated into a template literal to types that
+    // stringify cleanly, with numbers allowed but any, arrays, booleans,
+    // nullish, never, and RegExp all rejected.
+    //
+    // oxlint's defaults for this rule are far looser than the typescript-eslint
+    // config this repo is modeled on: allowAny, allowBoolean, allowNullish, and
+    // allowRegExp all default to true, so ${maybeUndefined} interpolating the
+    // literal string "undefined" and ${someAny} passing unchecked both slip
+    // through. This config turns those escapes off. The one allowance kept is
+    // allowNumber, because ${count} is everywhere, unambiguous, and stringifies
+    // exactly as expected. The point is to stop [object Object], "undefined",
+    // and an any's mystery contents from landing in output that a user or log
+    // will read.
+    "typescript/restrict-template-expressions": [
+      "error",
+      {
+        "allowAny": false,
+        "allowArray": false,
+        "allowBoolean": false,
+        "allowNever": false,
+        "allowNullish": false,
+        "allowNumber": true,
+        "allowRegExp": false,
+      },
+    ],
+
+    // Enforces a consistent, correct handling of returning an awaited promise
+    // inside try/catch, where getting it wrong quietly removes frames from
+    // stack traces or drops the value from the catch.
+    //
+    // Inside a try, return somePromise without await means the promise is
+    // returned before it settles, so a rejection escapes the enclosing catch
+    // entirely and the error handling you wrote never runs. Outside a try the
+    // await is often superfluous, but inside one it is load-bearing. The rule
+    // enforces return await where it changes behavior and keeps the treatment
+    // uniform so readers do not have to reason it out each time.
+    "typescript/return-await": "error",
+
+    // Requires a switch over a union to handle every member, and requires a
+    // default clause on switches over non-union types.
+    //
+    // The real payoff is at refactor time: add a new member to a union and
+    // every switch that does not yet handle it lights up as an error, so the
+    // compiler walks you to each place that needs updating instead of letting a
+    // case fall through silently in production. This config sets
+    // considerDefaultExhaustiveForUnions true, so a default clause counts as
+    // covering the remaining union members when you genuinely want a catch-all,
+    // and requireDefaultForNonUnion true, so switches over open types like
+    // number or string must state what happens in the unhandled case rather
+    // than falling out silently.
+    "typescript/switch-exhaustiveness-check": [
+      "error",
+      {
+        "considerDefaultExhaustiveForUnions": true,
+        "requireDefaultForNonUnion": true,
+      },
+    ],
+
+    // Flags referencing a class method without calling it, because pulling it
+    // off the instance loses the this binding and the method breaks when later
+    // invoked.
+    //
+    // const fn = obj.method detaches method from obj, so calling fn later runs
+    // with the wrong this, or undefined this in strict mode, and either throws
+    // or corrupts state far from where the mistake was made. This bites most in
+    // callbacks, where a method handed straight to addEventListener, then, or a
+    // React prop silently loses its receiver. Bind it, wrap it in an arrow, or
+    // use a class field arrow so this survives the handoff.
+    "typescript/unbound-method": "error",
+
+    // Requires the callback form of promise error handling, .catch and the
+    // onRejected argument to then, to type its parameter as unknown rather than
+    // any.
+    //
+    // A caught value can be anything, exactly like a value in a catch block, so
+    // typing the rejection callback's parameter as any lets code touch .message
+    // and .code on a value that might be a string or null, with no check.
+    // Typing it unknown forces a narrowing step before use, which is the whole
+    // safety argument for useUnknownInCatchVariables applied to the
+    // promise-callback form that setting does not itself cover. It makes async
+    // error handling as disciplined as synchronous try/catch.
+    "typescript/use-unknown-in-catch-callback-variable": "error",
+
+    // Requires the operand of a boolean context to actually be a boolean-ish
+    // type, catching any and unknown in conditions, always-truthy objects, and
+    // unions whose members disagree about truthiness.
+    //
+    // The full-strict version of this rule is churn against this repo's
+    // dominant idiom: if (maybeName), if (flag), and if (arr?.length) are
+    // everywhere, and rewriting them to explicit != null and !== "" checks
+    // changes no behavior while touching hundreds of lines, so the
+    // nullable-primitive escapes stay on (allowNullableBoolean,
+    // allowNullableString, allowNullableNumber, allowNullableEnum). What stays
+    // enforced is the part that catches real bugs: allowAny is false, so an any
+    // or unknown in a condition must be narrowed first; always-truthy objects
+    // in a condition are flagged because testing an object for truthiness is
+    // nearly always a mistake; and unions like string | number or string |
+    // object | null are rejected because their members do not agree on what
+    // falsy means, which is where surprising branches hide.
+    "typescript/strict-boolean-expressions": [
+      "error",
+      {
+        "allowAny": false,
+        "allowNullableBoolean": true,
+        "allowNullableEnum": true,
+        "allowNullableNumber": true,
+        "allowNullableString": true,
+      },
+    ],
+
+    // Catches value-returning callbacks passed where a void callback is
+    // expected, so the return value is silently dropped instead of doing what
+    // the author assumed.
+    //
+    // A function typed to return void tells callers "I ignore whatever you
+    // return." Handing it an async callback or one that returns a result means
+    // that value, including a Promise nobody awaits, vanishes. That hides real
+    // logic errors behind an API that looks like it works. Callbacks with no
+    // return, or ones that explicitly return undefined, are fine; only a
+    // meaningful discarded value is flagged.
+    "typescript/strict-void-return": "error",
+
+    // Flags every use of an API tagged with the JSDoc @deprecated marker,
+    // turning silent reliance on code slated for removal into a build error you
+    // fix on your schedule.
+    //
+    // Deprecation warnings that live only in editor tooltips get ignored until
+    // the day the dependency drops the symbol and the build breaks. Promoting
+    // them to lint errors surfaces the migration debt while the old path still
+    // works, so you can move at your own pace rather than during an emergency
+    // upgrade. Requires type information to resolve which declaration a name
+    // points at.
+    "typescript/no-deprecated": "error",
+
+    // Requires type-only re-exports to travel through export type so the
+    // compiler can erase them, keeping the emitted module graph free of imports
+    // that exist only for types.
+    //
+    // When a barrel re-exports a type using a plain export, bundlers and
+    // transpilers that process files in isolation cannot tell it is type-only
+    // and must keep the runtime reference alive. That defeats tree-shaking and
+    // can drag whole modules into the output. Splitting type exports into their
+    // own export type statements makes erasure unambiguous and pairs with
+    // consistent-type-imports on the import side.
+    "typescript/consistent-type-exports": "error",
+
+    // Marks private class members that are only ever assigned in the
+    // constructor as readonly, so accidental later mutation becomes a compile
+    // error rather than a subtle bug.
+    //
+    // The rule pays for itself by documenting intent: a reader sees readonly
+    // and knows the field is fixed after construction. It also narrows the
+    // surface where state can change, which makes classes easier to reason
+    // about. Only private members are considered, since the rule can prove they
+    // are never reassigned from outside; public fields could be mutated
+    // anywhere and are left alone.
+    "typescript/prefer-readonly": "error",
+
+    // Requires a comparator on Array sort and toSorted for anything other than
+    // strings, because the default coerces elements to strings and sorts
+    // lexically, so [10, 9, 1] becomes [1, 10, 9].
+    //
+    // The default sort is one of the most reliable sources of silent bugs in
+    // JavaScript: numbers, dates, and bigints all sort by their string form
+    // unless you pass a compare function. Making the comparator mandatory
+    // forces the author to state the ordering they actually want. String arrays
+    // are exempted since their default order is already lexical and correct.
+    "typescript/require-array-sort-compare": "error",
+
+    // Removes redundant namespace or enum qualifiers on names already in scope,
+    // so you write Color.Red inside enum Color as just Red where the prefix
+    // adds nothing.
+    //
+    // Qualifying a name with the very namespace or enum you are already inside
+    // is pure noise that suggests the author did not realize the name was
+    // directly available. Stripping it shortens the code and signals scope
+    // correctly. This only fires when the qualifier is provably redundant, so
+    // it never changes which symbol a name resolves to.
+    "typescript/no-unnecessary-qualifier": "error",
+
+    // Flags the redundant this.x = x inside a constructor whose parameter
+    // already carries a visibility modifier, since TypeScript initializes those
+    // properties automatically.
+    //
+    // A constructor parameter written public, private, protected, or readonly
+    // is both a parameter and a field assignment in one. Writing the assignment
+    // again does nothing but duplicate work and mislead a reader into thinking
+    // something extra happens. Deleting it leaves behavior identical and the
+    // intent clearer.
+    "typescript/no-unnecessary-parameter-property-assignment": "error",
+
+    // Flags default parameter or destructuring defaults that can never trigger
+    // because the type proves the value is never undefined, removing runtime
+    // checks that do nothing.
+    //
+    // A default like (a = 0) on an array map callback reads as if undefined is
+    // a real possibility, but the element type guarantees a value is always
+    // passed. The default then adds a dead branch and misleads anyone reasoning
+    // about the function's inputs. This needs type information to know when
+    // undefined is genuinely impossible.
+    "typescript/no-useless-default-assignment": "error",
+
+    // Enforces the property function form for method signatures on interfaces
+    // and type literals, because method shorthand is checked bivariantly in its
+    // parameters while the property form is checked contravariantly, which is
+    // sound.
+    //
+    // Written as foo(x: T): void, a method's parameters are compared
+    // bivariantly, so TypeScript accepts unsafe overrides that a stricter check
+    // would reject. Written as foo: (x: T) => void, the same signature is
+    // compared contravariantly and catches those mismatches. Choosing the
+    // property form buys stronger type safety for the cost of a slightly more
+    // verbose declaration.
+    "typescript/method-signature-style": "error",
+
+    // Requires the overload signatures of a function to sit together, so a
+    // reader sees the full call surface at once instead of hunting for a stray
+    // signature split off by unrelated code.
+    //
+    // Overloads scattered through a declaration are easy to miss, and a missed
+    // one means an incomplete mental model of how the function can be called.
+    // Grouping them is a pure readability win with no runtime effect. None of
+    // these syntax rules had a violation when they were enabled; they exist to
+    // keep the codebase that way.
+    "typescript/adjacent-overload-signatures": "error",
+
+    // Requires ts-directive comments like ts-expect-error to carry an
+    // explanation and bans the blanket ts-ignore, so every suppression of the
+    // type checker is justified in place.
+    //
+    // A bare ts-ignore silences the compiler with no record of why, and those
+    // comments outlive the problem they were meant to work around. Demanding a
+    // description forces the author to admit what is being suppressed, which
+    // the next reader can evaluate. It works with prefer-ts-expect-error to
+    // push suppressions toward the self-checking directive.
+    "typescript/ban-ts-comment": "error",
+
+    // Flags leftover tslint disable and enable comments, which do nothing once
+    // the project has moved off TSLint and only confuse readers into thinking a
+    // linter still reads them.
+    //
+    // TSLint has been deprecated for years, so any tslint: comment in this
+    // codebase is dead metadata. Removing it prevents the false impression that
+    // some rule is still being toggled and keeps comments honest about what
+    // actually runs.
+    "typescript/ban-tslint-comment": "error",
+
+    // Enforces one consistent way to expose a constant on a class: a readonly
+    // field rather than a trivial getter that just returns a literal.
+    //
+    // A getter that returns a fixed literal and a readonly field holding that
+    // literal are interchangeable to callers, but mixing both styles across a
+    // class makes its API harder to scan and implies a distinction that is not
+    // there. The field form is also cheaper, since it avoids an accessor call.
+    // This config takes the default fields style.
+    "typescript/class-literal-property-style": "error",
+
+    // Requires the type arguments of a generic constructor to sit on the
+    // constructor call rather than on the variable annotation, so you write new
+    // Map<string, number>() instead of annotating the variable.
+    //
+    // Putting the type parameters on the new expression keeps them next to the
+    // value they describe and lets inference flow naturally to later
+    // assignments. Splitting them onto the annotation duplicates information
+    // and drifts out of sync when the constructor changes. Picking one
+    // placement removes a pointless style choice.
+    "typescript/consistent-generic-constructors": "error",
+
+    // Prefers the Record utility type over an index signature for plain
+    // key-value maps, so { [k: string]: V } is written Record<string, V>.
+    //
+    // Record is shorter, reads as a named intent rather than a hand-rolled
+    // signature, and composes cleanly with other utility types. The
+    // index-signature form is more verbose for the identical meaning.
+    // Standardizing on one keeps map types uniform across the codebase.
+    "typescript/consistent-indexed-object-style": "error",
+
+    // Bans the angle-bracket assertion form in favor of the as syntax, since
+    // angle brackets collide with JSX and read ambiguously.
+    //
+    // Writing <T>value looks like a JSX element and is outright illegal in .tsx
+    // files, so a codebase that mixes both forms has an assertion style that
+    // cannot be used everywhere. The as form works in every file and reads left
+    // to right. Standardizing on it removes a foot-gun and a needless
+    // inconsistency.
+    "typescript/consistent-type-assertions": "error",
+
+    // Flags non-null assertions positioned so they look like part of an
+    // adjacent operator, such as a! == b which the eye reads as a != b.
+    //
+    // The bang of a non-null assertion sitting right before an equality or
+    // assignment operator is genuinely ambiguous to a human scanner, and
+    // misreading it inverts the meaning of the expression. The rule forces
+    // parentheses or a rewrite so the assertion's scope is obvious. Cheap to
+    // satisfy, and it removes a real source of misreadings.
+    "typescript/no-confusing-non-null-assertion": "error",
+
+    // Flags two enum members initialized to the same literal, which is almost
+    // always a copy-paste slip that makes reverse lookups and equality checks
+    // ambiguous.
+    //
+    // When two members share a value, code that maps a value back to a name
+    // gets whichever the compiler picks, and switch or comparison logic can no
+    // longer distinguish the two. Occasionally aliasing is intentional, but far
+    // more often it is a mistake, so flagging it forces the author to confirm.
+    // Catches the bug at declaration rather than at a confusing runtime
+    // symptom.
+    "typescript/no-duplicate-enum-values": "error",
+
+    // Discourages delete on a computed member expression, since dynamically
+    // deleting keys turns objects into de-optimized maps and hides intent.
+    //
+    // delete obj[someExpr] on an object signals that the object is really being
+    // used as a dictionary, which a Map models better and faster; the delete
+    // also forces engines to abandon fast object shapes. Restricting delete to
+    // statically known, literal keys keeps object usage predictable. Genuine
+    // dictionaries should switch to Map, where deletion is a first-class
+    // operation.
+    "typescript/no-dynamic-delete": "error",
+
+    // Bans {} as a type and empty interfaces, because {} does not mean an empty
+    // object; it means any value that is not null or undefined.
+    //
+    // The {} type is a classic trap: developers reach for it expecting "an
+    // object with no properties" and instead get a type that accepts numbers,
+    // strings, and functions alike. Empty interfaces have the same problem and
+    // usually indicate an unfinished type. The rule pushes you toward object,
+    // Record<string, unknown>, or an actual shape, whichever you meant.
+    "typescript/no-empty-object-type": "error",
+
+    // Flags stacked non-null assertions like x!! or a!!.b, where the extra bang
+    // is redundant and signals confusion about the value's type.
+    //
+    // One non-null assertion already tells the compiler the value is present; a
+    // second does nothing but add noise and hint that the author was guessing.
+    // Removing the extra bang is a safe simplification. The leftover single
+    // assertion still carries whatever narrowing was actually intended.
+    "typescript/no-extra-non-null-assertion": "error",
+
+    // Flags classes used only as namespaces for static members or that are
+    // entirely empty, since a module of exported functions does the same job
+    // more idiomatically in JavaScript.
+    //
+    // Wrapping a pile of static methods in a class is a pattern imported from
+    // languages without free functions; in TypeScript it just adds a layer
+    // nobody needs to instantiate and blocks tree-shaking of the individual
+    // functions. Plain exported functions read better and bundle smaller. Empty
+    // classes are almost always leftovers from a refactor.
+    "typescript/no-extraneous-class": "error",
+
+    // Requires an import whose specifiers are all inline type markers to be
+    // written as a top-level import type, so the statement is fully erased
+    // instead of surviving as a side-effecting import.
+    //
+    // Under verbatim module syntax, import { type A, type B } from 'x' keeps
+    // the import statement in the output for its side effects even though
+    // nothing runtime is used, which can pull in and execute a module for no
+    // reason. Hoisting the type marker to import type { A, B } lets the
+    // compiler delete the line entirely. This keeps type-only dependencies from
+    // leaking into runtime.
+    "typescript/no-import-type-side-effects": "error",
+
+    // Flags void used anywhere it is meaningless, such as a union member, a
+    // property type, or a non-terminal generic argument, where it does not
+    // express the absence of a return.
+    //
+    // void has exactly one honest use, describing that a function returns
+    // nothing worth using. Dropped into a union like string | void or used as a
+    // variable type, it either means undefined and should say so, or it is a
+    // mistake. Restricting void to return positions and the generic slots that
+    // genuinely model it keeps the type's meaning intact.
+    "typescript/no-invalid-void-type": "error",
+
+    // Flags interfaces that declare a constructor and classes that declare a
+    // new method, which are almost always a misunderstanding of how to type
+    // constructables.
+    //
+    // Writing constructor() inside an interface or new() as a class method does
+    // not do what it looks like; the author usually wanted a construct
+    // signature or a normal method. The mistake produces a type that cannot be
+    // implemented as intended. Flagging it points them at the correct
+    // construct-signature syntax before the confusion spreads.
+    "typescript/no-misused-new": "error",
+
+    // Bans TypeScript's own module and namespace constructs in favor of
+    // standard ES modules, which are the interoperable and tooling-friendly way
+    // to organize code.
+    //
+    // TS namespaces predate ES modules and bring their own resolution, merging,
+    // and bundling quirks that the ecosystem has largely moved past. New code
+    // should organize itself with import and export so it plays well with every
+    // bundler and with Node's module system. Ambient declaration files, where
+    // namespaces are still legitimate, are outside the scope this rule enforces
+    // here.
+    "typescript/no-namespace": "error",
+
+    // Flags x! ?? y, where the non-null assertion promises the left side is
+    // never nullish and the ?? then handles the nullish case the assertion just
+    // claimed impossible.
+    //
+    // The two operators directly contradict each other: if you truly know x is
+    // non-null, the ?? y branch is dead; if you are not sure, the assertion is
+    // a lie and you should drop the bang and trust the ??. Either way the code
+    // is wrong and should pick one. The rule forces that decision instead of
+    // shipping the contradiction.
+    "typescript/no-non-null-asserted-nullish-coalescing": "error",
+
+    // Flags a?.b! where a non-null assertion is applied to the result of an
+    // optional chain, re-introducing the very crash the chain was written to
+    // avoid.
+    //
+    // Optional chaining short-circuits to undefined when the object is absent;
+    // slapping a bang on the end tells the compiler that undefined cannot
+    // happen, so a null access sails past the type checker and throws at
+    // runtime. The pattern usually means the author wanted to assert the
+    // object, not the whole chain result. Flagging it prevents a
+    // guaranteed-to-be-possible runtime error.
+    "typescript/no-non-null-asserted-optional-chain": "error",
+
+    // Bans require calls in favor of ES import syntax, matching this repo's
+    // ESM-only stance and keeping module resolution static and analyzable.
+    //
+    // require is CommonJS; mixing it into an ES-module codebase defeats static
+    // analysis, breaks tree-shaking, and behaves differently under bundlers.
+    // Standard import statements are the single supported way to bring code in
+    // here. Keeping the import surface uniform means tooling can reason about
+    // the whole dependency graph.
+    "typescript/no-require-imports": "error",
+
+    // Flags assigning this to a local like const self = this, an obsolete
+    // workaround from before arrow functions preserved lexical this.
+    //
+    // Arrow functions capture the surrounding this automatically, so the self
+    // or that alias pattern is dead weight that scatters an extra name across
+    // the method and obscures what this refers to. Rewriting the inner callback
+    // as an arrow removes the alias entirely. The result is shorter and less
+    // error-prone.
+    "typescript/no-this-alias": "error",
+
+    // Flags generic constraints that constrain to nothing, like <T extends any>
+    // or <T extends unknown>, which read as if they restrict the type but do
+    // not.
+    //
+    // A constraint of any or unknown is the widest possible bound, so it adds
+    // ceremony while permitting exactly what an unconstrained parameter already
+    // permits. Worse, it can mislead a reader into thinking some real
+    // restriction is in force. Dropping the constraint leaves the generic
+    // identical in behavior and honest about its bounds.
+    "typescript/no-unnecessary-type-constraint": "error",
+
+    // Flags an interface and a class sharing a name, a merge that lets the
+    // interface add members the class never implements, so instances lie about
+    // their shape.
+    //
+    // Declaration merging between a class and an interface is one of the few
+    // merges TypeScript allows but almost never checks for consistency: the
+    // interface can promise methods the class body never defines, and the
+    // compiler trusts it. At runtime those members are simply absent. Flagging
+    // the overlap stops a type from claiming capabilities the object does not
+    // have.
+    "typescript/no-unsafe-declaration-merging": "error",
+
+    // Bans the bare Function type, which accepts any callable and returns any,
+    // erasing all information about arguments and return value.
+    //
+    // Typing something as Function is barely better than any for callables: you
+    // can call it with any arguments, in any number, and whatever comes back is
+    // any, so every downstream use goes unchecked. A real signature like (x:
+    // number) => string documents the contract and catches misuse. The rule
+    // pushes you to write that signature.
+    "typescript/no-unsafe-function-type": "error",
+
+    // Flags a lone export {} in a file that already has other exports, where it
+    // does nothing but suggest a module-marker that is no longer needed.
+    //
+    // An empty export is sometimes used to force a script into module scope,
+    // but once the file has any real export that job is already done, and the
+    // leftover export {} just clutters the top or bottom of the file. Removing
+    // it changes nothing about the module's behavior. It is dead syntax from an
+    // earlier state of the file.
+    "typescript/no-useless-empty-export": "error",
+
+    // Bans the boxed wrapper types Number, String, Boolean, Object, and Symbol,
+    // which refer to the wrapper objects rather than the primitives almost
+    // everyone actually means.
+    //
+    // The capitalized forms describe the rarely-wanted wrapper object, not the
+    // primitive, and mixing them with primitive values produces confusing
+    // assignability and method behavior. The lowercase primitives number,
+    // string, boolean, and so on are what nearly every annotation intends. The
+    // rule steers you to the primitive and away from a subtle, long-standing
+    // JavaScript trap.
+    "typescript/no-wrapper-object-types": "error",
+
+    // Prefers a for-of loop when a numeric index is only ever used to read the
+    // current element, since for-of expresses that intent directly and drops
+    // the bookkeeping.
+    //
+    // A classic indexed for loop whose index appears solely as arr[i] carries
+    // three clauses of ceremony to do what for (const x of arr) says in one.
+    // The index form also invites off-by-one and bounds mistakes that for-of
+    // makes impossible. When the index is genuinely used for something else,
+    // the rule leaves the loop alone.
+    "typescript/prefer-for-of": "error",
+
+    // Prefers a function type alias or plain arrow type over an interface or
+    // object type whose only member is a call signature.
+    //
+    // An interface that contains nothing but a call signature is a verbose way
+    // to write a function type; the equivalent type F = (x: T) => R is shorter
+    // and reads as exactly what it is. The interface form also tempts people to
+    // add members later, blurring whether the thing is a function or an object.
+    // Choosing the arrow type keeps callable types crisp.
+    "typescript/prefer-function-type": "error",
+
+    // Requires enum members to be initialized with literal values rather than
+    // computed expressions, keeping the mapping between name and value stable
+    // and inspectable.
+    //
+    // An enum member set from a function call, a variable, or arithmetic on
+    // other members makes the enum's values depend on evaluation order and
+    // outside state, which undermines the whole point of an enum as a fixed set
+    // of named constants. Literal initializers keep the values obvious at a
+    // glance and safe to reorder. It also prevents accidental duplicate values
+    // from non-obvious expressions.
+    "typescript/prefer-literal-enum-member": "error",
+
+    // Requires the namespace keyword instead of the older module keyword when a
+    // TypeScript namespace is declared, so internal namespaces are not confused
+    // with ES module or ambient module declarations.
+    //
+    // The legacy module Foo {} syntax collides visually with declare module
+    // 'pkg', which means something entirely different, and this ambiguity trips
+    // up readers and tools alike. The namespace keyword names the construct for
+    // what it is. Where namespaces are used at all, this keeps their
+    // declarations unmistakable.
+    "typescript/prefer-namespace-keyword": "error",
+
+    // Requires ts-expect-error instead of ts-ignore, because ts-expect-error
+    // fails the build if the error it suppresses ever goes away, so stale
+    // suppressions cannot pile up.
+    //
+    // A ts-ignore silently keeps suppressing even after the underlying error is
+    // fixed or moves, leaving a comment that does nothing and hides the fact
+    // that the code is now clean. ts-expect-error is self-cleaning: the moment
+    // the line stops erroring, the directive itself becomes an error, prompting
+    // you to delete it. That turns every suppression into a tracked,
+    // self-expiring debt.
+    "typescript/prefer-ts-expect-error": "error",
+
+    // Bans triple-slash directives like /// reference in favor of ES module
+    // imports, which are typed, tree-shakeable, and understood by every modern
+    // tool.
+    //
+    // Triple-slash references are a pre-modules TypeScript mechanism for
+    // pulling in type declarations. In a codebase that is ES-modules-only, an
+    // import statement expresses the same dependency with proper resolution and
+    // ordering. Leftover triple-slash directives are almost always a copy-paste
+    // artifact or an auto-generated line that should be an import instead.
+    "typescript/triple-slash-reference": "error",
+
+    // Flags overload signatures that could be merged into one using an optional
+    // or rest parameter, cutting the surface a reader has to hold in their
+    // head.
+    //
+    // Two overloads that differ only by a trailing optional argument, or only
+    // by a union in one position, are noise: they say the same thing as a
+    // single signature with an optional parameter or a union type. Collapsing
+    // them makes the real shape of the function obvious and removes the risk of
+    // the overloads drifting out of sync when one is edited and the other is
+    // not.
+    "typescript/unified-signatures": "error",
+
+    // Requires obj.prop over obj["prop"] whenever the key is a valid
+    // identifier, keeping property access uniform and letting the type checker
+    // verify the member.
+    //
+    // Bracket access with a string literal defeats renaming, hides typos behind
+    // an any-ish index signature in some configs, and reads as if a dynamic key
+    // were involved when none is. Reserving brackets for genuinely computed
+    // keys makes the dynamic cases stand out. This is the type-aware variant,
+    // so it correctly leaves bracket access in place where the property is only
+    // reachable that way.
+    "typescript/dot-notation": "error",
+
+    // Prefers the non-null assertion x! over the wordier x as T when the only
+    // thing the assertion does is strip null or undefined from an
+    // already-correct type.
+    //
+    // When a value is typed T | null and you assert as T, the cast is doing
+    // nothing but removing the nullish part, and the ! operator says exactly
+    // that in one character. Writing the full as T restates the type, which
+    // drifts if T is renamed and buries the single fact that matters: you are
+    // claiming the value is present. The rule only fires when the assertion is
+    // purely a nullability strip, so real narrowing casts are untouched.
+    "typescript/non-nullable-type-assertion-style": "error",
+
+    // Rewrites arr.filter(pred)[0] to arr.find(pred), which stops at the first
+    // match and returns undefined instead of indexing into a possibly empty
+    // array.
+    //
+    // filter builds a whole array just to read its first element, doing
+    // unbounded work when find would stop early, and filter(...)[0] is typed as
+    // the element type even though it can be undefined at runtime, so it lies
+    // about nullability. find both performs better and carries the honest T |
+    // undefined type that forces you to handle the miss.
+    "typescript/prefer-find": "error",
+
+    // Prefers .includes over .indexOf(x) !== -1 for arrays and strings, which
+    // reads as the intent (membership) rather than a position comparison.
+    //
+    // indexOf(x) !== -1 is an idiom people have to decode; includes states the
+    // question directly and also handles NaN correctly, which indexOf does not.
+    // The type-aware rule applies it to any type exposing an includes method,
+    // so custom collections benefit too.
+    "typescript/prefer-includes": "error",
+
+    // Requires ?? instead of || when supplying a fallback, so that valid falsy
+    // values like 0, empty string, and false are not silently discarded.
+    //
+    // The || operator triggers its fallback for every falsy value, which is a
+    // classic bug: count || 10 replaces a legitimate 0 with 10, and name ||
+    // "anon" throws away a deliberately empty string. ?? only falls back on
+    // null or undefined, which is almost always what a default was meant to
+    // express. Reaching for ?? by default turns a whole class of falsy-coercion
+    // bugs into a compile error.
+    "typescript/prefer-nullish-coalescing": "error",
+
+    // Collapses chains of && guards such as a && a.b && a.b.c into a?.b?.c,
+    // which is shorter and does not re-evaluate each link.
+    //
+    // Hand-written && guards repeat the subexpression at every level, which is
+    // verbose and goes wrong the moment one link is edited but not the others.
+    // Optional chaining expresses the same short-circuit in one operator per
+    // hop and short-circuits to undefined cleanly. The type-aware version knows
+    // when a link is non-nullable and will not add a redundant ?..
+    "typescript/prefer-optional-chain": "error",
+
+    // Prefers regexp.exec(str) over str.match(re) when the regex has no global
+    // flag, because exec is the more direct call and is faster in a loop.
+    //
+    // For a non-global regex the two return the same single-match result, but
+    // exec is a method on the RegExp you already have and avoids re-coercing
+    // the pattern each call. match is better reserved for the global case where
+    // you actually want the array of all matches; keeping the two distinct
+    // signals intent.
+    "typescript/prefer-regexp-exec": "error",
+
+    // Requires String.prototype.startsWith and endsWith over equivalent indexOf
+    // checks or single-character index and slice comparisons.
+    //
+    // Patterns like str[0] === "/" or str.indexOf(prefix) === 0 or
+    // str.slice(-4) === ".css" all reimplement startsWith and endsWith with
+    // more moving parts and more room for an off-by-one. The named methods say
+    // what the test is at a glance and handle empty and boundary cases without
+    // extra thought.
+    "typescript/prefer-string-starts-ends-with": "error",
+
+    // Enforces that hooks are called only at the top level of a component or
+    // another hook, never inside conditions, loops, or nested functions.
+    //
+    // React identifies hook state purely by call order, so a hook guarded by an
+    // if or placed in a loop shifts the whole ordering between renders and
+    // corrupts every hook after it, producing bugs that are baffling to trace
+    // back. This rule catches the violation statically, at the one place it can
+    // be caught cheaply, instead of leaving it to surface as scrambled state at
+    // runtime. It is non-negotiable for any code using hooks.
+    "react-hooks/rules-of-hooks": "error",
+
+    // Checks that every reactive value a hook's callback reads is listed in its
+    // dependency array, so effects and memos re-run when their inputs actually
+    // change.
+    //
+    // A missing dependency is the most common React bug there is: the effect
+    // closes over a stale value and silently keeps using the version from the
+    // render where it last ran, so the UI drifts out of sync with state in ways
+    // that are maddening to reproduce. The rule reads the callback body and
+    // tells you exactly what is missing or superfluous. When you truly want to
+    // exclude something, do it deliberately rather than by forgetting, and the
+    // honest fix is usually to restructure the effect rather than to lie about
+    // its inputs.
+    "react-hooks/exhaustive-deps": "error",
+
+    // Turned off. The codebase compiles JSX with the automatic runtime, so
+    // React does not need to be imported into every file that uses JSX.
+    //
+    // With jsx set to react-jsx, the compiler emits calls to the runtime's jsx
+    // helper itself and imports it automatically, so the old import React from
+    // "react" line is dead weight. Requiring it would force an unused import
+    // into every component just to satisfy a rule that predates the modern
+    // transform. The previous ESLint config disabled this for the same reason.
+    "react/react-in-jsx-scope": "off",
+
+    // Requires === and !== over == and !=, removing the surprises of
+    // JavaScript's loose-equality coercion.
+    //
+    // Loose equality applies a tangle of coercion rules, so "" == 0, 0 ==
+    // false, and null == undefined are all true, and reasoning about any given
+    // comparison means recalling the whole table. Strict equality compares
+    // without coercion, which is what almost every comparison actually intends.
+    // Making it the default turns a category of subtle coercion bugs into
+    // something you never have to think about.
+    "eqeqeq": "error",
+
+    // Requires braces around the body of every if, else, for, and while, even
+    // single-statement bodies.
+    //
+    // Brace-less bodies are where the classic bug lives: someone adds a second
+    // line to an if intending it to be part of the branch, but without braces
+    // only the first line is guarded and the second runs unconditionally.
+    // Always bracing removes that trap, makes diffs cleaner when a body grows,
+    // and keeps control-flow structure visually unambiguous. The small
+    // verbosity cost is repaid the first time it prevents a mis-scoped
+    // statement.
+    "curly": "error",
+
+    // Flags an else block that follows an if whose branch already returns,
+    // since the else is redundant and only adds nesting.
+    //
+    // When the if body ends in return (or throw or continue), control cannot
+    // fall through to the code after it, so the else wrapper is pure ceremony.
+    // Dropping it and dedenting the following code flattens the function and
+    // makes the early-exit structure read as a series of guard clauses rather
+    // than a staircase of nesting. Less indentation, same behavior.
+    "no-else-return": "error",
+
+    // Requires an if that is the sole statement inside an else block to be
+    // written as else if, collapsing a needless level of nesting.
+    //
+    // An else that contains nothing but another if is really an else-if chain
+    // wearing extra braces. Writing it as else if flattens the structure and
+    // lines the conditions up as the ladder they actually are, which is easier
+    // to scan and to extend with another branch. Pairs naturally with
+    // no-else-return in keeping conditional code shallow.
+    "no-lonely-if": "error",
+
+    // Requires compound assignment operators like += and *= instead of the
+    // spelled-out x = x + 1 form.
+    //
+    // x = x + 1 names x twice, and the two references can drift during an edit
+    // so that one side is changed and the other is not, a quiet bug. The
+    // compound form states the operation once and makes the intent (mutate this
+    // in place) obvious. It is shorter and leaves less room for the two halves
+    // to disagree.
+    "operator-assignment": "error",
+
+    // Bans reassigning a function's parameters, which hides the original
+    // argument and makes the parameter mean two different things across the
+    // function body.
+    //
+    // When a parameter is reassigned, its name no longer reliably refers to
+    // what the caller passed, so anyone reading the later half of the function
+    // has to track that the value changed underfoot. Using a fresh local for
+    // the new value keeps the parameter meaning one thing and the derived value
+    // meaning another, which is clearer and avoids surprising the caller if the
+    // parameter is an object being mutated. The Biome rule this replaced
+    // flagged the same pattern.
+    "no-param-reassign": "error",
+
+    // Bans var in favor of let and const, replacing function-scoped, hoisted
+    // declarations with predictable block scoping.
+    //
+    // var declarations hoist to the top of their function and are visible
+    // before their line runs, and a var in a loop is shared across every
+    // iteration, which is the source of the classic
+    // closure-captures-the-last-value bug. let and const are block scoped and
+    // live only from their declaration onward, matching how people actually
+    // read the code. There is no reason to reach for var in modern code.
+    "no-var": "error",
+
+    // Requires const for any binding that is never reassigned, so the
+    // declaration states up front whether the value will change.
+    //
+    // Seeing const tells a reader immediately that this name is fixed for its
+    // whole scope, which is one fewer thing to track while following the logic;
+    // let signals the opposite and invites a search for where the reassignment
+    // happens. Defaulting to const and using let only when you genuinely rebind
+    // makes mutation the marked, visible case. It also catches values you
+    // declared mutable but never actually change.
+    "prefer-const": "error",
+
+    // Forces type-only imports to be written as import type, splitting them
+    // into their own statement so the compiler can erase them and bundlers
+    // never emit a runtime dependency for something used only in a type
+    // position.
+    //
+    // Marking type imports explicitly is what lets a build strip them
+    // completely, which matters for side-effect ordering and for avoiding
+    // accidental runtime coupling between modules. The fixStyle is
+    // separate-type-imports so a type import gets its own line rather than an
+    // inline import { type Foo } mix, matching the Biome rule this replaced.
+    // disallowTypeAnnotations stays off on purpose: inline import() types in a
+    // type position are legitimate, and at least one loader in this codebase
+    // relies on one.
+    "typescript/consistent-type-imports": [
+      "error",
+      { "fixStyle": "separate-type-imports", "disallowTypeAnnotations": false },
+    ],
+
+    // Standardizes on interface for object type declarations rather than type
+    // aliases, keeping one shape for the common case.
+    //
+    // interface and a type alias for an object are near-interchangeable, but
+    // picking one removes a per-declaration decision and a source of pointless
+    // diff churn. interface also gives better error messages, supports
+    // declaration merging where it is genuinely needed, and is generally faster
+    // for the checker on large object types. Type aliases remain available and
+    // necessary for unions, tuples, mapped and conditional types, which this
+    // rule does not touch.
+    "typescript/consistent-type-definitions": ["error", "interface"],
+
+    // Enforces the T[] shorthand over Array<T> for array types, with the
+    // default option set to array.
+    //
+    // Both spellings mean the same thing; committing to T[] keeps array types
+    // visually consistent and short. The rule still permits Array<T> in the
+    // rare case where the shorthand would be ambiguous, but the default here is
+    // the shorthand everywhere it reads cleanly.
+    "typescript/array-type": ["error", { "default": "array" }],
+
+    // Requires as const instead of a literal type annotation like : "foo" or a
+    // cast to a literal, giving the narrowest correct type without repeating
+    // the value.
+    //
+    // Writing const x: "GET" = "GET" states the literal twice and invites the
+    // two copies to drift; as const derives the literal type straight from the
+    // value and also makes nested arrays and objects deeply readonly. It is the
+    // right tool for pinning discriminants and config literals to their exact
+    // type.
+    "typescript/prefer-as-const": "error",
+
+    // Requires parameters with defaults to come after all required parameters,
+    // so callers can actually omit them.
+    //
+    // A default on a parameter that is followed by a required one is dead: the
+    // caller has to pass a value anyway to reach the required argument, so the
+    // default never applies. Ordering required parameters first makes the
+    // optional tail genuinely optional and matches how every caller reads the
+    // signature.
+    "typescript/default-param-last": "error",
+
+    // Requires every enum member to have an explicit initializer instead of
+    // relying on auto-incremented numeric values.
+    //
+    // Implicit enum values are positional: inserting or reordering a member
+    // silently renumbers the ones after it, which corrupts anything that
+    // persisted the old numbers to disk, a wire format, or a database. Spelling
+    // out each value pins the mapping so refactoring the member order is safe.
+    // Pairs with the preference for string or explicitly numbered enums over
+    // accidental ordinals.
+    "typescript/prefer-enum-initializers": "error",
+
+    // Removes redundant type annotations on variables and parameters whose type
+    // is already obvious from a literal initializer, like const n: number = 3.
+    //
+    // Annotating const n: number = 3 tells the reader nothing the initializer
+    // did not, and it is one more thing to update if the value changes. Letting
+    // inference do its job keeps declarations terse and honest; annotations
+    // then stand out where they carry real information, such as widening a
+    // literal or documenting a public boundary.
+    "typescript/no-inferrable-types": "error",
+
+    // Bans the ! non-null assertion operator, which overrides the type
+    // checker's nullability analysis with an unchecked runtime promise.
+    //
+    // foo!.bar tells the compiler foo is definitely present and asks it to stop
+    // checking; if that promise is wrong, you get a runtime crash the type
+    // system was built to prevent. A real narrowing check, an early return, or
+    // an assertion function proves presence instead of asserting it, and keeps
+    // the guarantee that a non-null type actually holds. The occasional
+    // truly-unavoidable case is a signal to fix the upstream type, not to punch
+    // a hole in it.
+    "typescript/no-non-null-assertion": "error",
+
+    // Bans explicit any, which switches off type checking for every value it
+    // touches and lets errors propagate silently through the program.
+    //
+    // any is contagious: anything derived from an any is itself unchecked, so
+    // one annotation can quietly disable safety across a whole call chain.
+    // unknown is the honest alternative when a type is genuinely not known,
+    // forcing a narrowing check before use. Generics express real polymorphism
+    // without giving up checking. Banning any keeps the type system's
+    // guarantees from leaking away one shortcut at a time.
+    "typescript/no-explicit-any": "error",
+
+    // Flags variables, imports, parameters, and type declarations that are
+    // declared but never used, which are usually the residue of an unfinished
+    // edit or a real mistake.
+    //
+    // An unused import bloats the module and can drag in side effects; an
+    // unused local is often a variable you meant to reference and did not, or a
+    // rename that left the old name behind. Treating these as errors keeps
+    // modules honest about what they actually depend on. This was carried over
+    // from the old config at error rather than warn, since a warning here tends
+    // to accumulate unread.
+    "typescript/no-unused-vars": "error",
+
+    // Requires the Number namespace forms Number.isNaN, Number.parseInt,
+    // Number.parseFloat, and Number.isFinite over the bare globals.
+    //
+    // The global isNaN and isFinite coerce their argument first, so
+    // isNaN("foo") is true, which is almost never what was meant; Number.isNaN
+    // does no coercion and answers the question actually asked. Routing
+    // parseInt and parseFloat through Number as well keeps all numeric
+    // operations under one obvious namespace and sidesteps the coercing globals
+    // entirely. The distinction is exactly the kind of footgun a linter should
+    // close off.
+    "unicorn/prefer-number-properties": "error",
+
+    // Flags direct writes to document.cookie, an error-prone string API where a
+    // malformed value fails silently instead of throwing.
+    //
+    // Assigning to document.cookie means hand-building a string with the right
+    // escaping, attributes, and separators, and a mistake produces no error,
+    // just a cookie that quietly did not set the way you expected. A proper
+    // cookie helper or the CookieStore API handles encoding and options safely.
+    // Flagging the raw assignment pushes toward the API that cannot silently
+    // drop your data.
+    "unicorn/no-document-cookie": "error",
+
+    // Requires self-closing tags for elements with no children, writing div and
+    // img without a separate closing tag.
+    //
+    // An element that never has children reads more clearly as a single
+    // self-closed tag than as an opening tag immediately followed by its
+    // closer; the pair implies content that is not there. Enforcing the
+    // self-closing form keeps JSX consistent and removes a small but constant
+    // source of pointless diff noise when an empty element gains or loses a
+    // redundant closing tag.
+    "react/self-closing-comp": "error",
+
+    // Requires components to be written as functions rather than classes,
+    // matching how the whole ecosystem has moved and where hooks live.
+    //
+    // Function components are the modern default: hooks give them state,
+    // effects, and context without the ceremony of a class, and there is no
+    // this to bind or lifecycle methods to spread logic across. New class
+    // components fragment the codebase's style and lock their logic out of the
+    // hooks that everything else composes with. This keeps every component
+    // reachable by the same set of patterns.
+    "react/prefer-function-component": "error",
+
+    // Requires a module that exports a component to export only components,
+    // keeping Fast Refresh able to hot-reload it without dropping state.
+    //
+    // Fast Refresh can preserve component state across an edit only when it can
+    // tell a file exports components and nothing else; mixing a component with
+    // an exported constant or helper defeats that heuristic and forces a full
+    // remount on every save, losing your place in the UI. Splitting
+    // non-component exports into their own module keeps the dev loop fast and
+    // the reload behavior predictable. Route modules and a couple of shadcn/ui
+    // files that export non-components alongside components by design are
+    // exempted in the overrides, since Fast Refresh copes with those specific
+    // patterns.
+    "react/only-export-components": "error",
+
+    // Left off deliberately. Enforcing readonly on parameters that receive
+    // objects or arrays would demand the modifier on essentially every function
+    // in the codebase.
+    //
+    // The rule wants a deep readonly type on any parameter whose value is not
+    // mutated, which sounds tidy but in practice means annotating almost every
+    // React prop, event handler argument, and third-party type, including
+    // library types from dependencies that are not themselves declared readonly
+    // and so cannot satisfy it without casts. The signal-to-noise ratio is
+    // poor: it would bury the handful of parameters where accidental mutation
+    // is a real risk under hundreds of mechanical annotations. Off until the
+    // ecosystem's own types make it practical.
+    "typescript/prefer-readonly-parameter-types": "off",
+
+    // Left off deliberately. Requiring an explicit return type on every
+    // function is mostly redundant with inference and adds nothing to React
+    // components.
+    //
+    // The large majority of violations are JSX-returning components where a
+    // hand-written : JSX.Element restates what the body already makes obvious.
+    // The place where explicit return types genuinely matter is the published
+    // API surface, and that is already covered a stronger way:
+    // isolatedDeclarations is on for every shipped package, which forces
+    // annotations on exported declarations at the compiler level. Requiring
+    // them on internal functions too would be churn for no added safety.
+    "typescript/explicit-function-return-type": "off",
+
+    // Left off deliberately, for the same reason as
+    // explicit-function-return-type: the exported boundary is already annotated
+    // by the compiler, not by lint.
+    //
+    // This rule targets the types on exported functions specifically, which is
+    // exactly what isolatedDeclarations already enforces in every package that
+    // ships. Turning the lint rule on as well would duplicate that guarantee
+    // for library code while also dragging in application and example code
+    // where inferred boundary types are perfectly readable. The compiler
+    // setting is the source of truth here.
+    "typescript/explicit-module-boundary-types": "off",
+
+    // Left off deliberately. Every hit in practice is a load-bearing narrowing
+    // cast that the domain genuinely requires and that no safer form can
+    // express.
+    //
+    // The cases are branded types (as Address, as Signature), fixed-shape
+    // tuples such as dnum's readonly [bigint, number], and decoder generics
+    // that produce a typed account from raw bytes. These are precisely the
+    // situations where the programmer knows more than the checker can prove,
+    // and the assertion encodes that knowledge. The only way to satisfy the
+    // rule is to route through as unknown as T, which is strictly less safe
+    // because it also erases the sanity check the direct assertion still
+    // performs. typescript-eslint ships this rule in no preset for the same
+    // reason.
+    "typescript/no-unsafe-type-assertion": "off",
+
+    // Left off deliberately. Marking every promise-returning function async
+    // inserts an extra microtask that matters where batching and scheduling are
+    // timing sensitive.
+    //
+    // Most of the affected code is a dataloader implementation whose batch
+    // scheduling depends on when a returned promise settles relative to the
+    // microtask queue. Adding async to functions that already return a promise
+    // wraps the result in one more tick, which is behavior change dressed up as
+    // style. The churn carries real timing risk and buys nothing, so the rule
+    // stays off.
+    "typescript/promise-function-async": "off",
+
+    // Left off deliberately. Its only real targets are useEffect callbacks,
+    // where returning a cleanup on one path and nothing on another is the
+    // documented React idiom.
+    //
+    // An effect that conditionally sets up a subscription returns its teardown
+    // function when it does and simply returns on the path where there is
+    // nothing to clean up. That is exactly how React's docs write it. The rule
+    // would force a return undefined; on the empty path, which adds a token to
+    // satisfy a linter without making anything clearer. Off, because the idiom
+    // it flags is the correct one.
+    "typescript/consistent-return": "off",
+  },
+}

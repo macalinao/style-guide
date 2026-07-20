@@ -6,9 +6,6 @@ import reactRefresh from "eslint-plugin-react-refresh";
 export const vite: Linter.Config[] = defineConfig([
   {
     files: ["**/*.{ts,tsx}"],
-    extends: [
-      reactRefresh.configs.vite,
-      tanstackRouterPlugin.configs["flat/recommended"],
-    ],
+    extends: [reactRefresh.configs.vite, tanstackRouterPlugin.configs["flat/recommended"]],
   },
 ]);

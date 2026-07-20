@@ -1,24 +1,24 @@
 {
   "name": "@macalinao/tsconfig",
-  "description": "Common TypeScript configuration.",
-  "license": "Apache-2.0",
   "version": "3.2.5",
-  "type": "module",
-  "sideEffects": false,
-  "repository": "github:macalinao/style-guide",
+  "description": "Common TypeScript configuration.",
+  "keywords": [
+    "config",
+    "configuration",
+    "ian-macalinao",
+    "tsconfig",
+    "typescript"
+  ],
   "homepage": "https://github.com/macalinao/style-guide",
   "bugs": {
     "url": "https://github.com/macalinao/style-guide/issues"
   },
-  "keywords": [
-    "typescript",
-    "tsconfig",
-    "configuration",
-    "config",
-    "ian-macalinao"
-  ],
+  "license": "Apache-2.0",
+  "repository": "github:macalinao/style-guide",
+  "type": "module",
+  "sideEffects": false,
   "publishConfig": {
-    "registry": "https://registry.npmjs.org/",
-    "access": "public"
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   }
 }

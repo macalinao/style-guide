@@ -11,9 +11,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ### Code Quality
 
-- `bun run lint` - Run ESLint across all packages
-- `bun run format` - Format code using Biome
-- `bun run format:check` - Check and fix code using Biome
+- `bun run lint` - Run oxlint at the root, then ESLint across all packages via Turbo
+- `bun run format` - Format code using oxfmt
+- `bun run format:check` - Check formatting with oxfmt (no writes)
 
 ### Publishing
 
@@ -46,9 +46,9 @@ This is a monorepo containing Ian Macalinao's standardized TypeScript and ESLint
 - **Tool Chain**:
   - Bun for package management and script running
   - Turbo for monorepo task orchestration with caching
-  - Biome for fast formatting (JSON, JSONC, HTML)
-  - ESLint with TypeScript for linting
-  - Prettier for Markdown and YAML formatting
+  - oxfmt for fast formatting (JS/TS/JSX/TSX, JSON, JSONC, CSS, Markdown, YAML, HTML)
+  - oxlint for fast linting at the repo root
+  - ESLint with TypeScript for linting (run per-package via `turbo run lint`)
   - Changesets for version management
 
 ### Development Patterns

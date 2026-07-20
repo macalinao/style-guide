@@ -28,11 +28,11 @@
         pre-commit-check = git-hooks.lib.${system}.run {
           src = ./.;
           hooks = {
-            biome = {
+            oxfmt = {
               enable = true;
-              name = "biome check";
-              entry = "bunx biome check --write --unsafe";
-              files = "\\.(js|jsx|ts|tsx|cjs|mjs|cts|mts|json|jsonc)$";
+              name = "oxfmt";
+              entry = "bunx oxfmt --no-error-on-unmatched-pattern";
+              files = "\\.(js|jsx|ts|tsx|cjs|mjs|cts|mts|json|jsonc|css|md|yaml|yml)$";
               language = "system";
             };
             nixfmt-rfc-style.enable = true;

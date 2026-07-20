@@ -1,18 +1,11 @@
 {
   "name": "@macalinao/style-guide",
-  "description": "Monorepo containing ESLint and TypeScript configurations.",
-  "private": true,
   "version": "0.1.0",
-  "scripts": {
-    "build": "turbo run build",
-    "clean": "turbo run clean",
-    "lint": "biome check && turbo run lint",
-    "lint:fix": "biome check --write --unsafe && turbo run lint -- --fix",
-    "format": "biome format --write",
-    "format:check": "biome check --write",
-    "ci:version": "changeset version && bun update",
-    "ci:publish": "for dir in packages/*; do (cd \"$dir\" && bun publish || true); done && changeset tag"
-  },
+  "private": true,
+  "description": "Monorepo containing ESLint and TypeScript configurations.",
+  "keywords": [],
+  "license": "Apache-2.0",
+  "author": "Ian Macalinao <me@ianm.com>",
   "workspaces": {
     "packages": [
       "packages/*"
@@ -20,24 +13,34 @@
     "catalog": {
       "@biomejs/biome": "^2.4.4",
       "eslint": "^10.0.2",
+      "oxfmt": "^0.59.0",
+      "oxlint": "^1.74.0",
+      "oxlint-tsgolint": "^0.25.0",
       "typescript": "^5.9.2",
       "typescript-eslint": "^8.56.1"
     }
   },
-  "keywords": [],
-  "author": "Ian Macalinao <me@ianm.com>",
-  "license": "Apache-2.0",
+  "scripts": {
+    "build": "turbo run build",
+    "clean": "turbo run clean",
+    "lint": "oxlint && turbo run lint",
+    "lint:fix": "oxlint --fix && oxfmt && turbo run lint -- --fix",
+    "format": "oxfmt",
+    "format:check": "oxfmt --check",
+    "ci:version": "changeset version && bun update",
+    "ci:publish": "for dir in packages/*; do (cd \"$dir\" && bun publish || true); done && changeset tag"
+  },
   "devDependencies": {
-    "@biomejs/biome": "^2.4.4",
     "@changesets/cli": "^2.29.8",
-    "@macalinao/biome-config": "workspace:^",
-    "prettier": "^3.8.1",
+    "oxfmt": "catalog:",
+    "oxlint": "catalog:",
+    "oxlint-tsgolint": "catalog:",
     "turbo": "^2.8.11",
     "typescript": "^5.9.3"
   },
   "engines": {
-    "node": ">=22",
-    "bun": ">=1.0.0"
+    "bun": ">=1.0.0",
+    "node": ">=22"
   },
   "packageManager": "bun@1.3.1"
 }
