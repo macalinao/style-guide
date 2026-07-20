@@ -1,4 +1,5 @@
 import configRaw from "@macalinao/oxlint-config/base.jsonc?raw";
+import { SECTIONS } from "$lib/sections";
 import { createScanner, parse } from "jsonc-parser";
 
 /**
@@ -271,6 +272,88 @@ function docsPluginPath(plugin: string): string {
     return "react";
   }
   return plugin;
+}
+
+/** A documentation section with its intro prose and resolved rule docs. */
+export interface SectionDoc {
+  id: string;
+  title: string;
+  intro: string[];
+  rules: RuleDoc[];
+}
+
+/**
+ * Resolve {@link SECTIONS} against the parsed rule docs, producing one
+ * {@link SectionDoc} per section with its rules in the declared order.
+ *
+ * This is the exhaustiveness gate that mirrors the missing-comment enforcement
+ * in {@link parseRuleDocs}: it throws, naming the offenders, if a section lists
+ * a rule that does not exist, if a rule is listed in more than one section, or
+ * if any parsed rule is not placed in a section at all. The result is that the
+ * prose page and the config can never silently drift apart.
+ */
+let cachedSections: SectionDoc[] | undefined;
+
+export function buildSections(): SectionDoc[] {
+  if (cachedSections) {
+    return cachedSections;
+  }
+
+  const docs = parseRuleDocs();
+  const byName = new Map(docs.map((doc) => [doc.name, doc]));
+
+  const unknown: string[] = [];
+  const duplicated: string[] = [];
+  const placed = new Set<string>();
+  const sections: SectionDoc[] = [];
+
+  for (const section of SECTIONS) {
+    const rules: RuleDoc[] = [];
+    for (const name of section.rules) {
+      const doc = byName.get(name);
+      if (!doc) {
+        unknown.push(`${name} (in section "${section.id}")`);
+        continue;
+      }
+      if (placed.has(name)) {
+        duplicated.push(name);
+        continue;
+      }
+      placed.add(name);
+      rules.push(doc);
+    }
+    sections.push({
+      id: section.id,
+      title: section.title,
+      intro: section.intro,
+      rules,
+    });
+  }
+
+  const unplaced = docs
+    .filter((doc) => !placed.has(doc.name))
+    .map((doc) => doc.name);
+
+  const problems: string[] = [];
+  if (unknown.length > 0) {
+    problems.push(`section entries that name no real rule: ${unknown.join(", ")}`);
+  }
+  if (duplicated.length > 0) {
+    problems.push(`rules listed in more than one section: ${duplicated.join(", ")}`);
+  }
+  if (unplaced.length > 0) {
+    problems.push(`rules not assigned to any section: ${unplaced.join(", ")}`);
+  }
+  if (problems.length > 0) {
+    throw new Error(
+      "src/lib/sections.ts is out of sync with @macalinao/oxlint-config/base.jsonc. " +
+        "Every rule must appear in exactly one section. Found " +
+        `${problems.join("; ")}.`,
+    );
+  }
+
+  cachedSections = sections;
+  return sections;
 }
 
 /** Build the canonical oxc.rs documentation URL for a rule. */

@@ -13,8 +13,9 @@
     >
       <a href="/" class="font-semibold no-underline">{SITE_TITLE}</a>
       <div class="flex items-center gap-5 text-[var(--color-muted)]">
-        <a href="/rules/" class="no-underline hover:text-[var(--color-ink)]"
-          >Rules</a
+        <a
+          href="/oxlint/base/"
+          class="no-underline hover:text-[var(--color-ink)]">Oxlint</a
         >
         <a
           href={GITHUB_URL}

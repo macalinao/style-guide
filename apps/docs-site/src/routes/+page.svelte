@@ -87,7 +87,7 @@
     <p class="text-[var(--color-muted)]">
       The configuration enables <strong>{data.ruleCount}</strong> rules. Each one
       is documented with the reasoning behind it —
-      <a href="/rules/">browse all rules</a>.
+      <a href="/oxlint/base/">read the annotated base config</a>.
     </p>
   </section>
 
