@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 set -e
 
+# nullglob so an unmatched packages/* or *.tgz glob expands to nothing rather
+# than the literal pattern -- otherwise "no tarballs to publish" would be misread
+# as a single bogus tarball named "*.tgz" and fail the run.
+shopt -s nullglob
+
 # Publishing uses npm OIDC trusted publishing (no NPM_TOKEN required).
 #
 # bun publish does not support OIDC trusted publishing yet
@@ -26,7 +31,9 @@ PACK_DIR="$(mktemp -d)"
 echo "Packing publishable packages..."
 for dir in packages/*; do
   if [ -d "$dir" ] && [ -f "$dir/package.json" ]; then
-    if ! grep -q '"private": true' "$dir/package.json"; then
+    # Parse the manifest as JSON rather than grepping for a literal string, so a
+    # private package is skipped regardless of whitespace/key ordering.
+    if ! node -e 'process.exit(JSON.parse(require("node:fs").readFileSync(process.argv[1], "utf8")).private === true ? 0 : 1)' "$dir/package.json"; then
       echo "Packing $(basename "$dir")..."
       # bun pm pack resolves catalog:/workspace: protocols to concrete versions
       (cd "$dir" && bun pm pack --destination "$PACK_DIR")
