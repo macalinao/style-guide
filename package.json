@@ -11,7 +11,7 @@
     "format": "biome format --write",
     "format:check": "biome check --write",
     "ci:version": "changeset version && bun update",
-    "ci:publish": "for dir in packages/*; do (cd \"$dir\" && bun publish || true); done && changeset tag"
+    "ci:publish": "./scripts/ci-publish.sh"
   },
   "workspaces": {
     "packages": [

@@ -57,6 +57,7 @@
               nixfmt
               git
               bun
+              nodejs
               turbo
               oxlint
               oxfmt
