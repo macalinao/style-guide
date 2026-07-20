@@ -2,6 +2,10 @@
   "name": "@macalinao/style-guide",
   "description": "Monorepo containing ESLint and TypeScript configurations.",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/macalinao/style-guide.git"
+  },
   "version": "0.1.0",
   "scripts": {
     "build": "turbo run build",
@@ -11,7 +15,7 @@
     "format": "biome format --write",
     "format:check": "biome check --write",
     "ci:version": "changeset version && bun update",
-    "ci:publish": "for dir in packages/*; do (cd \"$dir\" && bun publish || true); done && changeset tag"
+    "ci:publish": "./scripts/ci-publish.sh"
   },
   "workspaces": {
     "packages": [
