@@ -13,7 +13,11 @@
     "url": "https://github.com/macalinao/style-guide/issues"
   },
   "license": "Apache-2.0",
-  "repository": "github:macalinao/style-guide",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/macalinao/style-guide.git",
+    "directory": "packages/biome-config"
+  },
   "type": "module",
   "sideEffects": false,
   "exports": {

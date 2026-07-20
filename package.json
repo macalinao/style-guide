@@ -6,6 +6,10 @@
   "keywords": [],
   "license": "Apache-2.0",
   "author": "Ian Macalinao <me@ianm.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/macalinao/style-guide.git"
+  },
   "workspaces": {
     "packages": [
       "packages/*"
@@ -28,7 +32,7 @@
     "format": "oxfmt",
     "format:check": "oxfmt --check",
     "ci:version": "changeset version && bun update",
-    "ci:publish": "for dir in packages/*; do (cd \"$dir\" && bun publish || true); done && changeset tag"
+    "ci:publish": "./scripts/ci-publish.sh"
   },
   "devDependencies": {
     "@changesets/cli": "^2.29.8",

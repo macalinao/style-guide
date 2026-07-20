@@ -61,6 +61,7 @@
               git
               nodejs_24
               bun
+              nodejs
               turbo
               oxlint
               oxfmt
