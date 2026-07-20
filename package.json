@@ -2,6 +2,10 @@
   "name": "@macalinao/style-guide",
   "description": "Monorepo containing ESLint and TypeScript configurations.",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/macalinao/style-guide.git"
+  },
   "version": "0.1.0",
   "scripts": {
     "build": "turbo run build",
