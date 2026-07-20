@@ -35,7 +35,7 @@
               files = "\\.(js|jsx|ts|tsx|cjs|mjs|cts|mts|json|jsonc)$";
               language = "system";
             };
-            nixfmt-rfc-style.enable = true;
+            nixfmt.enable = true;
             lintel = {
               enable = true;
               name = "lintel check";
