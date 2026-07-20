@@ -63,22 +63,38 @@ function collectRuleComments(source: string): Map<string, string[]> {
   const stack: Container[] = [];
   const comments = new Map<string, string[]>();
   let commentBuffer: string[] = [];
+  let lineBreaksSinceComment = 0;
   let nextObjectIsRules = false;
 
   let kind: number = scanner.scan();
   while (kind !== Tok.EOF) {
-    // Accumulate consecutive line comments; let whitespace and line breaks
-    // pass through without disturbing the buffer.
+    // Accumulate consecutive line comments. A comment block only counts for
+    // the key immediately below it: a blank line (two line breaks) or a block
+    // comment breaks adjacency and discards the buffer.
     if (kind === Tok.LineCommentTrivia) {
       commentBuffer.push(scanner.getTokenValue());
+      lineBreaksSinceComment = 0;
       kind = scanner.scan();
       continue;
     }
-    if (
-      kind === Tok.LineBreakTrivia ||
-      kind === Tok.Trivia ||
-      kind === Tok.BlockCommentTrivia
-    ) {
+    if (kind === Tok.LineBreakTrivia) {
+      if (commentBuffer.length > 0) {
+        lineBreaksSinceComment += 1;
+        if (lineBreaksSinceComment >= 2) {
+          commentBuffer = [];
+          lineBreaksSinceComment = 0;
+        }
+      }
+      kind = scanner.scan();
+      continue;
+    }
+    if (kind === Tok.Trivia) {
+      kind = scanner.scan();
+      continue;
+    }
+    if (kind === Tok.BlockCommentTrivia) {
+      commentBuffer = [];
+      lineBreaksSinceComment = 0;
       kind = scanner.scan();
       continue;
     }
@@ -175,7 +191,12 @@ function toParagraphs(commentLines: string[]): string[] {
  * Throws, naming the offending rule, if any rule lacks a comment block — this
  * is the enforcement mechanism that keeps every rule documented.
  */
+let cachedDocs: RuleDoc[] | undefined;
+
 export function parseRuleDocs(): RuleDoc[] {
+  if (cachedDocs) {
+    return cachedDocs;
+  }
   const config = parse(configRaw) as OxlintConfig;
   const rules = config.rules;
   if (!rules || typeof rules !== "object") {
@@ -221,6 +242,7 @@ export function parseRuleDocs(): RuleDoc[] {
     });
   }
 
+  cachedDocs = docs;
   return docs;
 }
 

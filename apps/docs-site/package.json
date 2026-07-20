@@ -8,7 +8,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "check": "svelte-check --tsconfig ./tsconfig.json",
-    "clean": "rm -rf dist .svelte-kit"
+    "clean": "rm -rf dist .svelte-kit",
+    "lint": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json"
   },
   "dependencies": {
     "@macalinao/oxlint-config": "workspace:^"
@@ -28,6 +29,6 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/macalinao/style-guide.git",
-    "directory": "packages/docs"
+    "directory": "apps/docs-site"
   }
 }

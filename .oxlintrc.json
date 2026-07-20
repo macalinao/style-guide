@@ -2,12 +2,12 @@
   // Extends the workspace source directly (not via node_modules) so the path
   // resolves regardless of bun's install linker layout (hoisted vs isolated).
   "extends": ["./packages/oxlint-config/base.jsonc"],
-  // The docs site (packages/docs) is a SvelteKit app with its own toolchain
+  // The docs site (apps/docs-site) is a SvelteKit app with its own toolchain
   // (svelte-check, `bundler` module resolution) and a tsconfig that extends
   // SvelteKit's generated `.svelte-kit/tsconfig.json`. It is not part of this
   // repo's oxlint dogfood surface, so it is excluded here at the root rather
   // than in the published base config.
-  "ignorePatterns": ["packages/docs/**"],
+  "ignorePatterns": ["apps/docs-site/**"],
   "overrides": [
     {
       // These `eslint.config.js` files exist only to dogfood the ESLint

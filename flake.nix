@@ -35,7 +35,7 @@
               # the hook also works inside the sandboxed `nix flake check`,
               # where bunx and node_modules are unavailable.
               entry = "${pkgs.oxfmt}/bin/oxfmt --no-error-on-unmatched-pattern";
-              files = "\\.(js|jsx|ts|tsx|cjs|mjs|cts|mts|json|jsonc|css|md|yaml|yml)$";
+              files = "\\.(js|jsx|ts|tsx|cjs|mjs|cts|mts|json|jsonc|css|md|yaml|yml|html)$";
               language = "system";
             };
             nixfmt.enable = true;
