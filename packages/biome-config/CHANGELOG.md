@@ -1,5 +1,11 @@
 # @macalinao/biome-config
 
+## 0.3.0
+
+### Minor Changes
+
+- 9733055: Enable the `useMaxParams` (warn) and `noUselessCatchBinding` (error) lint rules. `useMaxParams` encourages passing named arguments via objects instead of many positional parameters.
+
 ## 0.2.0
 
 ### Minor Changes
