@@ -2,7 +2,7 @@
   description = "Ian Macalinao's standardized TypeScript and ESLint configurations";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "https://flakehub.com/f/DeterminateSystems/nixpkgs-weekly/*";
     flake-utils.url = "github:numtide/flake-utils";
     git-hooks = {
       url = "github:cachix/git-hooks.nix";
@@ -57,6 +57,10 @@
               nixfmt
               git
               bun
+              turbo
+              oxlint
+              oxfmt
+              tsgolint
               lintelPkg
             ]);
         };
