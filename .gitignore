@@ -44,10 +44,6 @@ dist/
 
 .claude/settings.local.json
 
-# Devenv
-.devenv*
-devenv.local.nix
-
 # direnv
 .direnv
 
