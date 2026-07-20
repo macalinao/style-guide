@@ -59,6 +59,7 @@
             ++ (with pkgs; [
               nixfmt
               git
+              nodejs_24
               bun
               turbo
               oxlint
