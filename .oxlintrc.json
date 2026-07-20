@@ -1,5 +1,7 @@
 {
-  "extends": ["./node_modules/@macalinao/oxlint-config/base.jsonc"],
+  // Extends the workspace source directly (not via node_modules) so the path
+  // resolves regardless of bun's install linker layout (hoisted vs isolated).
+  "extends": ["./packages/oxlint-config/base.jsonc"],
   // The docs site (packages/docs) is a SvelteKit app with its own toolchain
   // (svelte-check, `bundler` module resolution) and a tsconfig that extends
   // SvelteKit's generated `.svelte-kit/tsconfig.json`. It is not part of this

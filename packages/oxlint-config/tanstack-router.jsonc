@@ -1,5 +1,5 @@
 {
-  "$schema": "https://unpkg.com/oxlint@1.74.0/configuration_schema.json",
+  "$schema": "https://unpkg.com/oxlint@1.71.0/configuration_schema.json",
   // Opt-in add-on for apps built on TanStack Router. Stack it after the base
   // config via `extends`:
   //

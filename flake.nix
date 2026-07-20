@@ -2,7 +2,7 @@
   description = "Ian Macalinao's standardized TypeScript and ESLint configurations";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "https://flakehub.com/f/DeterminateSystems/nixpkgs-weekly/*";
     flake-utils.url = "github:numtide/flake-utils";
     git-hooks = {
       url = "github:cachix/git-hooks.nix";
@@ -31,11 +31,14 @@
             oxfmt = {
               enable = true;
               name = "oxfmt";
-              entry = "bunx oxfmt --no-error-on-unmatched-pattern";
+              # Use the nix-provided oxfmt (same version the catalog pins) so
+              # the hook also works inside the sandboxed `nix flake check`,
+              # where bunx and node_modules are unavailable.
+              entry = "${pkgs.oxfmt}/bin/oxfmt --no-error-on-unmatched-pattern";
               files = "\\.(js|jsx|ts|tsx|cjs|mjs|cts|mts|json|jsonc|css|md|yaml|yml)$";
               language = "system";
             };
-            nixfmt-rfc-style.enable = true;
+            nixfmt.enable = true;
             lintel = {
               enable = true;
               name = "lintel check";
@@ -57,6 +60,10 @@
               nixfmt
               git
               bun
+              turbo
+              oxlint
+              oxfmt
+              tsgolint
               lintelPkg
             ]);
         };
