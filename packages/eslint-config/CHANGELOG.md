@@ -1,5 +1,11 @@
 # @macalinao/eslint-config
 
+## 8.1.1
+
+### Patch Changes
+
+- 9733055: Update `eslint-config-turbo` to 2.9.18.
+
 ## 8.1.0
 
 ### Minor Changes

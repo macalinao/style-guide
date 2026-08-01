@@ -36,7 +36,7 @@
     "ci:publish": "./scripts/ci-publish.sh"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.29.8",
+    "@changesets/cli": "^2.31.1",
     "oxfmt": "catalog:",
     "oxlint": "catalog:",
     "oxlint-tsgolint": "catalog:",
