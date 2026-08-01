@@ -1,5 +1,13 @@
 # @macalinao/eslint-config-vite
 
+## 2.1.1
+
+### Patch Changes
+
+- 82cb1e6: Update dependencies: `@tanstack/eslint-plugin-router` to ^1.162.0, `eslint-plugin-react-refresh` to ^0.5.3, and `typescript-eslint` to ^8.64.0.
+- Updated dependencies [82cb1e6]
+  - @macalinao/eslint-config-react@6.1.1
+
 ## 2.1.0
 
 ### Minor Changes

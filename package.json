@@ -37,7 +37,7 @@
     "@biomejs/biome": "catalog:",
     "@changesets/cli": "^2.31.1",
     "@macalinao/biome-config": "workspace:^",
-    "prettier": "^3.9.5",
+    "prettier": "^3.9.6",
     "turbo": "catalog:",
     "typescript": "catalog:"
   },
