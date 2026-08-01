@@ -25,6 +25,15 @@
     // this will allow Node to run things directly
     "erasableSyntaxOnly": true,
 
+    // Node's type stripping requires relative imports to use real .ts extensions;
+    // rewriteRelativeImportExtensions (TS 5.7+) rewrites them back to .js on tsc
+    // emit so published output stays correct.
+    "allowImportingTsExtensions": true,
+    "rewriteRelativeImportExtensions": true,
+
+    // treat every file as a module
+    "moduleDetection": "force",
+
     // Enable this per-project as it prevents isolatedDeclarations from being used
     // "allowJs": true,
     // "checkJs": true,
@@ -39,7 +48,12 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitOverride": true,
+    "noImplicitReturns": true,
     "noUncheckedIndexedAccess": true,
+    // errors on side-effect imports of nonexistent modules
+    "noUncheckedSideEffectImports": true,
+    // distinguishes {x?: string} from {x: string | undefined}
+    "exactOptionalPropertyTypes": true,
     "noFallthroughCasesInSwitch": true,
     "forceConsistentCasingInFileNames": true,
     // "noErrorTruncation": true,
