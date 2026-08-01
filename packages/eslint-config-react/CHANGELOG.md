@@ -1,5 +1,13 @@
 # @macalinao/eslint-config-react
 
+## 6.1.1
+
+### Patch Changes
+
+- 82cb1e6: Update dependencies: `@tanstack/eslint-plugin-query` to ^5.101.2, `eslint-plugin-react-hooks` to ^7.1.1, and `typescript-eslint` to ^8.64.0.
+- Updated dependencies [9733055]
+  - @macalinao/eslint-config@8.1.2
+
 ## 6.1.0
 
 ### Minor Changes
