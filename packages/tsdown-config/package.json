@@ -1,15 +1,14 @@
 {
-  "name": "@macalinao/eslint-config-react",
-  "version": "6.1.2",
-  "description": "ESLint configuration to use for React projects",
+  "name": "@macalinao/tsdown-config",
+  "version": "0.0.0",
+  "description": "Common tsdown build configuration for library packages.",
   "keywords": [
-    "code-style",
-    "eslint",
-    "eslintconfig",
+    "build",
+    "bundler",
+    "config",
+    "configuration",
     "ian-macalinao",
-    "linting",
-    "react",
-    "typescript"
+    "tsdown"
   ],
   "homepage": "https://github.com/macalinao/style-guide",
   "bugs": {
@@ -19,7 +18,7 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/macalinao/style-guide.git",
-    "directory": "packages/eslint-config-react"
+    "directory": "packages/tsdown-config"
   },
   "files": [
     "src/**/*",
@@ -43,26 +42,18 @@
   "scripts": {
     "build": "tsdown",
     "clean": "rm -rf dist",
-    "lint": "eslint .",
-    "typecheck": "tsc --noEmit"
+    "lint": "eslint ."
   },
   "dependencies": {
-    "@macalinao/eslint-config": "workspace:^",
-    "@tanstack/eslint-plugin-query": "^5.101.2",
-    "eslint-plugin-react": "^7.37.5",
-    "eslint-plugin-react-hooks": "^7.1.1",
-    "typescript-eslint": "catalog:"
+    "publint": "^0.3.22"
   },
   "devDependencies": {
     "@macalinao/tsconfig": "workspace:^",
-    "@macalinao/tsdown-config": "workspace:^",
-    "@types/eslint-plugin-jsx-a11y": "^6.10.1",
-    "@typescript/native": "catalog:",
     "eslint": "catalog:",
     "tsdown": "catalog:",
     "typescript": "catalog:"
   },
   "peerDependencies": {
-    "eslint": "catalog:"
+    "tsdown": "catalog:"
   }
 }

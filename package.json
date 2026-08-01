@@ -23,6 +23,7 @@
       "oxfmt": "0.59.0",
       "oxlint": "1.73.0",
       "oxlint-tsgolint": "0.25.0",
+      "tsdown": "0.22.14",
       "turbo": "2.9.18",
       "typescript": "npm:typescript@6.0.3",
       "typescript-eslint": "^8.64.0"
@@ -33,6 +34,7 @@
     "clean": "turbo run clean",
     "lint": "oxlint && turbo run lint",
     "lint:fix": "oxlint --fix && oxfmt && turbo run lint -- --fix",
+    "typecheck": "turbo run typecheck",
     "format": "oxfmt",
     "format:check": "oxfmt --check",
     "ci:version": "changeset version && bun update",

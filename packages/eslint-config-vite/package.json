@@ -42,9 +42,10 @@
     "registry": "https://registry.npmjs.org/"
   },
   "scripts": {
-    "build": "tsc",
-    "clean": "tsc -b --clean && rm -rf dist",
-    "lint": "eslint ."
+    "build": "tsdown",
+    "clean": "rm -rf dist",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@macalinao/eslint-config-react": "workspace:^",
@@ -55,8 +56,10 @@
   "devDependencies": {
     "@macalinao/eslint-config": "workspace:^",
     "@macalinao/tsconfig": "workspace:^",
+    "@macalinao/tsdown-config": "workspace:^",
     "@typescript/native": "catalog:",
     "eslint": "catalog:",
+    "tsdown": "catalog:",
     "typescript": "catalog:"
   },
   "peerDependencies": {

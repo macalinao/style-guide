@@ -6,8 +6,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ### Build Commands
 
-- `bun run build` - Build all packages in the monorepo using Turbo
+- `bun run build` - Build all packages in the monorepo using Turbo (packages build with tsdown)
 - `bun run clean` - Clean all build artifacts across packages
+- `bun run typecheck` - Typecheck all packages with tsc (builds no longer run tsc)
 
 ### Code Quality
 
@@ -53,6 +54,8 @@ This is a monorepo containing Ian Macalinao's standardized TypeScript and ESLint
 
 - **@macalinao/eslint-config-react** - React-specific ESLint configuration extending the base config with React hooks, JSX a11y, and TanStack plugins
 
+- **@macalinao/tsdown-config** - Shared tsdown build configuration for library packages (unbundled ESM, declarations, source maps, publint validation)
+
 ### Key Technical Decisions
 
 - **ES Modules Only** - No CommonJS support, uses `"type": "module"`
@@ -60,6 +63,7 @@ This is a monorepo containing Ian Macalinao's standardized TypeScript and ESLint
 - **Tool Chain**:
   - Bun for package management and script running
   - Turbo for monorepo task orchestration with caching
+  - tsdown for building packages (via @macalinao/tsdown-config); tsc is typecheck-only
   - oxfmt for fast formatting (JS/TS/JSX/TSX, JSON, JSONC, CSS, Markdown, YAML, HTML)
   - oxlint for fast linting at the repo root
   - ESLint with TypeScript for linting (run per-package via `turbo run lint`)
@@ -69,7 +73,7 @@ This is a monorepo containing Ian Macalinao's standardized TypeScript and ESLint
 
 - All packages follow consistent structure:
   - Source in `src/`
-  - Build output in `dist/`
-  - TypeScript builds with source maps and declarations
+  - Build output in `dist/` (tsdown unbundled builds: `dist/` mirrors `src/`)
+  - Builds emit declarations and source maps; each package has a `tsdown.config.ts` using `defineLibraryConfig` from @macalinao/tsdown-config
 - Incremental builds enabled for performance
 - No tests in this repository (configuration-only packages)
