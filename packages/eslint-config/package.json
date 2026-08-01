@@ -39,6 +39,7 @@
   ],
   "devDependencies": {
     "@macalinao/tsconfig": "workspace:^",
+    "@typescript/native": "catalog:",
     "eslint": "catalog:",
     "typescript": "catalog:"
   },
