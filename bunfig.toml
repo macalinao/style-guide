@@ -1,0 +1,6 @@
+[install]
+linker = "hoisted"
+
+# Only install package versions published at least 7 days ago, so that
+# malicious releases that get caught and yanked quickly are never pulled in.
+minimumReleaseAge = 604800

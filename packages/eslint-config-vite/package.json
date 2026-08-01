@@ -1,6 +1,6 @@
 {
   "name": "@macalinao/eslint-config-vite",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "ESLint configuration for Vite projects with React Refresh support",
   "keywords": [
     "code-style",
@@ -57,6 +57,7 @@
     "@macalinao/eslint-config": "workspace:^",
     "@macalinao/tsconfig": "workspace:^",
     "@macalinao/tsdown-config": "workspace:^",
+    "@typescript/native": "catalog:",
     "eslint": "catalog:",
     "tsdown": "catalog:",
     "typescript": "catalog:"

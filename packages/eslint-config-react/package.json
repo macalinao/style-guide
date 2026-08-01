@@ -1,6 +1,6 @@
 {
   "name": "@macalinao/eslint-config-react",
-  "version": "6.1.1",
+  "version": "6.1.2",
   "description": "ESLint configuration to use for React projects",
   "keywords": [
     "code-style",
@@ -57,6 +57,7 @@
     "@macalinao/tsconfig": "workspace:^",
     "@macalinao/tsdown-config": "workspace:^",
     "@types/eslint-plugin-jsx-a11y": "^6.10.1",
+    "@typescript/native": "catalog:",
     "eslint": "catalog:",
     "tsdown": "catalog:",
     "typescript": "catalog:"
