@@ -25,16 +25,6 @@
         pkgs = nixpkgs.legacyPackages.${system};
         lintelPkg = lintel.packages.${system}.default;
 
-        # biome.json extends @macalinao/biome-config, which lives in this repo;
-        # link it into node_modules when bun install hasn't run (nix sandbox).
-        biomeCheck = pkgs.writeShellScript "biome-check" ''
-          if [ ! -e node_modules/@macalinao/biome-config ]; then
-            mkdir -p node_modules/@macalinao
-            ln -s "$PWD/packages/biome-config" node_modules/@macalinao/biome-config
-          fi
-          exec ${pkgs.biome}/bin/biome check --write --unsafe "$@"
-        '';
-
         # Lintel fetches JSON schemas over the network, which the nix build
         # sandbox forbids, so it only runs in the dev shell's git hooks.
         mkPreCommitCheck =
@@ -42,11 +32,14 @@
           git-hooks.lib.${system}.run {
             src = ./.;
             hooks = {
-              biome = {
+              oxfmt = {
                 enable = true;
-                name = "biome check";
-                entry = "${biomeCheck}";
-                files = "\\.(js|jsx|ts|tsx|cjs|mjs|cts|mts|json|jsonc)$";
+                name = "oxfmt";
+                # Use the nix-provided oxfmt (same version the catalog pins) so
+                # the hook also works inside the sandboxed `nix flake check`,
+                # where bunx and node_modules are unavailable.
+                entry = "${pkgs.oxfmt}/bin/oxfmt --no-error-on-unmatched-pattern";
+                files = "\\.(js|jsx|ts|tsx|cjs|mjs|cts|mts|json|jsonc|css|md|yaml|yml|html)$";
                 language = "system";
               };
               nixfmt.enable = true;

@@ -4,7 +4,7 @@ This monorepo contains ESLint and TypeScript configurations used across my proje
 
 Notes:
 
-- ~~I use default Prettier settings.~~ I use Biome formatting and linting. Prettier has performance issues with large codebases.
+- ~~I use default Prettier settings.~~ ~~I use Biome formatting and linting.~~ I use oxlint for linting and oxfmt for formatting. Both are built on oxc and are extremely fast.
 - I only use ES Modules. Dual CommonJS/ESM is a minefield that isn't worth the hassle.
 
 ## Packages
