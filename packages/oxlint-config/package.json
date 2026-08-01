@@ -1,0 +1,37 @@
+{
+  "name": "@macalinao/oxlint-config",
+  "version": "0.2.0",
+  "description": "Opinionated oxlint configuration for modern TypeScript projects.",
+  "keywords": [
+    "config",
+    "configuration",
+    "ian-macalinao",
+    "linter",
+    "oxc",
+    "oxlint"
+  ],
+  "homepage": "https://style-guide.ianm.com",
+  "bugs": {
+    "url": "https://github.com/macalinao/style-guide/issues"
+  },
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/macalinao/style-guide.git",
+    "directory": "packages/oxlint-config"
+  },
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": "./base.jsonc",
+    "./base.jsonc": "./base.jsonc",
+    "./tanstack-router.jsonc": "./tanstack-router.jsonc"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "peerDependencies": {
+    "oxlint": "catalog:"
+  }
+}

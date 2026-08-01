@@ -8,6 +8,14 @@ updates:
       day: "monday"
       time: "03:00"
     open-pull-requests-limit: 10
+    ignore:
+      # These tools are pinned to the versions nixpkgs provides (see the
+      # update-nixpkgs flow); bump them by updating the nix flake, not here.
+      - dependency-name: "@biomejs/biome"
+      - dependency-name: "turbo"
+      - dependency-name: "typescript"
+      # Kept in lockstep with the nix-pinned turbo version.
+      - dependency-name: "eslint-config-turbo"
     groups:
       # Group all non-major updates together
       minor-and-patch:

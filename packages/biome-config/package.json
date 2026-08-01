@@ -1,32 +1,32 @@
 {
   "name": "@macalinao/biome-config",
-  "description": "Opinionated Biome configuration for modern TypeScript projects.",
-  "license": "Apache-2.0",
   "version": "0.4.0",
-  "type": "module",
-  "sideEffects": false,
+  "description": "Opinionated Biome configuration for modern TypeScript projects.",
+  "keywords": [
+    "biome",
+    "config",
+    "configuration",
+    "ian-macalinao"
+  ],
+  "homepage": "https://github.com/macalinao/style-guide",
+  "bugs": {
+    "url": "https://github.com/macalinao/style-guide/issues"
+  },
+  "license": "Apache-2.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/macalinao/style-guide.git",
     "directory": "packages/biome-config"
   },
-  "homepage": "https://github.com/macalinao/style-guide",
-  "bugs": {
-    "url": "https://github.com/macalinao/style-guide/issues"
-  },
-  "keywords": [
-    "biome",
-    "configuration",
-    "config",
-    "ian-macalinao"
-  ],
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/",
-    "access": "public"
-  },
+  "type": "module",
+  "sideEffects": false,
   "exports": {
     "./base": "./base.jsonc",
     "./react": "./react.jsonc"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   },
   "peerDependencies": {
     "@biomejs/biome": "catalog:"

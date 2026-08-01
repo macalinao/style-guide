@@ -1,43 +1,57 @@
 {
   "name": "@macalinao/eslint-config-vite",
-  "description": "ESLint configuration for Vite projects with React Refresh support",
-  "license": "Apache-2.0",
   "version": "2.1.1",
-  "type": "module",
-  "sideEffects": false,
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/macalinao/style-guide.git",
-    "directory": "packages/eslint-config-vite"
-  },
+  "description": "ESLint configuration for Vite projects with React Refresh support",
+  "keywords": [
+    "code-style",
+    "eslint",
+    "eslintconfig",
+    "ian-macalinao",
+    "linting",
+    "react-refresh",
+    "typescript",
+    "vite"
+  ],
   "homepage": "https://github.com/macalinao/style-guide",
   "bugs": {
     "url": "https://github.com/macalinao/style-guide/issues"
   },
-  "keywords": [
-    "eslint",
-    "eslintconfig",
-    "vite",
-    "react-refresh",
-    "typescript",
-    "linting",
-    "code-style",
-    "ian-macalinao"
-  ],
-  "dependencies": {
-    "@macalinao/eslint-config-react": "workspace:^",
-    "@tanstack/eslint-plugin-router": "^1.162.0",
-    "eslint-plugin-react-refresh": "^0.5.3",
-    "typescript-eslint": "catalog:"
-  },
-  "peerDependencies": {
-    "eslint": "catalog:"
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/macalinao/style-guide.git",
+    "directory": "packages/eslint-config-vite"
   },
   "files": [
     "src/**/*",
     "dist/**/*",
     "README.md"
   ],
+  "type": "module",
+  "sideEffects": false,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "scripts": {
+    "build": "tsc",
+    "clean": "tsc -b --clean && rm -rf dist",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@macalinao/eslint-config-react": "workspace:^",
+    "@tanstack/eslint-plugin-router": "^1.162.0",
+    "eslint-plugin-react-refresh": "^0.5.3",
+    "typescript-eslint": "catalog:"
+  },
   "devDependencies": {
     "@macalinao/eslint-config": "workspace:^",
     "@macalinao/tsconfig": "workspace:^",
@@ -45,21 +59,7 @@
     "eslint": "catalog:",
     "typescript": "catalog:"
   },
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
-    }
-  },
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "scripts": {
-    "build": "tsc",
-    "clean": "tsc -b --clean && rm -rf dist",
-    "lint": "eslint ."
-  },
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/",
-    "access": "public"
+  "peerDependencies": {
+    "eslint": "catalog:"
   }
 }
