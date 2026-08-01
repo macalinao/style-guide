@@ -16,13 +16,15 @@
       "packages/*"
     ],
     "catalog": {
-      "@biomejs/biome": "2.4.16",
-      "eslint": "^10.0.2",
+      "@biomejs/biome": "2.5.4",
+      "eslint": "^10.7.0",
+      "eslint-config-turbo": "2.9.18",
       "oxfmt": "0.57.0",
       "oxlint": "1.71.0",
       "oxlint-tsgolint": "0.24.0",
+      "turbo": "2.9.18",
       "typescript": "5.9.3",
-      "typescript-eslint": "^8.56.1"
+      "typescript-eslint": "^8.64.0"
     }
   },
   "scripts": {
@@ -40,8 +42,8 @@
     "oxfmt": "catalog:",
     "oxlint": "catalog:",
     "oxlint-tsgolint": "catalog:",
-    "turbo": "2.9.18",
-    "typescript": "5.9.3"
+    "turbo": "catalog:",
+    "typescript": "catalog:"
   },
   "engines": {
     "bun": ">=1.0.0",

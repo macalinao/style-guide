@@ -25,11 +25,9 @@
         pkgs = nixpkgs.legacyPackages.${system};
         lintelPkg = lintel.packages.${system}.default;
 
-        # Lintel fetches JSON schemas over the network, which is impossible
-        # inside the sandboxed `nix flake check` build (it also panics there
-        # because the sandbox has no CA certificates). Only enable the hook
-        # for local commits, where network access is available.
-        mkPreCommit =
+        # Lintel fetches JSON schemas over the network, which the nix build
+        # sandbox forbids, so it only runs in the dev shell's git hooks.
+        mkPreCommitCheck =
           { withLintel }:
           git-hooks.lib.${system}.run {
             src = ./.;
@@ -55,16 +53,16 @@
             };
           };
 
-        pre-commit-check = mkPreCommit { withLintel = false; };
-        pre-commit-dev = mkPreCommit { withLintel = true; };
+        pre-commit-check = mkPreCommitCheck { withLintel = false; };
+        pre-commit-shell = mkPreCommitCheck { withLintel = true; };
       in
       {
         checks.pre-commit-check = pre-commit-check;
 
         devShells.default = pkgs.mkShell {
-          inherit (pre-commit-dev) shellHook;
+          inherit (pre-commit-shell) shellHook;
           buildInputs =
-            pre-commit-dev.enabledPackages
+            pre-commit-shell.enabledPackages
             ++ (with pkgs; [
               nixfmt
               git

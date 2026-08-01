@@ -48,8 +48,8 @@
   },
   "dependencies": {
     "@macalinao/eslint-config-react": "workspace:^",
-    "@tanstack/eslint-plugin-router": "^1.161.4",
-    "eslint-plugin-react-refresh": "^0.5.2",
+    "@tanstack/eslint-plugin-router": "^1.162.0",
+    "eslint-plugin-react-refresh": "^0.5.3",
     "typescript-eslint": "catalog:"
   },
   "devDependencies": {
