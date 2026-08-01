@@ -33,14 +33,14 @@
     },
     "packages/biome-config": {
       "name": "@macalinao/biome-config",
-      "version": "0.3.0",
+      "version": "0.4.0",
       "peerDependencies": {
         "@biomejs/biome": "catalog:",
       },
     },
     "packages/eslint-config": {
       "name": "@macalinao/eslint-config",
-      "version": "8.1.1",
+      "version": "8.1.2",
       "dependencies": {
         "@eslint/js": "^10.0.1",
         "@typescript-eslint/parser": "^8.64.0",
@@ -59,7 +59,7 @@
     },
     "packages/eslint-config-react": {
       "name": "@macalinao/eslint-config-react",
-      "version": "6.1.0",
+      "version": "6.1.1",
       "dependencies": {
         "@macalinao/eslint-config": "workspace:^",
         "@tanstack/eslint-plugin-query": "^5.101.2",
@@ -79,7 +79,7 @@
     },
     "packages/eslint-config-vite": {
       "name": "@macalinao/eslint-config-vite",
-      "version": "2.1.0",
+      "version": "2.1.1",
       "dependencies": {
         "@macalinao/eslint-config-react": "workspace:^",
         "@tanstack/eslint-plugin-router": "^1.162.0",
@@ -98,14 +98,14 @@
     },
     "packages/oxlint-config": {
       "name": "@macalinao/oxlint-config",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "peerDependencies": {
         "oxlint": "catalog:",
       },
     },
     "packages/tsconfig": {
       "name": "@macalinao/tsconfig",
-      "version": "3.2.5",
+      "version": "4.0.0",
     },
   },
   "catalog": {
