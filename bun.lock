@@ -15,14 +15,14 @@
     },
     "packages/biome-config": {
       "name": "@macalinao/biome-config",
-      "version": "0.2.0",
+      "version": "0.4.0",
       "peerDependencies": {
         "@biomejs/biome": "catalog:",
       },
     },
     "packages/eslint-config": {
       "name": "@macalinao/eslint-config",
-      "version": "8.1.0",
+      "version": "8.1.2",
       "dependencies": {
         "@eslint/js": "^10.0.1",
         "@typescript-eslint/parser": "^8.64.0",
@@ -41,7 +41,7 @@
     },
     "packages/eslint-config-react": {
       "name": "@macalinao/eslint-config-react",
-      "version": "6.1.0",
+      "version": "6.1.1",
       "dependencies": {
         "@macalinao/eslint-config": "workspace:^",
         "@tanstack/eslint-plugin-query": "^5.101.2",
@@ -61,7 +61,7 @@
     },
     "packages/eslint-config-vite": {
       "name": "@macalinao/eslint-config-vite",
-      "version": "2.1.0",
+      "version": "2.1.1",
       "dependencies": {
         "@macalinao/eslint-config-react": "workspace:^",
         "@tanstack/eslint-plugin-router": "^1.162.0",
@@ -80,7 +80,7 @@
     },
     "packages/tsconfig": {
       "name": "@macalinao/tsconfig",
-      "version": "3.2.5",
+      "version": "4.0.0",
     },
   },
   "catalog": {
@@ -672,7 +672,7 @@
 
     "prelude-ls": ["prelude-ls@1.2.1", "", {}, "sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g=="],
 
-    "prettier": ["prettier@3.9.5", "", { "bin": { "prettier": "bin/prettier.cjs" } }, "sha512-/FVl766LpUfB5vXgCYOYa0MeV/441Ia99AeICQIQFTY/Nw0roZwULcXpku5i1/m5kt/baz+s4Zogspd839HSMg=="],
+    "prettier": ["prettier@3.9.6", "", { "bin": { "prettier": "bin/prettier.cjs" } }, "sha512-OpN0zzVdiaiAhxpuuj5efpIS4sY9j7bY6uR5mnj5yPzGkdkjNKSJeUThPb60Jw29QuAZgA4o+/iB49kFiaBX6g=="],
 
     "prop-types": ["prop-types@15.8.1", "", { "dependencies": { "loose-envify": "^1.4.0", "object-assign": "^4.1.1", "react-is": "^16.13.1" } }, "sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg=="],
 
