@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.4.4/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.5.4/schema.json",
   "root": false,
   "vcs": {
     "enabled": true,
@@ -44,17 +44,12 @@
       "project": "recommended",
     },
     "rules": {
-      "recommended": true,
+      "preset": "recommended",
       "nursery": {
         "noFloatingPromises": "error",
-        "noForIn": "error",
         "noMisusedPromises": "error",
-        "noRedundantDefaultExport": "error",
-        "noUnnecessaryConditions": "error",
         "useAwaitThenable": "error",
-        "useConsistentEnumValueType": "error",
         "useExhaustiveSwitchCases": "error",
-        "useFind": "error",
         "useRegexpExec": "error",
       },
       "complexity": {
@@ -72,6 +67,8 @@
             "maxAllowedComplexity": 20,
           },
         },
+        "noRedundantDefaultExport": "error",
+        "useArrayFind": "error",
       },
       "suspicious": {
         "noConfusingVoidType": "error",
@@ -84,6 +81,8 @@
         "noExplicitAny": "error",
         "noSkippedTests": "error",
         "useAwait": "error",
+        "noForIn": "error",
+        "noUnnecessaryConditions": "error",
       },
       "style": {
         "useImportType": {
@@ -130,6 +129,7 @@
             "filenameCases": ["kebab-case"],
           },
         },
+        "useConsistentEnumValueType": "error",
       },
       "performance": {
         "useTopLevelRegex": "error",
