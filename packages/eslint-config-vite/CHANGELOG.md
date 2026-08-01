@@ -1,5 +1,13 @@
 # @macalinao/eslint-config-vite
 
+## 2.1.3
+
+### Patch Changes
+
+- 344f183: Build with tsdown (via `@macalinao/tsdown-config`) instead of tsc. Published entry points are unchanged; tsc now runs typecheck-only.
+- Updated dependencies [344f183]
+  - @macalinao/eslint-config-react@6.1.3
+
 ## 2.1.2
 
 ### Patch Changes
