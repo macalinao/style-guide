@@ -20,6 +20,20 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `bun run ci:version` - Update package versions using Changesets
 - `bun run ci:publish` - Publish packages to npm
 
+### Changesets
+
+Every PR that changes a published package must include a changeset. Create one with `bun changeset`, or hand-write a markdown file in `.changeset/` with a descriptive kebab-case filename:
+
+```markdown
+---
+"@macalinao/package-name": patch | minor | major
+---
+
+Description of the change from the consumer's perspective.
+```
+
+List every affected package with its semver bump (patch for fixes, minor for new features or behavior changes, major for breaking changes).
+
 ## Architecture Overview
 
 This is a monorepo containing Ian Macalinao's standardized TypeScript and ESLint configurations:
