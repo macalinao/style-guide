@@ -37,7 +37,7 @@
     "@macalinao/biome-config": "workspace:^",
     "prettier": "^3.9.5",
     "turbo": "2.9.18",
-    "typescript": "5.9.3"
+    "typescript": "7.0.2"
   },
   "engines": {
     "node": ">=24",
