@@ -1,36 +1,32 @@
 {
-  "name": "@macalinao/eslint-config",
-  "description": "Common ESLint configuration.",
+  "name": "@macalinao/tsdown-config",
+  "description": "Common tsdown build configuration for library packages.",
   "license": "Apache-2.0",
-  "version": "8.1.2",
+  "version": "0.0.0",
   "type": "module",
   "sideEffects": false,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/macalinao/style-guide.git",
-    "directory": "packages/eslint-config"
+    "directory": "packages/tsdown-config"
   },
   "homepage": "https://github.com/macalinao/style-guide",
   "bugs": {
     "url": "https://github.com/macalinao/style-guide/issues"
   },
   "keywords": [
-    "eslint",
-    "eslintconfig",
-    "typescript",
-    "linting",
-    "code-style",
+    "tsdown",
+    "build",
+    "bundler",
+    "configuration",
+    "config",
     "ian-macalinao"
   ],
   "dependencies": {
-    "@eslint/js": "^10.0.1",
-    "@typescript-eslint/parser": "^8.64.0",
-    "eslint-config-turbo": "catalog:",
-    "globals": "^17.7.0",
-    "typescript-eslint": "catalog:"
+    "publint": "^0.3.22"
   },
   "peerDependencies": {
-    "eslint": "catalog:"
+    "tsdown": "catalog:"
   },
   "files": [
     "src/**/*",
@@ -39,7 +35,6 @@
   ],
   "devDependencies": {
     "@macalinao/tsconfig": "workspace:^",
-    "@macalinao/tsdown-config": "workspace:^",
     "eslint": "catalog:",
     "tsdown": "catalog:",
     "typescript": "catalog:"
@@ -55,8 +50,7 @@
   "scripts": {
     "build": "tsdown",
     "clean": "rm -rf dist",
-    "lint": "eslint .",
-    "typecheck": "tsc --noEmit"
+    "lint": "eslint ."
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",

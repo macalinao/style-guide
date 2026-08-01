@@ -41,7 +41,9 @@
   "devDependencies": {
     "@macalinao/eslint-config": "workspace:^",
     "@macalinao/tsconfig": "workspace:^",
+    "@macalinao/tsdown-config": "workspace:^",
     "eslint": "catalog:",
+    "tsdown": "catalog:",
     "typescript": "catalog:"
   },
   "exports": {
@@ -53,9 +55,10 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc",
-    "clean": "tsc -b --clean && rm -rf dist",
-    "lint": "eslint ."
+    "build": "tsdown",
+    "clean": "rm -rf dist",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",

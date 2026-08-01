@@ -34,7 +34,11 @@ export function buildConfig(): Linter.Config[] {
         sourceType: "module",
         parserOptions: {
           projectService: {
-            allowDefaultProject: ["eslint.config.*", "tailwind.config.*"],
+            allowDefaultProject: [
+              "eslint.config.*",
+              "tailwind.config.*",
+              "tsdown.config.*",
+            ],
           },
         },
         globals: {
