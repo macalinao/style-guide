@@ -1,5 +1,11 @@
 # @macalinao/oxlint-config
 
+## 0.2.1
+
+### Patch Changes
+
+- f3c01a4: Update the oxlint peer dependency to 1.73.0, matching the version provided by nixpkgs.
+
 ## 0.2.0
 
 ### Minor Changes

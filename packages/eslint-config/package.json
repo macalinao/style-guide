@@ -1,6 +1,6 @@
 {
   "name": "@macalinao/eslint-config",
-  "version": "8.1.2",
+  "version": "8.1.3",
   "description": "Common ESLint configuration.",
   "keywords": [
     "code-style",
