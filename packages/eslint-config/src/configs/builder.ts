@@ -9,11 +9,7 @@ import tseslint from "typescript-eslint";
 export function buildConfig(): Linter.Config[] {
   return defineConfig(
     // Files we never want to lint
-    globalIgnores([
-      "**/.wrangler/**",
-      "dist/**/*",
-      "vite.config.ts.timestamp-*.mjs",
-    ]),
+    globalIgnores(["**/.wrangler/**", "dist/**/*", "vite.config.ts.timestamp-*.mjs"]),
     {
       files: ["**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}"],
       extends: [
@@ -34,11 +30,7 @@ export function buildConfig(): Linter.Config[] {
         sourceType: "module",
         parserOptions: {
           projectService: {
-            allowDefaultProject: [
-              "eslint.config.*",
-              "tailwind.config.*",
-              "tsdown.config.*",
-            ],
+            allowDefaultProject: ["eslint.config.*", "tailwind.config.*", "tsdown.config.*"],
           },
         },
         globals: {

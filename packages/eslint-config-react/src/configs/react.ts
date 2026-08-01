@@ -37,10 +37,7 @@ export const react: Linter.Config[] = defineConfig(
       // should validate props with TypeScript
       "react/prop-types": "off",
       // twin.macro stuff
-      "react/no-unknown-property": [
-        "error",
-        { ignore: ["css", "tw", "vaul-drawer-wrapper"] },
-      ],
+      "react/no-unknown-property": ["error", { ignore: ["css", "tw", "vaul-drawer-wrapper"] }],
     },
   },
 );

@@ -1,27 +1,50 @@
 {
   "name": "@macalinao/eslint-config",
-  "description": "Common ESLint configuration.",
-  "license": "Apache-2.0",
   "version": "8.1.2",
-  "type": "module",
-  "sideEffects": false,
+  "description": "Common ESLint configuration.",
+  "keywords": [
+    "code-style",
+    "eslint",
+    "eslintconfig",
+    "ian-macalinao",
+    "linting",
+    "typescript"
+  ],
+  "homepage": "https://github.com/macalinao/style-guide",
+  "bugs": {
+    "url": "https://github.com/macalinao/style-guide/issues"
+  },
+  "license": "Apache-2.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/macalinao/style-guide.git",
     "directory": "packages/eslint-config"
   },
-  "homepage": "https://github.com/macalinao/style-guide",
-  "bugs": {
-    "url": "https://github.com/macalinao/style-guide/issues"
-  },
-  "keywords": [
-    "eslint",
-    "eslintconfig",
-    "typescript",
-    "linting",
-    "code-style",
-    "ian-macalinao"
+  "files": [
+    "src/**/*",
+    "dist/**/*",
+    "README.md"
   ],
+  "type": "module",
+  "sideEffects": false,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "scripts": {
+    "build": "tsdown",
+    "clean": "rm -rf dist",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit"
+  },
   "dependencies": {
     "@eslint/js": "^10.0.1",
     "@typescript-eslint/parser": "^8.64.0",
@@ -29,14 +52,6 @@
     "globals": "^17.7.0",
     "typescript-eslint": "catalog:"
   },
-  "peerDependencies": {
-    "eslint": "catalog:"
-  },
-  "files": [
-    "src/**/*",
-    "dist/**/*",
-    "README.md"
-  ],
   "devDependencies": {
     "@macalinao/tsconfig": "workspace:^",
     "@macalinao/tsdown-config": "workspace:^",
@@ -44,22 +59,7 @@
     "tsdown": "catalog:",
     "typescript": "catalog:"
   },
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
-    }
-  },
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "scripts": {
-    "build": "tsdown",
-    "clean": "rm -rf dist",
-    "lint": "eslint .",
-    "typecheck": "tsc --noEmit"
-  },
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/",
-    "access": "public"
+  "peerDependencies": {
+    "eslint": "catalog:"
   }
 }

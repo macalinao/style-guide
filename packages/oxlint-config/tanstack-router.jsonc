@@ -1,0 +1,33 @@
+{
+  "$schema": "https://unpkg.com/oxlint@1.71.0/configuration_schema.json",
+  // Opt-in add-on for apps built on TanStack Router. Stack it after the base
+  // config via `extends`:
+  //
+  //   {
+  //     "extends": [
+  //       "./node_modules/@macalinao/oxlint-config/base.jsonc",
+  //       "./node_modules/@macalinao/oxlint-config/tanstack-router.jsonc"
+  //     ]
+  //   }
+
+  // `routeTree.gen.ts` is emitted by the TanStack Router plugin/CLI. It is
+  // generated output, not authored source -- linting it only produces noise
+  // that no one can fix by hand (the fix is to regenerate the file), so it is
+  // ignored the same way `dist` is.
+  "ignorePatterns": ["**/routeTree.gen.ts"],
+  "overrides": [
+    {
+      // A TanStack Router route module is expected to export `Route` (created
+      // with `createFileRoute`), plus loaders, `validateSearch`, `pending`
+      // components and so on, right alongside the route's page component.
+      // `react/only-export-components` exists to keep React Fast Refresh able
+      // to hot-swap a module, but route modules are a framework-defined file
+      // type where mixing these exports is the intended design, so the rule is
+      // switched off for the routes directory only.
+      "files": ["**/src/routes/**/*.tsx"],
+      "rules": {
+        "react/only-export-components": "off",
+      },
+    },
+  ],
+}

@@ -1,59 +1,59 @@
 {
   "name": "@macalinao/tsdown-config",
-  "description": "Common tsdown build configuration for library packages.",
-  "license": "Apache-2.0",
   "version": "0.0.0",
-  "type": "module",
-  "sideEffects": false,
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/macalinao/style-guide.git",
-    "directory": "packages/tsdown-config"
-  },
+  "description": "Common tsdown build configuration for library packages.",
+  "keywords": [
+    "build",
+    "bundler",
+    "config",
+    "configuration",
+    "ian-macalinao",
+    "tsdown"
+  ],
   "homepage": "https://github.com/macalinao/style-guide",
   "bugs": {
     "url": "https://github.com/macalinao/style-guide/issues"
   },
-  "keywords": [
-    "tsdown",
-    "build",
-    "bundler",
-    "configuration",
-    "config",
-    "ian-macalinao"
-  ],
-  "dependencies": {
-    "publint": "^0.3.22"
-  },
-  "peerDependencies": {
-    "tsdown": "catalog:"
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/macalinao/style-guide.git",
+    "directory": "packages/tsdown-config"
   },
   "files": [
     "src/**/*",
     "dist/**/*",
     "README.md"
   ],
-  "devDependencies": {
-    "@macalinao/tsconfig": "workspace:^",
-    "eslint": "catalog:",
-    "tsdown": "catalog:",
-    "typescript": "catalog:"
-  },
+  "type": "module",
+  "sideEffects": false,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     }
   },
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "scripts": {
     "build": "tsdown",
     "clean": "rm -rf dist",
     "lint": "eslint ."
   },
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/",
-    "access": "public"
+  "dependencies": {
+    "publint": "^0.3.22"
+  },
+  "devDependencies": {
+    "@macalinao/tsconfig": "workspace:^",
+    "eslint": "catalog:",
+    "tsdown": "catalog:",
+    "typescript": "catalog:"
+  },
+  "peerDependencies": {
+    "tsdown": "catalog:"
   }
 }

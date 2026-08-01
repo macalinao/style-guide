@@ -1,0 +1,30 @@
+{
+  // Extends the workspace source directly (not via node_modules) so the path
+  // resolves regardless of bun's install linker layout (hoisted vs isolated).
+  "extends": ["./packages/oxlint-config/base.jsonc"],
+  // The docs site (apps/docs-site) is a SvelteKit app with its own toolchain
+  // (svelte-check, `bundler` module resolution) and a tsconfig that extends
+  // SvelteKit's generated `.svelte-kit/tsconfig.json`. It is not part of this
+  // repo's oxlint dogfood surface, so it is excluded here at the root rather
+  // than in the published base config.
+  "ignorePatterns": ["apps/docs-site/**"],
+  "overrides": [
+    {
+      // These `eslint.config.js` files exist only to dogfood the ESLint
+      // configs this repo publishes. They live at each package root, outside
+      // the `src/**` tsconfig program, so the type-aware checker cannot resolve
+      // their types (`import.meta.dirname` and the imported flat config come
+      // back as `error`-typed), which trips the `no-unsafe-*` family. They are
+      // exercised by ESLint itself, not shipped, so the type-aware unsafe rules
+      // are switched off for them here.
+      "files": ["**/eslint.config.js"],
+      "rules": {
+        "typescript/no-unsafe-assignment": "off",
+        "typescript/no-unsafe-member-access": "off",
+        "typescript/no-unsafe-call": "off",
+        "typescript/no-unsafe-argument": "off",
+        "typescript/no-unsafe-return": "off"
+      }
+    }
+  ]
+}

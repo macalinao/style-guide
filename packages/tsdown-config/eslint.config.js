@@ -1,4 +1,6 @@
-// biome-ignore lint/correctness/noUndeclaredDependencies: declaring @macalinao/eslint-config here would create a workspace dependency cycle (eslint-config builds with tsdown-config); it resolves via hoisting
+// @macalinao/eslint-config is deliberately not declared in package.json:
+// it would create a workspace dependency cycle (eslint-config builds with
+// tsdown-config). It resolves via hoisting instead.
 import { configs } from "@macalinao/eslint-config";
 
 export default [
