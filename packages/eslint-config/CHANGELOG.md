@@ -1,5 +1,15 @@
 # @macalinao/eslint-config
 
+## 8.2.0
+
+### Minor Changes
+
+- 344f183: Allow `tsdown.config.*` files in the type-aware project service's `allowDefaultProject`, so tsdown config files lint without being part of a tsconfig project.
+
+### Patch Changes
+
+- 344f183: Build with tsdown (via `@macalinao/tsdown-config`) instead of tsc. Published entry points are unchanged; tsc now runs typecheck-only.
+
 ## 8.1.3
 
 ### Patch Changes

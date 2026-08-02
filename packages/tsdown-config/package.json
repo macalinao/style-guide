@@ -1,6 +1,6 @@
 {
   "name": "@macalinao/tsdown-config",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Common tsdown build configuration for library packages.",
   "keywords": [
     "build",
